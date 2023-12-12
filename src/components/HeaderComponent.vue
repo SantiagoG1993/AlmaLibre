@@ -1,17 +1,33 @@
 <template>
     <div class="header_c">
-    
+        <img id="flores" src="floresheader.png" alt="">
+        <SearchBarComponent/>
+        <img id="logo" src="santi.jpg" alt="">
+        <UserComponent />
+        <NavbarComponent />
     </div>
 </template>
 
 <script setup>
+import NavbarComponent from './header/NavbarComponent.vue'
+import SearchBarComponent from './header/SearchBarComponent.vue'
+import UserComponent from './header/UserComponent.vue'
 
 </script>
 
 <style scoped>
 .header_c{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    min-height: 30vh;
-    background-color: red;
+    min-height: 375px;
+    background-color: #DBC9DD;
 }
+#logo{
+    width: 200px;
+    margin-bottom: 40px!important;
+}
+
+
 </style>
