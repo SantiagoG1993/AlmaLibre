@@ -2,12 +2,38 @@
   <div class="user_c">
     <div class="user_cart_icos_c">
       <i class="fa-solid fa-user" @click="openLoginForm"></i>
-      <i class="fa-solid fa-cart-shopping"></i>
+      <i class="fa-solid fa-cart-shopping" @click="openCart"></i>
     </div>
     <p id="user_name_logged">Bienvenido/a Santiago</p>
   </div>
+
+  <!-- CARRITO MODAL -->
+    <div class="cart_c">
+      <CartProduct/>
+      <CartProduct/>
+      <CartProduct/>
+      <CartProduct/>
+      <div class="article_price_c">
+        <p>1 Articulo</p>
+        <p>3500.00 ARS</p>
+      </div>
+      <div class="descuent_c">
+        <p>Descuento</p>
+        <p>0.00 ARS</p>
+      </div>
+      <hr id="hr_carrito">
+      <div class="total">
+        <p>TOTAL</p>
+        <p>3500.00 ARS</p>
+      </div>
+      <button class="carrito_btn">ir al carrito <i class="fa-solid fa-cart-shopping"></i></button>
+    </div>
+
+
+  <!-- LOGIN Y REGISTER MODAL -->
   <div class="modal_c">
     <class class="modal">
+      <!-- LOGIN FORM -->
       <div v-if="formSelection == true" class="login_c">
         <i class="fa-solid fa-x" @click="closeLoginForm"></i>
         <h2 class="title">Login</h2>
@@ -19,6 +45,7 @@
           <p class="text_purple">¿Olvidaste tu contraseña?</p>
         </form>
       </div>
+      <!-- REGISTER FORM -->
       <div v-if="formSelection == false" class="register_c">
         <i class="fa-solid fa-x" @click="closeLoginForm"></i>
         <h2 class="title">Crear nueva cuenta</h2>
@@ -38,24 +65,104 @@
 
 <script setup>
 import {ref} from 'vue'
+import CartProduct from '../header/CartProduct.vue'
+
 const openLoginForm = ()=>{
   const item = document.querySelector(".modal_c")
   item.classList.add("show--modal")
+  document.body.style.overflow = 'hidden';
 }
 const closeLoginForm = ()=>{
   const item = document.querySelector(".modal_c")
   item.classList.remove("show--modal")
+  formSelection.value = true
+  document.body.style.overflow = 'auto';
+}
+const openCart = ()=>{
+  const item = document.querySelector(".cart_c")
+  if(item.classList.contains('show--cart')){
+    item.classList.remove('show--cart')
+  }else{
+
+    item.classList.add('show--cart')
+  }
 }
 const formSelection = ref(true)
+
+
 </script>
 
 <style scoped>
-/* MODAL */
+.cart_c{
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  position: absolute;
+  right: 5%;
+  top: 190px;
+  width: 350px;
+  min-height: 200px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 2px 2px 11px 0px rgba(140, 140, 140, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.show--cart{
+  opacity: 1;
+  pointer-events: unset;
+}
+#hr_carrito{
+width: 90%;
+  color: #937096;
+  margin-bottom: 10px !important;
+}
+.article_price_c,.descuent_c{
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px !important;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 3px;
+  color: grey;
+  font-size: 14px !important;
+}
+.total{
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px !important;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 3px;
+  font-size: 24px;
+}
+.carrito_btn{
+  width: 90%;
+  height: 40px;
+  background-color: #3D273E;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  margin-bottom: 20px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px !important;
+  gap: 10px;
+}
+.carrito_btn:hover{
+  background-color: #584958;
+  cursor: pointer;
+}
+/* MODAL LOGIN Y REGISTER */
 
 .modal_c{
   opacity: 0;
   pointer-events: none;
-  background-color: rgba(0, 0, 0, 0.375);
+  background-color: rgba(0, 0, 0, 0.229);
   position: fixed;
   top: 0;
   right: 0;
@@ -159,6 +266,8 @@ transition: .2s all ease;
 .register_c input{
   width: 80%;
 }
+
+/* USER CONTAINER */
 .user_c {
   position: absolute;
   width: auto;

@@ -21,34 +21,40 @@ const props = defineProps({
 
 <style scoped>
 .card_c{
-    width: 235px;
-    height: 356px;
-    border: 2px solid #b79cb9d1;
-    border-radius: 8px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 9px;
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  height: 400px;
+  border-radius: 5px;
+  border: 1px solid rgb(228, 227, 228);
+  background-color: white;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
 }
 .card_c:hover{
     cursor: pointer;
-        box-shadow: 1px 2px 8px -5px rgba(0,0,0,0.75);
+      box-shadow: 3px 4px 18px 0px rgba(214, 214, 214, 0.75);
 }
 img{
     width: 203px;
     height: 173px;
     margin-top: 16px!important;
+    border-radius: 8px;
 }
 #product_name{
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 22px;
-        color: #525252;
+        font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 2px;
+  color: #6a6969;
+  font-size: 16px;
+  margin-top: 15px !important;
 }
 #price{
-  font-family: "Bebas Neue", sans-serif;
-        font-size: 25px;   
-        letter-spacing: 3px;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 4px;
+  margin-top: 10px !important;
+  font-size: 18px !important;
 }
 #add_cart_btn{
     position: absolute;

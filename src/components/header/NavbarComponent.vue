@@ -3,8 +3,22 @@
     <ul class="list">
       <li>INICIO</li>
       <li @mouseover="openModal">PRODUCTOS</li>
-      <li>CONTACTO</li>
+      <li @click="openContact">CONTACTO</li>
     </ul>
+    <!-- MODAL CONTACTO -->
+    <div class="modal_contact">
+      <div class="contact_c">
+        <i class="fa-solid fa-x" @click="closeContact"></i>
+        <h3>Contactanos</h3>
+        <form action="">
+          <input class="contacto__form__input" type="text" placeholder="Nombre">
+          <input class="contacto__form__input" type="text" placeholder="E-mail">
+          <input class="contacto__form__text" type="text" placeholder="Ingresa tu mensaje">
+          <button>Enviar</button>
+    </form>
+      </div>
+
+    </div>
     <div class="modal_nav"  @mouseleave="closeModal">
       <ul class="list_modal">
         <li>TAZAS</li>
@@ -21,6 +35,20 @@
 </template>
 
 <script setup>
+
+const openContact = ()=>{
+  document.body.style.overflow = 'hidden'
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+  let item = document.querySelector(".modal_contact")
+  item.classList.add('show--contact')
+};
+const closeContact = ()=>{
+    document.body.style.overflow = 'auto';
+  const item = document.querySelector(".modal_contact")
+  item.classList.remove('show--contact')
+  
+};
+
 let openModal = () => {
   const item = document.querySelector(".modal_nav");
   item.classList.add("show--modalNav");
@@ -31,9 +59,112 @@ const closeModal = () => {
     item.classList.remove("show--modalNav");
   }, 500);
 };
+
 </script>
 
 <style scoped>
+
+/* CONTACT MODAL */
+.modal_contact{
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1b1b1b46;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.contacto__form__input{
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 6px;
+  height: 50px;
+  letter-spacing: 3px;
+  margin-top: 20px !important;
+  width: 450px;
+  padding-left: 20px !important;
+  border: 1px solid rgb(192, 192, 192);
+  color: rgb(107, 107, 107);
+  cursor: pointer;
+}
+.fa-x{
+position: absolute;
+right: 20px;
+top: 20px;
+font-size: 20px;
+cursor: pointer;
+}
+h3{
+  color: #5f4261;
+  font-size: 30px;
+  letter-spacing: 6px;
+}
+button{
+  width: 150px;
+  height: 40px;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 6px;
+  border: none;
+  background-color: #3D273E;
+  color: white;
+  border-radius: 5px;
+  align-self: flex-end;
+  margin-right: 70px !important;
+  margin-top: 20px !important;
+}
+button:hover{
+  background-color: #5f4261;
+  cursor: pointer;
+}
+input:focus{
+  outline: none;
+}
+.contacto__form__text{
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 6px;
+  width: 550px;
+  cursor: pointer;
+  height: 130px;
+  letter-spacing: 3px;
+  margin-top: 20px !important;
+  width: 500px;
+  padding-left: 20px !important;
+  border: 1px solid rgb(192, 192, 192);
+  color: rgb(107, 107, 107);
+}
+.contact_c{
+  width: 650px;
+  height: 430px;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 4px;
+  user-select: none;
+}
+  
+form{
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.show--contact{
+    opacity: 1!important;
+    pointer-events: unset;
+  }
+
+/* NAVBAR */
 .navbar_c {
   width: 100%;
   height: 90px;

@@ -35,7 +35,7 @@ onMounted(()=>{
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 95%;
   min-height: 400px;
   background-color: #f1f1f1;
 padding: 40px 0px!important;
