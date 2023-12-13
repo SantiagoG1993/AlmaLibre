@@ -14,12 +14,14 @@
 </template>
 
 <script setup>
+
 import {defineProps} from 'vue'
 
 const props = defineProps({
     name:String,
     description:String,
     price:String
+
 })
 
 </script>
@@ -29,12 +31,13 @@ const props = defineProps({
     margin-top: 40px!important;
         margin-bottom: 40px!important;
     width: 1200px;
-    height: 416px;
-    border: 2px solid rgb(182, 182, 182);
+    height: 316px;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: rgb(241, 241, 241);
+      box-shadow: 2px 10px 30px 0px rgba(116, 116, 116, 0.2);
 }
 #title{
        font-family: "Bebas Neue", sans-serif;
@@ -45,35 +48,35 @@ const props = defineProps({
 }
 img{
     width: 380px;
-    height: 380px;
-    margin-left: 20px!important;
+    height: 100%;
 }
 .info_c{
 width:650px ;
-height: 380px;
+height: 100%;
 margin-right: 30px!important;
  font-family: "Bebas Neue", sans-serif;
  letter-spacing: 6px;
  display: flex;
+ justify-content: center;
  flex-direction: column;
  position: relative;
  gap: 20px;
 }
 #name_product{
-    font-size: 60px;
+    font-size: 46px;
 }
 #description_product{
     color: rgb(94, 94, 94);
-    font-size: 28px;
+    font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 1px;
 }
 #price{
-    font-size: 45px;
+    font-size: 35px;
 }
 #add_btn{
-    width: 363px;
-    height: 90px;
+    width: 300px;
+    height: 70px;
      font-family: "Bebas Neue", sans-serif;
  letter-spacing: 6px;
  background-color: transparent;
@@ -91,16 +94,16 @@ margin-right: 30px!important;
     transition: .3s all ease;
 }
 #info_btn{
-    width: 200px;
-    height: 90px;
+    width: 300px;
+    height: 70px;
     background-color: rgb(234, 234, 234);
     border: none;
     position: absolute;
-    bottom: 60px;
+    bottom: 30px;
     right: 30px;
     font-size: 20px;
-         font-family: "Bebas Neue", sans-serif;
-         letter-spacing: 6px;
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 6px;
 display: flex;
 justify-content: center;
 align-items: center;

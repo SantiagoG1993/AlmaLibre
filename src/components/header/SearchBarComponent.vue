@@ -1,15 +1,57 @@
 <template>
   <div class="searchbar_c">
-    <input type="text" id="input" placeholder="Remera" />
+    <input v-model="textoBusqueda" type="text" id="input"  placeholder="Remera" />
     <div class="lupa">
       <i class="fa-solid fa-magnifying-glass"></i>
     </div>
   </div>
+  <div v-if="textoBusqueda.length >0" class="products_search_c">
+    <SearchProduct v-for="producto of productosFiltrados" :key="producto && producto.id" :name="producto && producto.name" :price="producto && producto.price"/>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import {ref,onMounted,computed} from 'vue'
+import SearchProduct from './SearchProduct.vue'
+
+const productos = ref([])
+const textoBusqueda = ref('')
+const productosFiltrados = computed(()=>{
+  return productos.value.filter(prod=>prod.name.toUpperCase().includes(textoBusqueda.value.toUpperCase()))
+})
+
+const url = 'http://localhost:8080/api/products'
+const options = {
+  method:'GET',
+  headers:{
+    'Content-Type':'application/json'
+  }
+}
+
+onMounted(()=>{
+  fetch(url,options)
+  .then(res=>res.json())
+  .then(data=>{productos.value=data;
+  })
+  .catch(err=>console.log(err))
+})
+
+</script>
 
 <style scoped>
+.products_search_c{
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: auto;
+  background-color: white;
+  position: absolute;
+  left: 80px;
+  top: 195px;
+  border-radius: 8px 0px 0px 8px;
+  
+}
 .searchbar_c {
   cursor: pointer;
   position: absolute;
