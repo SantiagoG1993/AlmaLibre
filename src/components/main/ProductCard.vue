@@ -1,14 +1,21 @@
 <template>
     <div class="card_c">
         <img src="" alt="">
-        <p id="product_name">Remera Unisex Talle 4 al 16</p>
-        <p id="price">4500.00ARS</p>
+        <p id="product_name">{{props.name}}</p>
+        <p id="price">{{props.price}} ARS</p>
         <button id="add_cart_btn"><i class="fa-solid fa-cart-shopping"></i> AGREGAR AL CARRITO </button>
 
     </div>
 </template>
 
 <script setup>
+import {defineProps} from 'vue'
+
+const props = defineProps({
+  name:String,
+  price:String
+})
+
 
 </script>
 

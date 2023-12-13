@@ -79,10 +79,10 @@
 }
 #seguinos{
   color: white;
-       font-family: "Bebas Neue", sans-serif;
-         letter-spacing: 6px;
-         font-size: 25px;
-         text-align: center;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 6px;
+  font-size: 25px;
+  text-align: center;
 }
 .social_icons{
   display: flex;
