@@ -3,9 +3,9 @@
     <div class="featured_c">
         <img src="" alt="">
         <div class="info_c">
-            <p id="name_product">Kit de mate</p>
-            <p id="description_product">Mate + Yerbera + Azucarera</p>
-            <p id="price">$4.000</p>
+            <p id="name_product">{{props.name}}</p>
+            <p id="description_product">{{props.description}}</p>
+            <p id="price">${{props.price}}</p>
             <button id="add_btn"><i class="fa-solid fa-cart-shopping"></i> Agregar al carrito</button>
             <button id="info_btn"><i class="fa-solid fa-circle-info"></i> Mas info</button>
         </div>
@@ -14,6 +14,13 @@
 </template>
 
 <script setup>
+import {defineProps} from 'vue'
+
+const props = defineProps({
+    name:String,
+    description:String,
+    price:String
+})
 
 </script>
 

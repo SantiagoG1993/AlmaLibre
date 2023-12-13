@@ -21,7 +21,7 @@ const options = {
 onMounted(()=>{
   fetch(url,options)
   .then(res=>res.json())
-  .then(data=>{datos.value=data;console.log(data)})
+  .then(data=>{datos.value=data;})
   .catch(err=>console.log(err))
 })
 
