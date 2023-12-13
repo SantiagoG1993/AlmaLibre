@@ -1,11 +1,15 @@
 <template>
   <div class="main_c">
     <ProductsSection />
+    <FeaturedProduct />
+    <ComoComprar />
   </div>
 </template>
 
 <script setup>
 import ProductsSection from './main/ProductsSection.vue'
+import FeaturedProduct from './main/FeaturedProduct.vue'
+import ComoComprar from './main/ComoComprar.vue'
 
 </script>
 
