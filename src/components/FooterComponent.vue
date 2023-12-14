@@ -30,7 +30,7 @@
 <style scoped>
 .footer_c {
   width: 100%;
-  min-height: 430px;
+  height: 350px;
   background-color: #7D5C7F;
   display: flex;
   justify-content: space-around;
@@ -43,7 +43,7 @@
 
 .contact_us_c{
   width: 400px;
-  height: 400px;
+  height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -90,13 +90,19 @@
   font-size: 50px;
   color: white;
 }
-
+.social_icons i{
+  z-index: 2;
+}
+.social_icons i:hover{
+  color: rgb(218, 218, 218);
+  cursor: pointer;
+}
 /* Medios de pago */
 
 
 .pay_mediums_c{
   width: 400px;
-  height: 400px;
+height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -105,8 +111,7 @@
 }
 #flores{
   width: 100%;
-  object-fit: cover;
-  min-height: 439px;
+  object-fit: contain;
   position: absolute;
 }
 @media(max-width:1100px){

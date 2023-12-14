@@ -5,15 +5,23 @@
       <i class="fa-solid fa-magnifying-glass"></i>
     </div>
   </div>
-  <div v-if="textoBusqueda.length >0" class="products_search_c">
+
+  <div v-if="textoBusqueda.length >0" class="products_search_c" ref="closeSearch">
     <SearchProduct v-for="producto of productosFiltrados" :key="producto && producto.id" :name="producto && producto.name" :price="producto && producto.price"/>
   </div>
+
 </template>
 
 <script setup>
+import {onClickOutside} from '@vueuse/core'
 import {ref,onMounted,computed} from 'vue'
 import SearchProduct from './SearchProduct.vue'
 
+const closeSearch = ref(null)
+onClickOutside(closeSearch, ()=>{
+  textoBusqueda.value=''
+  
+})
 const productos = ref([])
 const textoBusqueda = ref('')
 const productosFiltrados = computed(()=>{

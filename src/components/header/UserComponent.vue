@@ -3,12 +3,26 @@
     <div class="user_cart_icos_c">
       <i class="fa-solid fa-user" @click="openLoginForm"></i>
       <i class="fa-solid fa-cart-shopping" @click="openCart"></i>
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <i class="fa-solid fa-bars" @click="showMobileNav"></i>
+
     </div>
     <p id="user_name_logged">Bienvenido/a Santiago</p>
   </div>
-
+      <!-- MENU MODAL IZQUIERDO MOVIL -->
+    <div class="modal_navbar" ref="closeMobileNavbar" >
+      <ul>
+        <li>TAZAS</li>
+        <li>REMERAS</li>
+        <li>GORRAS</li>
+        <li>BODYS</li>
+        <li>CHOPPS</li>
+        <li>MATELISTO</li>
+        <li>COMO COMPRAR?</li>
+      </ul>
+    </div>
   <!-- CARRITO MODAL -->
-    <div class="cart_c">
+    <div class="cart_c" ref="closeModalCart">
       <CartProduct/>
       <CartProduct/>
       <CartProduct/>
@@ -31,8 +45,8 @@
 
 
   <!-- LOGIN Y REGISTER MODAL -->
-  <div class="modal_c">
-    <class class="modal">
+  <div class="modal_c" >
+    <div class="modal" ref="closeLoginModal">
       <!-- LOGIN FORM -->
       <div v-if="formSelection == true" class="login_c">
         <i class="fa-solid fa-x" @click="closeLoginForm"></i>
@@ -58,14 +72,36 @@
           <p class="text_purple" @click="formSelection = true">Login</p>
       </div>
 
-    </class>
+    </div>
 
   </div>
 </template>
 
 <script setup>
+
 import {ref} from 'vue'
+import { onClickOutside } from '@vueuse/core'
 import CartProduct from '../header/CartProduct.vue'
+
+
+const formSelection = ref(true)
+
+const closeMobileNavbar  = ref(null)
+const closeModalCart = ref(null)
+const closeLoginModal = ref(null)
+
+onClickOutside(closeMobileNavbar,  ()=>{
+  const item = document.querySelector(".modal_navbar")
+   item.classList.remove('show-mobile-nav')
+})
+onClickOutside(closeModalCart,  ()=>{
+  const item = document.querySelector(".cart_c")
+   item.classList.remove('show--cart')
+})
+onClickOutside(closeLoginModal,  ()=>{
+  const item = document.querySelector(".modal_c")
+   item.classList.remove("show--modal")
+})
 
 const openLoginForm = ()=>{
   const item = document.querySelector(".modal_c")
@@ -87,12 +123,68 @@ const openCart = ()=>{
     item.classList.add('show--cart')
   }
 }
-const formSelection = ref(true)
+  const showMobileNav = ()=>{
+    const item = document.querySelector(".modal_navbar")
+    if(item.classList.contains('show-mobile-nav')){
+      item.classList.remove('show-mobile-nav')
+    }else{
+      item.classList.add('show-mobile-nav')
+    }
+  }
+
+
+
 
 
 </script>
 
 <style scoped>
+
+
+/* MODAL NAVBAR -----------------------------*/ 
+
+.modal_navbar{
+  user-select: none;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 40px;
+  z-index: 2;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  border-radius: 0px 10px 10px 0px;
+  background-color: rgb(61, 39, 62);
+  color: white;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 5px;
+  font-size: 20px;
+  box-shadow: 9px -8px 6px -4px rgba(46, 46, 46, 0.75);
+}
+.show-mobile-nav{
+  opacity: 1;
+  pointer-events: unset;
+  
+}
+.modal_navbar ul{
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding-left: 20px !important;
+  padding-top: 30px !important;
+}
+.modal_navbar ul li:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: white;
+  text-decoration-thickness: 3px;
+
+}
+.fa-magnifying-glass, .fa-bars{
+  display: none;
+}
 .cart_c{
   opacity: 0;
   pointer-events: none;
@@ -157,7 +249,7 @@ width: 90%;
   background-color: #584958;
   cursor: pointer;
 }
-/* MODAL LOGIN Y REGISTER */
+/* MODAL LOGIN Y REGISTER ---------------------------------------------------*/
 
 .modal_c{
   opacity: 0;
@@ -295,5 +387,13 @@ transition: .2s all ease;
   letter-spacing: 5px;
   font-size: 20px;
   color: rgb(82, 82, 82);
+}
+@media (max-width:1000px){
+  .fa-magnifying-glass, .fa-bars{
+  display: unset;
+}
+#user_name_logged{
+  font-size: 16px;
+}
 }
 </style>

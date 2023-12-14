@@ -1,5 +1,7 @@
 <template>
   <div class="main_c">
+    <CarrouselComponent />
+    <WhatsappComponent />
     <ProductsSection />
   <FeaturedProduct :name="productoDestacado && productoDestacado.name" 
     :price="productoDestacado && productoDestacado.price" 
@@ -13,6 +15,8 @@ import {ref,onMounted} from 'vue'
 import ProductsSection from './main/ProductsSection.vue'
 import FeaturedProduct from './main/FeaturedProduct.vue'
 import ComoComprar from './main/ComoComprar.vue'
+import CarrouselComponent from './main/CarrouselComponent.vue'
+import WhatsappComponent from './main/WhatsappComponent.vue'
 
 const productoDestacado = ref(null)
 

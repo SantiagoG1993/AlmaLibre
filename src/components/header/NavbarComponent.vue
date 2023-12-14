@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar_c" >
+  <div  class="navbar_c">
     <ul class="list">
       <li>INICIO</li>
       <li @mouseover="openModal">PRODUCTOS</li>
@@ -7,18 +7,18 @@
     </ul>
     <!-- MODAL CONTACTO -->
     <div class="modal_contact">
-      <div class="contact_c">
+      <div class="contact_c" ref="closeContactModal">
         <i class="fa-solid fa-x" @click="closeContact"></i>
         <h3>Contactanos</h3>
-        <form action="">
-          <input class="contacto__form__input" type="text" placeholder="Nombre">
-          <input class="contacto__form__input" type="text" placeholder="E-mail">
-          <input class="contacto__form__text" type="text" placeholder="Ingresa tu mensaje">
+        <form action="" @submit.prevent="sendMessage">
+          <input class="contacto__form__input" type="text" placeholder="Nombre" v-model="name">
+          <input class="contacto__form__input" type="text" placeholder="E-mail" v-model="email">
+          <input class="contacto__form__text" type="text" placeholder="Ingresa tu mensaje" v-model="message">
           <button>Enviar</button>
-    </form>
+        </form>
       </div>
-
     </div>
+
     <div class="modal_nav"  @mouseleave="closeModal">
       <ul class="list_modal">
         <li>TAZAS</li>
@@ -32,9 +32,64 @@
       </ul>
     </div>
   </div>
+
+
 </template>
 
 <script setup>
+import { onClickOutside } from '@vueuse/core'
+import {ref,onMounted} from 'vue'
+
+const closeContactModal = ref(null)
+
+
+const handleScroll = ()=>{
+  if(window.scrollY >= 295){
+    const item = document.querySelector(".navbar_c")
+    const item2= document.querySelector(".modal_nav")
+    item.classList.add('--sticky')
+    item2.classList.add('--stickymodal_nav')
+  }else{
+   const item = document.querySelector(".navbar_c")
+    const item2= document.querySelector(".modal_nav")
+    item.classList.remove('--sticky')
+    item2.classList.remove('--stickymodal_nav') 
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+onClickOutside(closeContactModal,()=>{ 
+  document.body.style.overflow = 'auto';
+  const item = document.querySelector(".modal_contact")
+  item.classList.remove('show--contact')
+  }
+  )
+
+const name = ref('')
+const email = ref('')
+const message = ref('')
+
+const sendMessage = ()=>{
+const url = `http://localhost:8080/api/messages?name=${name.value}&email=${email.value}&message=${message.value}`
+const options = {
+  method:'POST',
+  headers:{
+    'Content-Type':'application/json'
+  }
+}
+fetch(url,options)
+.then(res=> console.log(res))
+.then(data=>console.log(data))
+.catch(err=>console.log(err))
+
+name.value =''
+email.value= ''
+message.value=''
+closeContact()
+}
 
 const openContact = ()=>{
   document.body.style.overflow = 'hidden'
@@ -64,7 +119,20 @@ const closeModal = () => {
 
 <style scoped>
 
+
 /* CONTACT MODAL */
+.--sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 45px!important;
+    background-color: #3d273eb8;
+  /* Agrega otros estilos según sea necesario */
+}
+.--stickymodal_nav{
+top: 45px!important;
+}
 .modal_contact{
   opacity: 0;
   pointer-events: none;
@@ -164,10 +232,14 @@ form{
     pointer-events: unset;
   }
 
-/* NAVBAR */
+
+
+/* NAVBAR-------------------------------------------------- */
+
+
 .navbar_c {
   width: 100%;
-  height: 90px;
+  height: 80px;
   background-color: #3d273e;
   display: flex;
   justify-content: center;
@@ -179,9 +251,9 @@ form{
   display: flex;
   list-style-type: none;
   gap: 30px;
-  font-size: 18px;
+  font-size: 16px;
   font-family: "Bebas Neue", sans-serif;
-  letter-spacing: 6px;
+  letter-spacing: 5px;
 }
 .list li:hover {
   text-decoration: underline;

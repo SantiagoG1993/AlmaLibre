@@ -6,8 +6,8 @@
             <p id="name_product">{{props.name}}</p>
             <p id="description_product">{{props.description}}</p>
             <p id="price">${{props.price}}</p>
-            <button id="add_btn"><i class="fa-solid fa-cart-shopping"></i> Agregar al carrito</button>
-            <button id="info_btn"><i class="fa-solid fa-circle-info"></i> Mas info</button>
+            <button id="add_btn"> Agregar al carrito <i class="fa-solid fa-cart-shopping"></i></button>
+            <button id="info_btn">Ver mas info <i class="fa-solid fa-circle-info"></i></button>
         </div>
 
     </div>
@@ -51,7 +51,7 @@ img{
     height: 100%;
 }
 .info_c{
-width:650px ;
+width:750px ;
 height: 100%;
 margin-right: 30px!important;
  font-family: "Bebas Neue", sans-serif;
@@ -78,40 +78,41 @@ margin-right: 30px!important;
     width: 300px;
     height: 70px;
      font-family: "Bebas Neue", sans-serif;
- letter-spacing: 6px;
+ letter-spacing: 4px;
  background-color: transparent;
- border: 2px solid black;
- font-size: 20px;
+ color: white;
+ border: none;
+ background-color: black;
+ font-size: 16px;
  display: flex;
  justify-content: center;
  align-items: center;
  gap: 10px;
+ border-radius: 2px;
 }
 #add_btn:hover{
-    background-color: black;
-    color: white;
+    background-color: #2f2f2f;
     cursor: pointer;
-    transition: .3s all ease;
+    transition: .2s all ease;
 }
 #info_btn{
     width: 300px;
     height: 70px;
-    background-color: rgb(234, 234, 234);
-    border: none;
+    background-color: transparent;
+    border: 1px solid grey;
     position: absolute;
     bottom: 30px;
     right: 30px;
-    font-size: 20px;
+    font-size: 16px;
     font-family: "Bebas Neue", sans-serif;
-    letter-spacing: 6px;
+    letter-spacing: 4px;
 display: flex;
 justify-content: center;
 align-items: center;
 gap: 15px;
 }
 #info_btn:hover{
-    background-color: grey;
-    color: white;
+   background-color: rgb(234, 234, 234);
     cursor: pointer;
     transition: .3s all ease;
 }

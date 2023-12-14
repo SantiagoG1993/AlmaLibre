@@ -1,26 +1,77 @@
 <template>
-    <div class="card_c">
+    <div class="card_c" @mouseover="showFav" @mouseleave="closeFav">
         <img src="" alt="">
+        <div class="fav_c" ref="favContainer">
+            <div class="ico" id="heart"><i class="fa-regular fa-heart"></i></div>
+            <div class="ico" id="eye" @click="openMoreInfo"><i class="fa-regular fa-eye"></i></div>
+        </div>
         <p id="product_name">{{props.name}}</p>
         <p id="price">{{props.price}} ARS</p>
         <button id="add_cart_btn"><i class="fa-solid fa-cart-shopping"></i> AGREGAR AL CARRITO </button>
-
     </div>
+    <MoreInfoProduct v-if="moreInfoIsOpen==true" :name="props.name" :price="props.price" :description="props.description" @cerrar-more-info="cerrarMoreInfo"/>
+
 </template>
 
 <script setup>
-import {defineProps} from 'vue'
+import {defineProps,ref} from 'vue'
+import MoreInfoProduct from './MoreInfoProduct.vue'
+const favContainer = ref('favContainer')
+
+const moreInfoIsOpen = ref(false)
+const openMoreInfo = ()=>{
+  moreInfoIsOpen.value = true
+  document.body.style.overflow = 'hidden';
+}
+const showFav = ()=>{
+  favContainer.value.classList.add('show--fav')
+}
+const closeFav = ()=>{
+  favContainer.value.classList.remove('show--fav')
+}
 
 const props = defineProps({
   name:String,
-  price:String
+  price:String,
+  description:String
 })
-
+const cerrarMoreInfo=()=>{
+  moreInfoIsOpen.value = false
+}
 
 </script>
 
 <style scoped>
+.fav_c{
+  opacity: 0;
+  pointer-events: none;
+}
+.show--fav{
+  opacity: 1;
+  pointer-events: unset;
+}
+.ico{
+  width: 35px;
+  height: 35px;
+  background-color: #653367;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#heart{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+#eye{
+  position: absolute;
+  top: 55px;
+  right: 15px;
+}
 .card_c{
+  position: relative;
 display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,8 +89,8 @@ display: flex;
       box-shadow: 3px 4px 18px 0px rgba(214, 214, 214, 0.75);
 }
 img{
-    width: 203px;
-    height: 173px;
+    width: 90%;
+    height: 190px;
     margin-top: 16px!important;
     border-radius: 8px;
 }
