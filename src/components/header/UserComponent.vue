@@ -3,7 +3,7 @@
     <div class="user_cart_icos_c">
       <i class="fa-solid fa-user" @click="openLoginForm"></i>
       <i class="fa-solid fa-cart-shopping" @click="openCart"></i>
-      <i class="fa-solid fa-magnifying-glass"></i>
+      <i class="fa-solid fa-magnifying-glass" @click="openSearchBar"></i>
       <i class="fa-solid fa-bars" @click="showMobileNav"></i>
 
     </div>
@@ -79,10 +79,15 @@
 
 <script setup>
 
-import {ref} from 'vue'
+import {ref,defineEmits} from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import CartProduct from '../header/CartProduct.vue'
 
+const emit = defineEmits(['openSearchBar'])
+
+const openSearchBar= ()=>{
+  emit('openSearchBar')
+}
 
 const formSelection = ref(true)
 
@@ -189,7 +194,7 @@ const openCart = ()=>{
   opacity: 0;
   pointer-events: none;
   user-select: none;
-  z-index: 1;
+  z-index: 200;
   position: absolute;
   right: 5%;
   top: 190px;
@@ -260,7 +265,7 @@ width: 90%;
   right: 0;
   left: 0;
   bottom: 0;
-  z-index: 1;
+  z-index: 200;
   display: flex;
 }
 .show--modal{

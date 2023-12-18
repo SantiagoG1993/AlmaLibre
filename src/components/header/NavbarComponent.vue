@@ -46,8 +46,8 @@ const closeContactModal = ref(null)
 const handleScroll = ()=>{
   if(window.scrollY >= 295){
     const item = document.querySelector(".navbar_c")
-    const item2= document.querySelector(".modal_nav")
     item.classList.add('--sticky')
+    const item2= document.querySelector(".modal_nav")
     item2.classList.add('--stickymodal_nav')
   }else{
    const item = document.querySelector(".navbar_c")
@@ -142,7 +142,7 @@ top: 45px!important;
   left: 0;
   right: 0;
   background-color: #1b1b1b46;
-  z-index: 2;
+  z-index: 200;
   display: flex;
   justify-content: center;
 }
@@ -266,7 +266,8 @@ form{
   opacity: 0;
   pointer-events: none;
   position: absolute;
-  top: 375px;
+  top: 340px;
+  z-index: 100;
   width: 100%;
   height: 90px;
   background-color: rgba(255, 255, 255, 0.862);

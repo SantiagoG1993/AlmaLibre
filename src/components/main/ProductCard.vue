@@ -59,6 +59,11 @@ const cerrarMoreInfo=()=>{
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 3px 4px 18px 0px rgba(0, 0, 0, 0.75);
+}
+.ico:hover{
+ background-color: #a372a4; 
+ transition: .2s all ease-in;
 }
 #heart{
   position: absolute;

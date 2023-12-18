@@ -1,10 +1,10 @@
 <template>
   <div class="header_c">
     <img id="flores" src="floresheader.png" alt="" />
-    <SearchBarComponent />
+    <SearchBarComponent :isSearchBarVisible="isSearchBarVisible" />
     <img id="logo" src="santi.jpg" alt="" />
-    <UserComponent />
-    <NavbarComponent />
+    <UserComponent @openSearchBar = "openSearchBarMedia" />
+    <NavbarComponent  />
   </div>
 </template>
 
@@ -12,6 +12,13 @@
 import NavbarComponent from "./header/NavbarComponent.vue";
 import SearchBarComponent from "./header/SearchBarComponent.vue";
 import UserComponent from "./header/UserComponent.vue";
+import {ref} from 'vue'
+
+const isSearchBarVisible = ref(null)
+
+const openSearchBarMedia = ()=>{
+  isSearchBarVisible.value=!isSearchBarVisible.value
+}
 </script>
 
 <style scoped>

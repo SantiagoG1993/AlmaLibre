@@ -1,5 +1,5 @@
 <template>
-  <div class="searchbar_c">
+  <div class="searchbar_c" :class="{ 'show--searchbar': props.isSearchBarVisible }">
     <input v-model="textoBusqueda" type="text" id="input"  placeholder="Remera" />
     <div class="lupa">
       <i class="fa-solid fa-magnifying-glass"></i>
@@ -14,8 +14,10 @@
 
 <script setup>
 import {onClickOutside} from '@vueuse/core'
-import {ref,onMounted,computed} from 'vue'
+import {ref,onMounted,computed,defineProps} from 'vue'
 import SearchProduct from './SearchProduct.vue'
+
+const props = defineProps(['isSearchBarVisible'])
 
 const closeSearch = ref(null)
 onClickOutside(closeSearch, ()=>{
@@ -73,6 +75,10 @@ onMounted(()=>{
   left: 80px;
   top: 140px;
 }
+.show--searchbar{
+  opacity: 1;
+  pointer-events: none;
+}
 #input {
   width: 70%;
   height: 80%;
@@ -99,7 +105,23 @@ onMounted(()=>{
 }
 @media (max-width: 1000px) {
   .searchbar_c {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 200;
+    position: absolute;
+    left: 10%;
+    top: 300px;
+    width: 80%;
+
   }
+  .show--searchbar{
+  opacity: 1;
+  pointer-events: unset;
+}
+.products_search_c{
+width: 80%;
+left: 10%;
+top: 355px;
+}
 }
 </style>
