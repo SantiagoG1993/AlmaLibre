@@ -4,13 +4,41 @@
         <li @click="showProducts">PRODUCTOS</li>
         <li @click="showImages">IMAGENES</li>
         <li @click="showMessages">MENSAJES</li>
-        <li>IR AL INICIO</li>
+        <div class="rlink" >
+            <router-link id="link" :to="'/'">IR AL INICIO</router-link>
+        </div>
         <button id="btn_agregar2">Agregar producto</button>
     </ul>
 </div>
 <div class="right_c">
     <!-- products table -->
     <div v-if="productsIsOpen == true" class="products_c">
+        <table>
+            <tbody>
+                <tr id="tr1">
+                    <th></th>
+                    <th>IMAGEN</th>
+                    <th>NOMBRE</th
+                    ><th>PRECIO</th>
+                    <th class="items_tabla">DESCRIPCION</th><th>STOCK</th>
+                    <th class="items_tabla">DESTACADO</th>
+                        <th>COD.</th>
+                </tr>
+                <tr v-for="product of products" id="tr2" :key="product.id">
+                            <td id="pencil"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
+                            </td>
+                            <td>
+                                <img src="" alt="" id="img_table">
+                            </td>
+                            <td>{{product.name}}</td>
+                            <td id="precio_stock_destacado">${{product.price}}</td>
+                            <td class="items_tabla">{{product.description}}</td>
+                            <td id="precio_stock_destacado">{{product.stock}} u</td>
+                                <td id="precio_stock_destacado" class="items_tabla">{{product.featured}}</td>
+                                <td>{{product.id}}</td>
+                                </tr>
+            </tbody>
+        </table>
     </div>
         <!-- carrousel images -->
     <div v-if="imagesIsOpen == true" class="images_c">
@@ -25,10 +53,28 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref,onMounted} from 'vue'
+
+const products= ref([])
+
+onMounted(()=>{
+    const url = 'http://localhost:8080/api/products'
+    const options = {
+        method:'GET',
+        headers:{
+            'Content-Type':'application/json'
+        }
+    }
+    fetch(url,options)
+    .then(res=>res.json())
+    .then(data=>{products.value= data;console.log(data)})
+    .catch(err=>console.log(err))
+})
+
+
 
 const mesgIsOpen = ref(false)
-const productsIsOpen = ref(false)
+const productsIsOpen = ref(true)
 const imagesIsOpen = ref(true)
 
 const showProducts = ()=>{
@@ -66,9 +112,17 @@ const showImages = ()=>{
 li{
     margin-top: 20px !important;
 }
+.rlink{
+ margin-top: 20px!important;
+}   
+#link{
+ text-decoration: none;
+ color: rgb(97, 96, 96);
+}
+
 .menu ul li:hover{
    cursor: pointer;
-       color: #3D273E;
+    color: #3D273E;
 }
 
 /* CONTENEDOR DERECHO */
@@ -83,7 +137,47 @@ li{
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 5px;
 }
+/* productos */
 
+table{
+    caption-side: bottom;
+border-collapse: collapse;
+width: 100%;
+  text-align: center;
+  user-select: none;
+}
+th{
+    padding: 20px!important;
+}
+td{
+    letter-spacing: 1px !important;
+  color: rgb(85, 85, 85);
+  cursor: pointer;
+}
+#tr2:hover{
+   background-color: #c3bac3;
+  cursor: pointer;
+  transition: .2s all;
+}
+#tr1{
+border-bottom: 2px solid black;
+color: rgb(70, 70, 70);
+font-size: 20px;
+}
+#tr2{
+    border-bottom: 1px solid grey;
+}
+#img_table{
+    width: 80px;
+    height: 80px;
+  border-radius: 4px;
+  padding: 4px !important;
+  border: 1px solid black;
+}
+#precio_stock_destacado {
+  font-size: 25px !important;
+  color: rgb(59, 59, 59) !important;
+}
 /* mensajes */
 
 .messages_c, .products_c,.images_c{
@@ -98,6 +192,9 @@ li{
  }   
 .right_c{
     width: 100%;
+}
+.items_tabla{
+    display: none;
 }
 }
 </style>

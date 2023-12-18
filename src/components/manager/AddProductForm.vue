@@ -1,17 +1,19 @@
 <template>
     <div class="addProduct_c" :class="{'show--addForm' : props.isAddFormVisible}" ref="addFormContainer">
         <i id="close-x" class="fa-solid fa-xmark" aria-hidden="true"></i>
-        <form action="">
+        <form action="" @submit.prevent="addProduct">
             <h2>Agregar producto</h2>
-            <input type="text" placeholder="Nombre" id="nombre">
+            <input type="text" placeholder="Nombre" id="nombre" v-model="name">
             <div id="inputImage">
                 <i class="fa-regular fa-image" aria-hidden="true"></i>
             </div>
-                <input type="text" placeholder="Precio" id="precio">
-                <select name="destacado" id="destacado">
-                    <option value="si">SI</option><option value="si">NO</option>
-                </select><input type="text" placeholder="Descripcion" id="descripcion">
-                <button>Agregar</button>
+                <input type="text" placeholder="Precio" id="precio" v-model="price">
+                <select name="destacado" id="destacado" v-model="featured">
+                    <option :value="true">SI</option>
+                    <option :value="false">NO</option>
+                </select>
+                <input type="text" placeholder="Descripcion" id="descripcion" v-model="description">
+                <button >Agregar</button>
             </form>
     </div>
 </template>
@@ -23,11 +25,40 @@ const props = defineProps(['isAddFormVisible'])
 
 const addFormContainer = ref(null)
 
+const name = ref('')
+const description = ref('')
+const price = ref('')
+const featured =  ref(false)
+
 onClickOutside(addFormContainer,()=>{
     const item = document.querySelector('.addProduct_c')
     item.classList.remove('show--addForm')
 })
 
+
+const addProduct = ()=>{
+    const data ={
+        name:name.value,
+        description:description.value,
+        img:'vacio',
+        price:price.value,
+        isFeatured:featured.value,
+        stock:1,
+        ProductType:'CUSTOM_PRODUCT'
+    }
+console.log(data)
+    const url ='http://localhost:8080/api/products' 
+    const options = {
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(data)
+    }
+    fetch(url,options)
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+}
 
 </script>
 
