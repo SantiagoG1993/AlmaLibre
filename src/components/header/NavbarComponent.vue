@@ -267,7 +267,7 @@ form{
   pointer-events: none;
   position: absolute;
   top: 340px;
-  z-index: 100;
+  z-index: 400;
   width: 100%;
   height: 90px;
   background-color: rgba(255, 255, 255, 0.862);

@@ -107,7 +107,7 @@ onMounted(()=>{
   .searchbar_c {
     opacity: 0;
     pointer-events: none;
-    z-index: 200;
+    z-index: 1;
     position: absolute;
     left: 10%;
     top: 300px;
