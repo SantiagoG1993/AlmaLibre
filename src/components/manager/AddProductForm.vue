@@ -73,7 +73,7 @@ console.log(data)
     border: 2px solid white;
     border-radius: 4px;
     width: 400px;
-    height: 450px;
+    height: 470px;
     z-index: 2;
 
 }

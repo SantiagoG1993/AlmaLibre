@@ -6,7 +6,7 @@
             <div class="ico" id="eye" @click="openMoreInfo"><i class="fa-regular fa-eye"></i></div>
         </div>
         <p id="product_name">{{props.name}}</p>
-        <p id="price">{{props.price}} ARS</p>
+        <p id="price">${{props.price}} </p>
         <button id="add_cart_btn"><i class="fa-solid fa-cart-shopping"></i> AGREGAR AL CARRITO </button>
     </div>
     <MoreInfoProduct v-if="moreInfoIsOpen==true" :name="props.name" :price="props.price" :description="props.description" @cerrar-more-info="cerrarMoreInfo"/>

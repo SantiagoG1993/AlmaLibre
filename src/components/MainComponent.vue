@@ -20,15 +20,16 @@ import WhatsappComponent from './main/WhatsappComponent.vue'
 
 const productoDestacado = ref(null)
 
-  const url = 'http://localhost:8080/api/featured'
+
+
+onMounted(()=>{
+    const url = 'http://localhost:8080/api/featured'
 const options = {
   method:'GET',
   headers:{
     'Content-Type':'application/json'
   }
 }
-
-onMounted(()=>{
   fetch(url,options)
   .then(res=>res.json())
   .then(data=>{productoDestacado.value=data;

@@ -46,7 +46,24 @@
         </div>
     <!-- mensajes -->
     <div v-if="mesgIsOpen == true" class="messages_c">
-
+        <table>
+            <tr class="tr1_msg">
+                <td>De:</td>
+                <td>Email</td>
+                <td>Fecha</td>
+                <td>Hora</td>
+                <td>Mensaje</td>
+                <td></td>
+            </tr>
+            <tr class="tr2_msg" v-for="message of messages" :key="message.id">
+                <td>{{message.name}}</td>
+                <td>{{message.email}}</td>
+                <td>{{message.date.slice(0,-16)}}</td>
+                <td>{{message.date.slice(11,-10)}}</td>
+                <td>{{message.message}}</td>
+                <td><i class="fa-solid fa-trash"></i></td>
+            </tr>
+        </table>
     </div>
 
 </div>
@@ -54,28 +71,45 @@
 
 <script setup>
 import {ref,onMounted} from 'vue'
-
 const products= ref([])
+const messages = ref([])
+
+
 
 onMounted(()=>{
-    const url = 'http://localhost:8080/api/products'
+    /* PETICION GET PRODUCTOS */
+    const urlProducts = 'http://localhost:8080/api/products'
     const options = {
         method:'GET',
         headers:{
             'Content-Type':'application/json'
         }
     }
-    fetch(url,options)
+    fetch(urlProducts,options)
     .then(res=>res.json())
     .then(data=>{products.value= data;console.log(data)})
     .catch(err=>console.log(err))
-})
+
+      /* PETICION GET MENSAJES */
+const urlMessages = 'http://localhost:8080/api/messages'
+    const optionsMessages = {
+        method:'GET',
+        headers:{
+            'Content-Type':'application/json'
+        }
+    }
+    fetch(urlMessages,optionsMessages)
+    .then(res=>res.json())
+    .then(data=>{messages.value = data;console.log(data)})
+    .catch(err=>console.log(err))
+},
+)
 
 
 
-const mesgIsOpen = ref(false)
-const productsIsOpen = ref(true)
-const imagesIsOpen = ref(true)
+const mesgIsOpen = ref(true)
+const productsIsOpen = ref(false)
+const imagesIsOpen = ref(false)
 
 const showProducts = ()=>{
     productsIsOpen.value =!productsIsOpen.value
@@ -178,14 +212,32 @@ font-size: 20px;
   font-size: 25px !important;
   color: rgb(59, 59, 59) !important;
 }
-/* mensajes */
-
 .messages_c, .products_c,.images_c{
     width: 100%;
-    min-height: 450px;
+    min-height: 450px;  
+}
+/* messages */
+.tr1_msg{
+    border: 1px solid black;
+    background-color: #3D273E;
     
 }
-
+.tr1_msg td{
+    padding: 10px!important;
+    color: white;
+}
+.tr2_msg{
+    border: 1px solid black;
+}
+.tr2_msg td{
+    padding: 10px!important;
+}
+.fa-trash{
+    font-size: 20px;
+}
+.fa-trash:hover{
+    color: rgb(125, 125, 125);
+}
 @media (max-width:1000px){
  .menu{
     display: none;
