@@ -133,4 +133,48 @@ h3{
     opacity: 1;
     pointer-events: unset;
 }
+
+@media(max-width:1214px){
+.more_info_c{
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+}
+.producto-modal__container___info{
+  justify-content: center;
+  width: 500px;
+  align-items: center;
+  margin: 0px!important;
+}
+.imgPrincipal{
+  width: 320px;
+  height: 320px;
+  margin-top: 40px!important;
+}
+}
+@media(max-width:932px){
+.more_info_c{
+  width: 90%;
+  height: 90%;
+  flex-direction: column;
+  align-items: center;
+}
+.imgPrincipal{
+  border: 1px solid red;
+  width: 300px;
+  height: 300px;
+  margin-top: 40px!important;
+}
+.img_adicionales_c{
+display: none;
+}
+}
+@media (max-width:550px){
+  .more_info_c{
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+}
 </style>

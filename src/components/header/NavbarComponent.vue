@@ -44,16 +44,14 @@ const closeContactModal = ref(null)
 
 
 const handleScroll = ()=>{
+  const navbar = document.querySelector(".navbar_c")
+  const modalNav= document.querySelector(".modal_nav")
   if(window.scrollY >= 295){
-    const item = document.querySelector(".navbar_c")
-    item.classList.add('--sticky')
-    const item2= document.querySelector(".modal_nav")
-    item2.classList.add('--stickymodal_nav')
+    navbar.classList.add('--sticky')
+    modalNav.classList.add('--stickymodal_nav')
   }else{
-   const item = document.querySelector(".navbar_c")
-    const item2= document.querySelector(".modal_nav")
-    item.classList.remove('--sticky')
-    item2.classList.remove('--stickymodal_nav') 
+    navbar.classList.remove('--sticky')
+    modalNav.classList.remove('--stickymodal_nav') 
   }
 }
 

@@ -28,17 +28,18 @@ const handleClick= (id1,id2,type)=>{
 
 }
 
-const url = 'http://localhost:8080/api/products'
-const options = {
-  method:'GET',
-  headers:{
-    'Content-Type':'application/json'
-  }
-}
+/* GET PRODUCTOS */
 onMounted(()=>{
+  const url = 'http://localhost:8080/api/products'
+  const options = {
+    method:'GET',
+    headers:{
+      'Content-Type':'application/json'
+    }
+  }
   fetch(url,options)
   .then(res=>res.json())
-  .then(data=>{datos.value=data;})
+  .then(data=>{datos.value=data.filter(p=>p.deleted==false);})
   .catch(err=>console.log(err))
 })
 

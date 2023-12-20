@@ -45,4 +45,9 @@ text-align: center;
     text-align: center;
     width: 80%;
 }
+@media (max-width:1000px){
+    .howto_c{
+        width: 100%;
+    }
+}
 </style>

@@ -117,9 +117,15 @@ height: 100%;
 @media(max-width:1100px){
   .footer_c{
     flex-direction: column;
+    height: 700px!important;
+    gap: 20px;
   }
   .social_c{
     border: none;
+  }
+  .contact_us_c{
+    margin-top: 40px!important;
+    margin-bottom: 40px!important;
   }
 }
 

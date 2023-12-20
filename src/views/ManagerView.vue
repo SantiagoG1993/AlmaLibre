@@ -1,7 +1,7 @@
 <template>
     <div>
         <HeaderManager @openFormAddProduct="openFormAdd" />
-        <AddProductForm :isAddFormVisible="isAddFormVisible" />
+        <AddProductForm :isAddFormVisible="isAddFormVisible"/>
         <NavBarManager />
     </div>
 </template>

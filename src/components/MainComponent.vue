@@ -20,8 +20,7 @@ import WhatsappComponent from './main/WhatsappComponent.vue'
 
 const productoDestacado = ref(null)
 
-
-
+/* GET PRODUCTO DESTACADO */
 onMounted(()=>{
     const url = 'http://localhost:8080/api/featured'
 const options = {

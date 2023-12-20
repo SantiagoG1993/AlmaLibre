@@ -267,6 +267,8 @@ width: 90%;
   bottom: 0;
   z-index: 200;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .show--modal{
   opacity: 1;
@@ -274,13 +276,16 @@ width: 90%;
 }
 .modal{
   width: 450px;
-  min-height: 370px;
+  height: 370px;
   background-color: white;
-  margin: auto!important;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  left: 37%;
+  top: 10%;
+
 }
 .login_c,.register_c{
   width: 100%;

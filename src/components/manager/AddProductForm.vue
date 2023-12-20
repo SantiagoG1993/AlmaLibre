@@ -1,14 +1,15 @@
 <template>
     <div class="addProduct_c" :class="{'show--addForm' : props.isAddFormVisible}" ref="addFormContainer">
         <i id="close-x" class="fa-solid fa-xmark" aria-hidden="true"></i>
-        <form action="" @submit.prevent="addProduct">
+        <form action="" @submit.prevent="addProduct" enctype="multipart/form-data">
             <h2>Agregar producto</h2>
             <input type="text" placeholder="Nombre" id="nombre" v-model="name">
             <div id="inputImage">
+                <input  type="file" name="img" id="imgInput" @change="handleFileChange">
                 <i class="fa-regular fa-image" aria-hidden="true"></i>
             </div>
                 <input type="text" placeholder="Precio" id="precio" v-model="price">
-                <select name="destacado" id="destacado" v-model="featured">
+                <select name="destacado" id="destacado" v-model="isFeatured">
                     <option :value="true">SI</option>
                     <option :value="false">NO</option>
                 </select>
@@ -28,7 +29,13 @@ const addFormContainer = ref(null)
 const name = ref('')
 const description = ref('')
 const price = ref('')
-const featured =  ref(false)
+const isFeatured =  ref(true)
+const img = ref({})
+
+const handleFileChange = (event) => {
+const file = event.target.files[0];
+img.value = file;
+};
 
 onClickOutside(addFormContainer,()=>{
     const item = document.querySelector('.addProduct_c')
@@ -36,29 +43,32 @@ onClickOutside(addFormContainer,()=>{
 })
 
 
-const addProduct = ()=>{
-    const data ={
-        name:name.value,
-        description:description.value,
-        img:'vacio',
-        price:price.value,
-        isFeatured:featured.value,
-        stock:1,
-        ProductType:'CUSTOM_PRODUCT'
-    }
-console.log(data)
-    const url ='http://localhost:8080/api/products' 
+const addProduct = () => {
+
+    const formData = new FormData();
+    formData.append('name', name.value);
+    formData.append('description', description.value);
+    formData.append('imgFile', img.value);
+    formData.append('price', price.value);
+    formData.append('featured', isFeatured.value);
+    formData.append('stock', 1);
+    formData.append('ProductType', 'CUSTOM_PRODUCT');
+
+    console.log(formData);
+
+    const url = 'http://localhost:8080/api/products';
     const options = {
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify(data)
-    }
-    fetch(url,options)
-    .then(res=>console.log(res))
-    .catch(err=>console.log(err))
-}
+        method: 'POST',
+        body: formData
+    };
+
+    fetch(url, options)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => console.error(err));
+};
+
 
 </script>
 
