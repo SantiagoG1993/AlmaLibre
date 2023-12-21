@@ -1,18 +1,30 @@
 <template>
     <div class="product_c">
-        <img src="" alt="">
+        <img src="https://lh3.googleusercontent.com/pw/ABLVV86WIGOLbKTpJ7v8jDkgzwJqZ13SqUn7xUKrSozkZZqimmlKAFMw49cQLXNQVW87V_8TYPdl6uLw3HtpqHke4OqpU46Ex_2Af9l0axcJ2rHOddDehOq3NFcFiLHci2H-I2hv-_DeCD3jDoAn5cAuSma8xg=w659-h879-s-no?authuser=0" alt="">
         <input type="number" id="cantidad">
         <div class="name_price_c">
-            <h3>Body</h3>
-            <p>x 3500 ARS</p>
+            <h3>{{props.name}}</h3>
+            <p>x  $ {{props.price}}</p>
         </div>
-            <i class="fa-solid fa-trash"></i>
+            <i class="fa-solid fa-trash" @click="deleteProduct"></i>
     </div>
           <hr id="hr_carrito">
 </template>
 
 <script setup>
+import {defineProps,defineEmits} from 'vue'
+const emit = defineEmits(['delete-from-cart'])
 
+const props = defineProps(
+  {
+   name:String,
+   price:String 
+  }
+)
+
+const deleteProduct = ()=>{
+  emit('delete-from-cart')
+}
 </script>
 
 <style scoped>
@@ -33,6 +45,7 @@ width: 90%;
 .product_c img{
     width: 85px;
     height: 100%;
+    object-fit: cover;
 }
 #cantidad{
     width: 60px;

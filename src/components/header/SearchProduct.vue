@@ -1,9 +1,9 @@
 <template>
     <div class="search_product_c">
-        <img src="" alt="">
+        <img src="https://lh3.googleusercontent.com/pw/ABLVV86WIGOLbKTpJ7v8jDkgzwJqZ13SqUn7xUKrSozkZZqimmlKAFMw49cQLXNQVW87V_8TYPdl6uLw3HtpqHke4OqpU46Ex_2Af9l0axcJ2rHOddDehOq3NFcFiLHci2H-I2hv-_DeCD3jDoAn5cAuSma8xg=w659-h879-s-no?authuser=0" alt="">
         <div class="name_price_c">
             <p id="nombre">{{props.name}}</p>
-            <p>{{props.price}} ARS</p>
+            <p>${{props.price}}</p>
         </div>
     </div>
     <hr id="hr_carrito">
@@ -38,6 +38,7 @@ img{
     width: 70px;
     height: 100%;
     border: 1px solid black;
+    object-fit: cover;
 }
 #nombre{
     color: grey;

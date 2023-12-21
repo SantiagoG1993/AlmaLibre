@@ -1,23 +1,28 @@
 <template>
     <div class="card_c" @mouseover="showFav" @mouseleave="closeFav">
-        <img src="" alt="">
+        <img src="https://lh3.googleusercontent.com/pw/ABLVV86WIGOLbKTpJ7v8jDkgzwJqZ13SqUn7xUKrSozkZZqimmlKAFMw49cQLXNQVW87V_8TYPdl6uLw3HtpqHke4OqpU46Ex_2Af9l0axcJ2rHOddDehOq3NFcFiLHci2H-I2hv-_DeCD3jDoAn5cAuSma8xg=w659-h879-s-no?authuser=0" alt="">
         <div class="fav_c" ref="favContainer">
             <div class="ico" id="heart"><i class="fa-regular fa-heart"></i></div>
             <div class="ico" id="eye" @click="openMoreInfo"><i class="fa-regular fa-eye"></i></div>
         </div>
         <p id="product_name">{{props.name}}</p>
         <p id="price">${{props.price}} </p>
-        <button id="add_cart_btn"><i class="fa-solid fa-cart-shopping"></i> AGREGAR AL CARRITO </button>
+        <button id="add_cart_btn" @click="add"><i class="fa-solid fa-cart-shopping"></i> AGREGAR AL CARRITO </button>
     </div>
-    <MoreInfoProduct v-if="moreInfoIsOpen==true" :name="props.name" :price="props.price" :description="props.description" @cerrar-more-info="cerrarMoreInfo"/>
+    <MoreInfoProduct v-if="moreInfoIsOpen==true" :name="props.name" :price="props.price" :description="props.description" @cerrar-more-info="cerrarMoreInfo" @add-to-cart="add"/>
 
 </template>
 
 <script setup>
-import {defineProps,ref} from 'vue'
+import {defineProps,ref,defineEmits} from 'vue'
 import MoreInfoProduct from './MoreInfoProduct.vue'
 const favContainer = ref('favContainer')
 
+const emit = defineEmits(['add-to-cart'])
+
+const add = ()=>{
+  emit('add-to-cart')
+} 
 const moreInfoIsOpen = ref(false)
 const openMoreInfo = ()=>{
   moreInfoIsOpen.value = true
@@ -38,6 +43,7 @@ const props = defineProps({
 const cerrarMoreInfo=()=>{
   moreInfoIsOpen.value = false
 }
+
 
 </script>
 
@@ -98,6 +104,7 @@ img{
     height: 190px;
     margin-top: 16px!important;
     border-radius: 8px;
+    object-fit: cover;
 }
 #product_name{
         font-family: 'Bebas Neue', sans-serif;

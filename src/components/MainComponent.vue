@@ -3,22 +3,26 @@
     <CarrouselComponent />
     <WhatsappComponent />
     <ProductsSection />
-  <FeaturedProduct :name="productoDestacado && productoDestacado.name" 
+  <FeaturedProduct 
+    :name="productoDestacado && productoDestacado.name" 
     :price="productoDestacado && productoDestacado.price" 
-    :description="productoDestacado && productoDestacado.description"/>   
-                      <ComoComprar />
+    :description="productoDestacado && productoDestacado.description"
+    @add-to-cart="addToCart"/>   
+    <ComoComprar />
   </div>
 </template>
 
 <script setup>
 import {ref,onMounted} from 'vue'
+import {useStore} from 'vuex'
 import ProductsSection from './main/ProductsSection.vue'
 import FeaturedProduct from './main/FeaturedProduct.vue'
 import ComoComprar from './main/ComoComprar.vue'
 import CarrouselComponent from './main/CarrouselComponent.vue'
 import WhatsappComponent from './main/WhatsappComponent.vue'
 
-const productoDestacado = ref(null)
+const productoDestacado = ref([])
+const store =useStore()
 
 /* GET PRODUCTO DESTACADO */
 onMounted(()=>{
@@ -36,6 +40,12 @@ const options = {
   .catch(err=>console.log(err))
 })
 
+const addToCart= ()=>{
+  const producto = productoDestacado.value
+  store.commit('addProductToCart',producto)
+  console.log(productoDestacado.value)
+
+}
 </script>
 
 

@@ -122,6 +122,7 @@ onMounted(()=>{
 width: 80%;
 left: 10%;
 top: 355px;
+z-index: 300;
 }
 }
 </style>

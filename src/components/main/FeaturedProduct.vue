@@ -6,16 +6,17 @@
             <p id="name_product">{{props.name}}</p>
             <p id="description_product">{{props.description}}</p>
             <p id="price">${{props.price}}</p>
-            <button id="add_btn"> Agregar al carrito <i class="fa-solid fa-cart-shopping"></i></button>
+            <button id="add_btn" @click="addToCart"> Agregar al carrito <i class="fa-solid fa-cart-shopping"></i></button>
             <button id="info_btn">Ver mas info <i class="fa-solid fa-circle-info"></i></button>
         </div>
-
     </div>
 </template>
 
 <script setup>
 
-import {defineProps} from 'vue'
+import {defineProps,defineEmits} from 'vue'
+
+const emit = defineEmits(['add-to-cart'])
 
 const props = defineProps({
     name:String,
@@ -23,7 +24,9 @@ const props = defineProps({
     price:String
 
 })
-
+const addToCart = ()=>{
+emit('add-to-cart')
+}
 </script>
 
 <style scoped>

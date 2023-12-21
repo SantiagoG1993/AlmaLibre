@@ -11,7 +11,7 @@
                 <p class="producto-modal__container___info____descripcion">{{props.description}}</p>
                 <p class="producto-modal__container___info____precio">${{props.price}}</p>
                 <input id="cantidad" type="number">
-                <button>Agregar al carrito</button>
+                <button @click="addToCart">Agregar al carrito</button>
                 </div>
         </div>
 
@@ -29,7 +29,11 @@ const props = defineProps({
     description:String,
     price:String
 })
-const emit = defineEmits(['cerrar-more-info']) /* Cerrar con la "X" */
+const emit = defineEmits(['cerrar-more-info','add-to-cart']) /* Cerrar con la "X" */
+
+const addToCart = ()=>{
+  emit('add-to-cart')
+}
 
 const closeMoreInfoWithX = ()=>{
     emit('cerrar-more-info')

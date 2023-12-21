@@ -4,7 +4,13 @@
   <li id="digitales" @click="handleClick('digitales','personalizados','digitales')">DISEÑOS DIGITALES</li>
 </ul>
   <div  v-if="productType == 'personalizados'" class="products_c">
-  <ProductCard  v-for="dato in datos" :key="dato.id" :name="dato.name" :price="dato.price" :description="dato.description"/>
+  <ProductCard  v-for="dato in datos" 
+  :key="dato.id" 
+  :name="dato.name" 
+  :price="dato.price" 
+  :description="dato.description" 
+  :product-id=dato.id
+  @add-to-cart="addToCart(dato.id)"/>
   </div >
   <div v-if="productType == 'digitales'" class="products_c" >
 
@@ -13,10 +19,14 @@
 
 <script setup>
 import {ref,onMounted} from 'vue'
+import {useStore} from 'vuex'
 import ProductCard from './ProductCard.vue'
+
+const store =useStore()
 
 const productType = ref('personalizados')
 const datos = ref(null)
+
 
 const handleClick= (id1,id2,type)=>{
   const item = document.querySelector(`#${id1}`)
@@ -42,6 +52,12 @@ onMounted(()=>{
   .then(data=>{datos.value=data.filter(p=>p.deleted==false);})
   .catch(err=>console.log(err))
 })
+
+
+const addToCart = (id)=>{
+  const product = datos.value.filter(p => p.id == id)
+  store.commit('addProductToCart', product[0])
+}
 
 
 </script>

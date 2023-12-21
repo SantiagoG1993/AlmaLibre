@@ -28,7 +28,7 @@
                             <td id="pencil"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
                             </td>
                             <td>
-                                <img src="" alt="" id="img_table">
+                                <img src="https://lh3.googleusercontent.com/pw/ABLVV86WIGOLbKTpJ7v8jDkgzwJqZ13SqUn7xUKrSozkZZqimmlKAFMw49cQLXNQVW87V_8TYPdl6uLw3HtpqHke4OqpU46Ex_2Af9l0axcJ2rHOddDehOq3NFcFiLHci2H-I2hv-_DeCD3jDoAn5cAuSma8xg=w659-h879-s-no?authuser=0" alt="" id="img_table">
                             </td>
                             <td><i v-if="product.featured == true" class="fa-solid fa-star"></i>{{product.name}}</td>
                             <td id="precio_stock_destacado">${{product.price}}</td>
@@ -332,10 +332,10 @@ font-size: 20px;
     border-bottom: 1px solid grey;
 }
 #img_table{
-    width: 80px;
-    height: 80px;
-  border-radius: 4px;
-  padding: 4px !important;
+    width: 75px;
+    height: 75px;
+    margin: 5px 0px 5px 0px!important;
+  border-radius: 2px;
   border: 1px solid black;
 }
 #precio_stock_destacado {

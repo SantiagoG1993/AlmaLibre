@@ -2,7 +2,10 @@
   <div class="user_c">
     <div class="user_cart_icos_c">
       <i class="fa-solid fa-user" @click="openLoginForm"></i>
-      <i class="fa-solid fa-cart-shopping" @click="openCart"></i>
+      <div class="cart_icon_c">
+        <p v-if="cartProductsAdded.length>0" id="number_products">{{cartProductsAdded.length}}</p>
+        <i class="fa-solid fa-cart-shopping" @click="openCart"></i>
+      </div>
       <i class="fa-solid fa-magnifying-glass" @click="openSearchBar"></i>
       <i class="fa-solid fa-bars" @click="showMobileNav"></i>
 
@@ -23,22 +26,25 @@
     </div>
   <!-- CARRITO MODAL -->
     <div class="cart_c" ref="closeModalCart">
-      <CartProduct/>
-      <CartProduct/>
-      <CartProduct/>
-      <CartProduct/>
+
+      <CartProduct v-for="product of cartProductsAdded" 
+      :key="product.id" 
+      :name="product.name" 
+      :price="product.price.toLocaleString()"
+      @delete-from-cart="deleteProduct(product.id)"/>
+
       <div class="article_price_c">
-        <p>1 Articulo</p>
-        <p>3500.00 ARS</p>
+        <p>{{cartProductsAdded.length}} Articulo/s</p>
+        <p>${{sumaTotal.toLocaleString()}}</p>
       </div>
       <div class="descuent_c">
         <p>Descuento</p>
-        <p>0.00 ARS</p>
+        <p>$0.00</p>
       </div>
       <hr id="hr_carrito">
       <div class="total">
         <p>TOTAL</p>
-        <p>3500.00 ARS</p>
+        <p>${{sumaTotal.toLocaleString()}}</p>
       </div>
       <button class="carrito_btn">ir al carrito <i class="fa-solid fa-cart-shopping"></i></button>
     </div>
@@ -79,11 +85,15 @@
 
 <script setup>
 
-import {ref,defineEmits} from 'vue'
+import {ref,defineEmits,computed} from 'vue'
+import {useStore} from 'vuex'
 import { onClickOutside } from '@vueuse/core'
 import CartProduct from '../header/CartProduct.vue'
 
+const store = useStore()
 const emit = defineEmits(['openSearchBar'])
+
+
 
 const openSearchBar= ()=>{
   emit('openSearchBar')
@@ -91,6 +101,18 @@ const openSearchBar= ()=>{
 
 const formSelection = ref(true)
 
+const cartProductsAdded  = computed(()=>{
+  return store.state.cartProducts
+})
+const sumaTotal = computed(()=>{
+return store.getters.sumaDePrecios;
+})
+const deleteProduct = (id)=>{
+  const producto = cartProductsAdded.value.filter(p => p.id == id)
+  console.log('click')
+  return store.commit('removeProductFromCart',producto[0])
+  
+}
 const closeMobileNavbar  = ref(null)
 const closeModalCart = ref(null)
 const closeLoginModal = ref(null)
@@ -218,6 +240,7 @@ width: 90%;
   margin-bottom: 10px !important;
 }
 .article_price_c,.descuent_c{
+  margin-top: 30px!important;
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -383,6 +406,7 @@ transition: .2s all ease;
 .user_cart_icos_c {
   display: flex;
   justify-content: end;
+  align-items: center;
   gap: 10px;
 }
 .user_cart_icos_c i {
@@ -390,8 +414,31 @@ transition: .2s all ease;
   color: rgb(255, 255, 255);
   filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.5));
   cursor: pointer;
+  
 }
-
+/* CART ICON ---------------------------------------------------------*/
+.cart_icon_c{
+  display: flex;
+  align-items: center;
+  width: 45px;
+  height: 50px;
+  position: relative;
+}
+#number_products{
+  background-color: #3D273E;
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  z-index:200 ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
 #user_name_logged {
   font-family: "Bebas Neue", sans-serif;
   letter-spacing: 5px;
