@@ -1,11 +1,12 @@
 <template>
 <p id="title">Producto Destacado</p>
     <div class="featured_c">
-        <img src="" alt="">
+        <img :src="props.img" alt="">
         <div class="info_c">
             <p id="name_product">{{props.name}}</p>
             <p id="description_product">{{props.description}}</p>
             <p id="price">${{props.price}}</p>
+            <i class="fa-regular fa-heart"></i>
             <button id="add_btn" @click="addToCart"> Agregar al carrito <i class="fa-solid fa-cart-shopping"></i></button>
             <button id="info_btn">Ver mas info <i class="fa-solid fa-circle-info"></i></button>
         </div>
@@ -21,7 +22,8 @@ const emit = defineEmits(['add-to-cart'])
 const props = defineProps({
     name:String,
     description:String,
-    price:String
+    price:String,
+    img:String
 
 })
 const addToCart = ()=>{
@@ -49,9 +51,21 @@ emit('add-to-cart')
        font-size: 30px;
        margin-top: 20px!important;
 }
+.fa-heart{
+    color: rgb(63, 37, 63);
+    font-size: 40px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+.fa-heart:hover{
+   color: rgb(157, 71, 157); 
+}
 img{
     width: 380px;
     height: 100%;
+    object-fit: cover;
 }
 .info_c{
 width:750px ;

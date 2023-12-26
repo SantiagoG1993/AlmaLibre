@@ -1,12 +1,12 @@
 <template>
     <div class="card_c" @mouseover="showFav" @mouseleave="closeFav">
-        <img src="https://lh3.googleusercontent.com/pw/ABLVV86WIGOLbKTpJ7v8jDkgzwJqZ13SqUn7xUKrSozkZZqimmlKAFMw49cQLXNQVW87V_8TYPdl6uLw3HtpqHke4OqpU46Ex_2Af9l0axcJ2rHOddDehOq3NFcFiLHci2H-I2hv-_DeCD3jDoAn5cAuSma8xg=w659-h879-s-no?authuser=0" alt="">
+        <img :src="props.img" alt="remera" border="0">
         <div class="fav_c" ref="favContainer">
             <div class="ico" id="heart"><i class="fa-regular fa-heart"></i></div>
             <div class="ico" id="eye" @click="openMoreInfo"><i class="fa-regular fa-eye"></i></div>
         </div>
         <p id="product_name">{{props.name}}</p>
-        <p id="price">${{props.price}} </p>
+        <p id="price">${{props.price.toLocaleString()}} </p>
         <button id="add_cart_btn" @click="add"><i class="fa-solid fa-cart-shopping"></i> AGREGAR AL CARRITO </button>
     </div>
     <MoreInfoProduct v-if="moreInfoIsOpen==true" :name="props.name" :price="props.price" :description="props.description" @cerrar-more-info="cerrarMoreInfo" @add-to-cart="add"/>
@@ -38,7 +38,8 @@ const closeFav = ()=>{
 const props = defineProps({
   name:String,
   price:String,
-  description:String
+  description:String,
+  img:String
 })
 const cerrarMoreInfo=()=>{
   moreInfoIsOpen.value = false

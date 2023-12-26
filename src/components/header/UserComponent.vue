@@ -2,6 +2,7 @@
   <div class="user_c">
     <div class="user_cart_icos_c">
       <i class="fa-solid fa-user" @click="openLoginForm"></i>
+        <i id="fav_user_icon" class="fa-solid fa-heart"></i>
       <div class="cart_icon_c">
         <p v-if="cartProductsAdded.length>0" id="number_products">{{cartProductsAdded.length}}</p>
         <i class="fa-solid fa-cart-shopping" @click="openCart"></i>
@@ -31,6 +32,7 @@
       :key="product.id" 
       :name="product.name" 
       :price="product.price.toLocaleString()"
+      :img = "product.img"
       @delete-from-cart="deleteProduct(product.id)"/>
 
       <div class="article_price_c">
@@ -413,9 +415,9 @@ transition: .2s all ease;
   font-size: 30px;
   color: rgb(255, 255, 255);
   filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.5));
-  cursor: pointer;
-  
+  cursor: pointer; 
 }
+
 /* CART ICON ---------------------------------------------------------*/
 .cart_icon_c{
   display: flex;
@@ -449,6 +451,7 @@ transition: .2s all ease;
   .fa-magnifying-glass, .fa-bars{
   display: unset;
 }
+
 #user_name_logged{
   font-size: 16px;
 }

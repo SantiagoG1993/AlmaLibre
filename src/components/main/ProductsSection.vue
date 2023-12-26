@@ -9,7 +9,8 @@
   :name="dato.name" 
   :price="dato.price" 
   :description="dato.description" 
-  :product-id=dato.id
+  :product-id="dato.id"
+  :img = "dato.img"
   @add-to-cart="addToCart(dato.id)"/>
   </div >
   <div v-if="productType == 'digitales'" class="products_c" >
@@ -49,7 +50,7 @@ onMounted(()=>{
   }
   fetch(url,options)
   .then(res=>res.json())
-  .then(data=>{datos.value=data.filter(p=>p.deleted==false);})
+  .then(data=>{datos.value=data.filter(p=>p.deleted==false);console.log(data)})
   .catch(err=>console.log(err))
 })
 

@@ -5,8 +5,8 @@
             <h2>Agregar producto</h2>
             <input type="text" placeholder="Nombre" id="nombre" v-model="name">
             <div id="inputImage">
-                <input  type="file" name="img" id="imgInput" @change="handleFileChange">
                 <i class="fa-regular fa-image" aria-hidden="true"></i>
+                <input  type="text" name="img" id="imgInput" v-model="img">
             </div>
                 <input type="text" placeholder="Precio" id="precio" v-model="price">
                 <select name="destacado" id="destacado" v-model="isFeatured">
@@ -30,12 +30,7 @@ const name = ref('')
 const description = ref('')
 const price = ref('')
 const isFeatured =  ref(true)
-const img = ref({})
-
-const handleFileChange = (event) => {
-const file = event.target.files[0];
-img.value = file;
-};
+const img = ref('')
 
 onClickOutside(addFormContainer,()=>{
     const item = document.querySelector('.addProduct_c')
@@ -45,21 +40,25 @@ onClickOutside(addFormContainer,()=>{
 
 const addProduct = () => {
 
-    const formData = new FormData();
-    formData.append('name', name.value);
-    formData.append('description', description.value);
-    formData.append('imgFile', img.value);
-    formData.append('price', price.value);
-    formData.append('featured', isFeatured.value);
-    formData.append('stock', 1);
-    formData.append('ProductType', 'CUSTOM_PRODUCT');
+    const data = {
+        'name': name.value,
+        'description':description.value,
+        'img':img.value,
+        'price':price.value,
+        'featured':isFeatured.value,
+        'stock': 1,
+        'ProductType': 'CUSTOM_PRODUCT'
+    }
 
-    console.log(formData);
+    console.log( JSON.stringify(data));
 
     const url = 'http://localhost:8080/api/products';
     const options = {
         method: 'POST',
-        body: formData
+        headers:{
+            "Content-type":"application/json"
+        },
+        body: JSON.stringify(data)
     };
 
     fetch(url, options)
@@ -146,6 +145,7 @@ form button:hover{
     width: 130px;
     height: 130px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 4px;
@@ -157,6 +157,10 @@ form button:hover{
 #inputImage i{
     font-size: 30px;
     color: rgb(168, 168, 168);
+}
+#imgInput{
+    width: 100%;
+    
 }
 h2{
     font-family: 'Bebas Neue', sans-serif;

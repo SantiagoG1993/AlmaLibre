@@ -1,6 +1,6 @@
 <template>
     <div class="product_c">
-        <img src="https://lh3.googleusercontent.com/pw/ABLVV86WIGOLbKTpJ7v8jDkgzwJqZ13SqUn7xUKrSozkZZqimmlKAFMw49cQLXNQVW87V_8TYPdl6uLw3HtpqHke4OqpU46Ex_2Af9l0axcJ2rHOddDehOq3NFcFiLHci2H-I2hv-_DeCD3jDoAn5cAuSma8xg=w659-h879-s-no?authuser=0" alt="">
+        <img :src="props.img" alt="">
         <input type="number" id="cantidad">
         <div class="name_price_c">
             <h3>{{props.name}}</h3>
@@ -18,7 +18,8 @@ const emit = defineEmits(['delete-from-cart'])
 const props = defineProps(
   {
    name:String,
-   price:String 
+   price:String,
+   img:String
   }
 )
 

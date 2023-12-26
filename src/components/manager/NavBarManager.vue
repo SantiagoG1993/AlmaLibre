@@ -28,7 +28,7 @@
                             <td id="pencil"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
                             </td>
                             <td>
-                                <img src="https://lh3.googleusercontent.com/pw/ABLVV86WIGOLbKTpJ7v8jDkgzwJqZ13SqUn7xUKrSozkZZqimmlKAFMw49cQLXNQVW87V_8TYPdl6uLw3HtpqHke4OqpU46Ex_2Af9l0axcJ2rHOddDehOq3NFcFiLHci2H-I2hv-_DeCD3jDoAn5cAuSma8xg=w659-h879-s-no?authuser=0" alt="" id="img_table">
+                                <img :src="product.img" alt="" id="img_table">
                             </td>
                             <td><i v-if="product.featured == true" class="fa-solid fa-star"></i>{{product.name}}</td>
                             <td id="precio_stock_destacado">${{product.price}}</td>
