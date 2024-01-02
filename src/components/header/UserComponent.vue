@@ -25,6 +25,9 @@
         <li>COMO COMPRAR?</li>
       </ul>
     </div>
+
+
+
   <!-- CARRITO MODAL -->
     <div class="cart_c" ref="closeModalCart">
 
@@ -48,10 +51,38 @@
         <p>TOTAL</p>
         <p>${{sumaTotal.toLocaleString()}}</p>
       </div>
-      <button class="carrito_btn">ir al carrito <i class="fa-solid fa-cart-shopping"></i></button>
+      <button class="carrito_btn" @click="showModalComprar">COMPRAR <i class="fa-solid fa-cart-shopping"></i></button>
     </div>
 
+<!-- MODAL COMPRA PARA INGRESAR DATOS DE CONTACTO -->
 
+<div class="modal_compra" >
+  <div class="modal__compra___container" ref="closeModalComprar">
+    <div v-if="finishBuy == true" class="buyResume_c">
+      <h2>Tu pedido:</h2>
+      <form action="" class="form_comprar">
+        <tr v-for="product of cartProductsAdded" :key="product.id">
+          <td><img :src="product.img" alt="product_img" id="img_compra"></td>
+          <td>{{product.name}}</td>
+          <td>{{product.description}}</td>
+          <td>Cant x 1</td>
+          <td>${{product.price}}</td>
+          <td>Cod. {{product.id}}</td>
+        </tr>
+      </form>
+      <h2 id="total_comprar">Total: ${{sumaTotal.toLocaleString()}}</h2>
+      <button id="btn_finalizar" @click="handleFinishBuy">Finalizar pedido</button>
+    </div>
+
+    <div class="checkbuy_c" v-if="finishBuy == false" >
+      <p>Hemos recibido tu pedido. Nos pondremos en contacto en breve para coordinar el diseño y los detalles del pago.
+    </p>
+    <p id="gracias">¡Gracias por elegirnos!</p>
+    <img src="checkgif.gif" alt="" id="gifCheck">
+    </div>
+  
+  </div>
+</div>
   <!-- LOGIN Y REGISTER MODAL -->
   <div class="modal_c" >
     <div class="modal" ref="closeLoginModal">
@@ -95,7 +126,7 @@ import CartProduct from '../header/CartProduct.vue'
 const store = useStore()
 const emit = defineEmits(['openSearchBar'])
 
-
+const finishBuy = ref(true)
 
 const openSearchBar= ()=>{
   emit('openSearchBar')
@@ -106,6 +137,19 @@ const formSelection = ref(true)
 const cartProductsAdded  = computed(()=>{
   return store.state.cartProducts
 })
+
+const handleFinishBuy = ()=>{
+  finishBuy.value = false
+  setTimeout(()=>{
+  const item = document.querySelector(".modal_compra")
+  item.classList.remove("show--modal--comprar")
+  finishBuy.value = true
+  store.commit('emptyCart')
+},5000)
+
+  }
+
+
 const sumaTotal = computed(()=>{
 return store.getters.sumaDePrecios;
 })
@@ -118,6 +162,7 @@ const deleteProduct = (id)=>{
 const closeMobileNavbar  = ref(null)
 const closeModalCart = ref(null)
 const closeLoginModal = ref(null)
+const closeModalComprar = ref(null)
 
 onClickOutside(closeMobileNavbar,  ()=>{
   const item = document.querySelector(".modal_navbar")
@@ -131,6 +176,11 @@ onClickOutside(closeLoginModal,  ()=>{
   const item = document.querySelector(".modal_c")
    item.classList.remove("show--modal")
 })
+onClickOutside(closeModalComprar,  ()=>{
+  const item = document.querySelector(".modal_compra")
+  item.classList.remove("show--modal--comprar")
+})
+
 
 const openLoginForm = ()=>{
   const item = document.querySelector(".modal_c")
@@ -160,7 +210,12 @@ const openCart = ()=>{
       item.classList.add('show-mobile-nav')
     }
   }
-
+const showModalComprar = ()=>{
+  if(cartProductsAdded.value.length>0){
+    const item = document.querySelector(".modal_compra")
+    item.classList.add("show--modal--comprar")
+  }
+}
 
 
 
@@ -169,7 +224,112 @@ const openCart = ()=>{
 
 <style scoped>
 
-
+/* MODAL COMPRA INGREAR DATOS --------------------- */
+.modal_compra{
+  position: fixed;
+  background-color: #3d273ec1;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 300;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+}
+.modal__compra___container{
+  width: 700px;
+  min-height: 300px;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.show--modal--comprar{
+  opacity: 1;
+  pointer-events: unset;
+}
+#img_compra{
+  width: 50px;
+  height: 50px;
+  border-radius: 2px;
+}
+#total_comprar{
+  align-self: end;
+  margin-right: 60px!important;
+  margin-top: 20px!important;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 5px;
+  font-size: 40px;
+  margin-bottom: 20px!important;
+  
+}
+.form_comprar{
+background-color: rgb(245, 245, 245);
+border-radius: 4px;
+  min-height: 50px;
+  width: 90%;
+font-family: Arial, Helvetica, sans-serif;
+  color: rgb(89, 89, 89);
+  margin-top: 20px!important;
+}
+.form_comprar td{
+  padding: 10px!important;
+}
+#btn_finalizar{
+  width: 220px;
+  height: 45px;
+   font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 5px;
+  color: white;
+  background-color: #3D273E;
+border: none;
+margin-bottom: 30px!important;
+}
+#btn_finalizar:hover{
+  background-color: #584359;
+}
+.buyResume_c{
+  width: 100%;
+  height: 100%;
+  display: flex;
+    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.buyResume_c h2{
+     font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 5px;
+  margin-top: 30px!important;
+}
+#gifCheck{
+  width: 200px;
+}
+.checkbuy_c p{
+  color: grey;
+    letter-spacing: 0px;
+}
+#gracias{
+  font-size:40px;
+  color: rgb(54, 54, 54);
+  margin-top: 20px!important;
+}
+.checkbuy_c{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing:2px;
+  font-size: 25px;
+  text-align: center;
+    padding: 50px!important;
+}
 /* MODAL NAVBAR -----------------------------*/ 
 
 .modal_navbar{

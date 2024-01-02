@@ -42,6 +42,9 @@
     </div>
         <!-- carrousel images -->
     <div v-if="imagesIsOpen == true" class="images_c">
+        <div class="img_card">Imagen 1</div>
+        <div class="img_card">Imagen 2</div>
+        <div class="img_card">Imagen 3</div>
 
         </div>
     <!-- mensajes -->
@@ -380,6 +383,24 @@ transition: .2s all ease-in;
 }
 .fa-trash:hover{
     color: rgb(125, 125, 125);
+}
+
+/* IMAGES CONTAINER */
+.img_card{
+    width: 300px;
+    height: 150px;
+    background-color: #361837;
+    border-radius: 10px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}.images_c{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  
 }
 @media (max-width:1000px){
  .menu{

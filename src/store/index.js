@@ -24,7 +24,11 @@ export default createStore({
             if (index !== -1) {
             state.cartProducts.splice(index, 1);
             }
+        },
+        emptyCart(state){
+            state.cartProducts = []
         }
+
     },
     actions:{
 

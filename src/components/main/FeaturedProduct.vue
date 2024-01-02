@@ -8,7 +8,6 @@
             <p id="price">${{props.price}}</p>
             <i class="fa-regular fa-heart"></i>
             <button id="add_btn" @click="addToCart"> Agregar al carrito <i class="fa-solid fa-cart-shopping"></i></button>
-            <button id="info_btn">Ver mas info <i class="fa-solid fa-circle-info"></i></button>
         </div>
     </div>
 </template>
@@ -29,6 +28,7 @@ const props = defineProps({
 const addToCart = ()=>{
 emit('add-to-cart')
 }
+
 </script>
 
 <style scoped>

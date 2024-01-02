@@ -1,22 +1,46 @@
 <template>
-    <div class="search_product_c">
-        <img src="https://lh3.googleusercontent.com/pw/ABLVV86WIGOLbKTpJ7v8jDkgzwJqZ13SqUn7xUKrSozkZZqimmlKAFMw49cQLXNQVW87V_8TYPdl6uLw3HtpqHke4OqpU46Ex_2Af9l0axcJ2rHOddDehOq3NFcFiLHci2H-I2hv-_DeCD3jDoAn5cAuSma8xg=w659-h879-s-no?authuser=0" alt="">
+    <div class="search_product_c" >
+        <img :src="props.img" alt="" @click="openMoreInfo">
         <div class="name_price_c">
             <p id="nombre">{{props.name}}</p>
             <p>${{props.price}}</p>
         </div>
     </div>
     <hr id="hr_carrito">
+        <MoreInfoProduct v-if="moreInfoIsOpen==true" 
+    :name="props.name" :price="props.price" 
+    :description="props.description" 
+    :img="props.img"
+    @cerrar-more-info="cerrarMoreInfo" 
+    @add-to-cart="add"/>
 </template>
 
 <script setup>
-import {defineProps} from 'vue'
+import {defineProps,ref,defineEmits} from 'vue'
+
+const moreInfoIsOpen = ref(false)
+
+const emit = defineEmits(['add-to-cart'])
 
 const props =defineProps({
     name:String,
-    price:String
+    price:String,
+    img:String,
+    description:String
 }) 
 
+const openMoreInfo = ()=>{
+  moreInfoIsOpen.value = true
+  document.body.style.overflow = 'hidden';
+}
+
+const cerrarMoreInfo=()=>{
+moreInfoIsOpen.value = false
+}
+
+const add = ()=>{
+emit('add-to-cart')
+} 
 </script>
 
 <style scoped>

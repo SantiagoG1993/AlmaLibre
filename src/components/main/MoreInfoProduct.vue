@@ -4,7 +4,7 @@
             <div class="img_adicionales_c">
 
             </div>
-            <img class="imgPrincipal" src="" alt="">
+            <img class="imgPrincipal" :src="props.img" alt="">
             <i class="fa-solid fa-xmark" aria-hidden="true" @click="closeMoreInfoWithX"></i>
             <div class="producto-modal__container___info">
                 <h3>{{props.name}}</h3>
@@ -27,7 +27,8 @@ const  closeMoreInfo = ref(null)
 const props = defineProps({
     name:String,
     description:String,
-    price:String
+    price:String,
+    img:String
 })
 const emit = defineEmits(['cerrar-more-info','add-to-cart']) /* Cerrar con la "X" */
 

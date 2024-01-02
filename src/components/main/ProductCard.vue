@@ -9,7 +9,12 @@
         <p id="price">${{props.price.toLocaleString()}} </p>
         <button id="add_cart_btn" @click="add"><i class="fa-solid fa-cart-shopping"></i> AGREGAR AL CARRITO </button>
     </div>
-    <MoreInfoProduct v-if="moreInfoIsOpen==true" :name="props.name" :price="props.price" :description="props.description" @cerrar-more-info="cerrarMoreInfo" @add-to-cart="add"/>
+    <MoreInfoProduct v-if="moreInfoIsOpen==true" 
+    :name="props.name" :price="props.price" 
+    :description="props.description" 
+    :img="props.img"
+    @cerrar-more-info="cerrarMoreInfo" 
+    @add-to-cart="add"/>
 
 </template>
 

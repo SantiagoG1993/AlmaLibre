@@ -7,7 +7,12 @@
   </div>
 
   <div v-if="textoBusqueda.length >0" class="products_search_c" ref="closeSearch">
-    <SearchProduct v-for="producto of productosFiltrados" :key="producto && producto.id" :name="producto && producto.name" :price="producto && producto.price"/>
+    <SearchProduct v-for="producto of productosFiltrados" :key="producto && producto.id" 
+    :name="producto && producto.name" 
+    :price="producto && producto.price"
+    :img="producto && producto.img"
+    :description="producto && producto.description"
+    />
   </div>
 
 </template>
@@ -83,9 +88,10 @@ onMounted(()=>{
   width: 70%;
   height: 80%;
   font-family: "Bebas Neue", sans-serif;
-  letter-spacing: 6px;
+  letter-spacing: 3px;
   padding-left: 20px !important;
   border: none;
+  font-size: 13px;
 }
 #input:focus {
   outline: none;
