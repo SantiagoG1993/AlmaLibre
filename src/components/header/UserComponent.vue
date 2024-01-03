@@ -139,6 +139,25 @@ const cartProductsAdded  = computed(()=>{
 })
 
 const handleFinishBuy = ()=>{
+  const listIdProducts = [];
+ for(let product of cartProductsAdded.value){
+  listIdProducts.push(product.id)
+ }
+ console.log(JSON.stringify(listIdProducts))
+
+  const url = "http://localhost:8080/api/order";
+  const options = {
+    method:'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ listId: listIdProducts })
+  }
+  fetch(url,options)
+  .then(res=>console.log(res))
+  .then(data=>console.log(data))
+  .catch(err=>console.log(err))
+
   finishBuy.value = false
   setTimeout(()=>{
   const item = document.querySelector(".modal_compra")
