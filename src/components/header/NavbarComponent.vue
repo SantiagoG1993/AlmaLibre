@@ -57,7 +57,8 @@ const handleScroll = ()=>{
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
-});
+},
+);
 
 onClickOutside(closeContactModal,()=>{ 
   document.body.style.overflow = 'auto';

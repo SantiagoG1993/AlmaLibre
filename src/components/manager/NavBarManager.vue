@@ -2,6 +2,7 @@
 <div class="menu">
     <ul>
         <li @click="showProducts">PRODUCTOS</li>
+        <li @click="showBuyOrder">PEDIDOS</li>
         <li @click="showImages">IMAGENES</li>
         <li @click="showMessages">MENSAJES</li>
         <div class="rlink" >
@@ -39,6 +40,16 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <!-- buy orders -->
+    <div v-if="buyOrderIsOpen == true" class="buyOrders_c">
+        <BuyOrder v-for="order of orders" 
+        :key="order.id" 
+        :name="order.name" 
+        :list="order.productList"
+        :id="order.id"
+        :state="order.state"/>
+
     </div>
         <!-- carrousel images -->
     <div v-if="imagesIsOpen == true" class="images_c">
@@ -85,10 +96,12 @@
 
 <script setup>
 import {ref,onMounted} from 'vue'
+import BuyOrder from './BuyOrder.vue'
 
 
 const messages = ref([])
 const products = ref([])
+const orders = ref([])
 const modal_msg_c = ref(null)
 
 const loadData = ()=>{
@@ -107,6 +120,11 @@ const loadData = ()=>{
         products.value= data.filter(p=>p.deleted == false);
         console.log(data)})
     .catch(err=>console.log(err))
+/* PETICION GET ORDENES */
+fetch("http://localhost:8080/api/orders/")
+.then(res=>res.json())
+.then(data =>{ orders.value=data;console.log(data)})
+.catch(err=>console.log(err))
 
       /* PETICION GET MENSAJES */
 
@@ -185,23 +203,32 @@ const readMessage = (id)=>{
 
 
 const mesgIsOpen = ref(false)
-const productsIsOpen = ref(true)
+const productsIsOpen = ref(false)
 const imagesIsOpen = ref(false)
-
+const buyOrderIsOpen = ref(true)
 const showProducts = ()=>{
     productsIsOpen.value =!productsIsOpen.value
     mesgIsOpen.value = false
     imagesIsOpen.value = false
+    buyOrderIsOpen.value = false
+}
+const showBuyOrder = ()=>{
+    buyOrderIsOpen.value =!buyOrderIsOpen.value
+    mesgIsOpen.value = false
+    imagesIsOpen.value = false 
+    productsIsOpen.value = false 
 }
 const showMessages = ()=>{
    mesgIsOpen.value =!mesgIsOpen.value
     productsIsOpen.value = false 
     imagesIsOpen.value = false
+     buyOrderIsOpen.value = false
 }
 const showImages = ()=>{
    imagesIsOpen.value =!imagesIsOpen.value
     productsIsOpen.value = false 
     mesgIsOpen.value = false
+    buyOrderIsOpen.value = false
 }
 </script>
 
@@ -209,6 +236,11 @@ const showImages = ()=>{
 
 
 <style scoped>
+/* ordenes de compra */
+.buyOrders_c{
+    display: flex;
+    flex-wrap: wrap;
+}
 .modal_message{
     opacity: 0;
     pointer-events: none;
