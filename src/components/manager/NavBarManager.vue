@@ -14,6 +14,17 @@
 <div class="right_c">
     <!-- products table -->
     <div v-if="productsIsOpen == true" class="products_c">
+        <div class="filters-c">
+            <p>Filtrar por nombre:</p>
+            <input type="text" name="" id="filter_input" v-model="filterTextProducts">
+            <p>Filtrar por tipo:</p>
+            <select name="" id="" v-model="filterSelectType">
+                <option value="TODOS">Todos</option>
+                <option value="CUSTOM_PRODUCT">Personalizado</option>
+                <option value="DIGITAL_DESIGN">Diseño digital</option>
+            </select>
+        </div>
+        
         <table>
             <tbody>
                 <tr id="tr1">
@@ -25,7 +36,7 @@
                     <th>COD.</th>
                     <th></th>
                 </tr>
-                <tr v-for="product of products" id="tr2" :key="product.id">
+                <tr v-for="product of textAndTypeFilteredProducts " id="tr2" :key="product.id">
                             <td id="pencil"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
                             </td>
                             <td>
@@ -43,13 +54,30 @@
     </div>
     <!-- buy orders -->
     <div v-if="buyOrderIsOpen == true" class="buyOrders_c">
-        <BuyOrder v-for="order of orders" 
-        :key="order.id" 
-        :name="order.name" 
-        :list="order.productList"
-        :id="order.id"
-        :state="order.state"
-        :date="order.date"/>
+        <div class="filters-c">
+            <p>Filtrar por:</p>
+            <input type="text" name="" id="filter_input" v-model="filterTextOrder">
+            <p>Filtrar por estado:</p>
+            <select name="" id="" v-model="filterOrderState">
+                <option value="TODOS">Todos</option>
+                <option value="PENDIENTE">Pendiente</option>
+                <option value="FINALIZADO">Finalizado</option>
+            </select>
+            <p>Desde:</p>
+            <input type="date">
+            <p>Hasta:</p>
+            <input type="date">
+        </div>
+        <div class="orders_c">
+            <BuyOrder v-for="order of filteredOrders" 
+            :key="order.id" 
+            :name="order.name" 
+            :list="order.productList"
+            :id="order.id"
+            :state="order.state"
+            :date="order.date"
+            :orderNumber="order.orderNumber"/>
+        </div>
 
     </div>
         <!-- carrousel images -->
@@ -96,7 +124,7 @@
 </template>
 
 <script setup>
-import {ref,onMounted} from 'vue'
+import {ref,onMounted,computed} from 'vue'
 import BuyOrder from './BuyOrder.vue'
 
 
@@ -104,6 +132,38 @@ const messages = ref([])
 const products = ref([])
 const orders = ref([])
 const modal_msg_c = ref(null)
+
+  /* Filtrar productos por tipo y nombre */
+const filterTextProducts =ref('') 
+const filterSelectType = ref('')
+const textAndTypeFilteredProducts = computed(() => {
+    return products.value.filter(p => {
+        const nameMatch = p.name.toUpperCase().includes(filterTextProducts.value.toUpperCase());
+        let typeMatch; 
+        if(filterSelectType.value == 'TODOS'){
+            typeMatch = products.value
+        }else{
+            typeMatch = filterSelectType.value === '' || p.productType.includes(filterSelectType.value);
+        }
+       /*  const typeMatch = filterSelectType.value === '' || p.productType.includes(filterSelectType.value); */
+        return nameMatch && typeMatch;
+    });
+});
+  /* Filtrar ordenes por n orden , fecha y estado */
+
+  const filterOrderState = ref('')
+  const filterTextOrder =  ref('')
+  const filteredOrders = computed(()=>{
+    let state;
+    let text = orders.value.filter(o=>o.orderNumber.toString().includes(filterTextOrder.value))
+
+    if(filterOrderState.value == 'TODOS'){
+        state = orders.value
+    }else{
+        state = orders.value.filter(o=>o.state.includes(filterOrderState.value))
+    }
+      return text.filter(order => state.includes(order));
+  })
 
 const loadData = ()=>{
    /* PETICION GET PRODUCTOS */
@@ -204,9 +264,9 @@ const readMessage = (id)=>{
 
 
 const mesgIsOpen = ref(false)
-const productsIsOpen = ref(false)
+const productsIsOpen = ref(true)
 const imagesIsOpen = ref(false)
-const buyOrderIsOpen = ref(true)
+const buyOrderIsOpen = ref(false)
 const showProducts = ()=>{
     productsIsOpen.value =!productsIsOpen.value
     mesgIsOpen.value = false
@@ -237,8 +297,27 @@ const showImages = ()=>{
 
 
 <style scoped>
+/*Filtros  */
+.filters-c{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    letter-spacing: 1px;
+    background-color: rgb(231, 231, 231);
+    padding: 10px!important;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#filter_input{
+  width: 200px;  
+}
 /* ordenes de compra */
 .buyOrders_c{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.orders_c{
     display: flex;
     flex-wrap: wrap;
 }

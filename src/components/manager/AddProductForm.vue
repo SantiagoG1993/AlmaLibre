@@ -9,6 +9,10 @@
                 <input  type="text" name="img" id="imgInput" v-model="img">
             </div>
                 <input type="text" placeholder="Precio" id="precio" v-model="price">
+                <select name="" id="" v-model="type">
+                    <option value="CUSTOM_PRODUCT">Personalizado</option>
+                    <option value="DIGITAL_DESIGN">Diseño digial</option>
+                </select>
                 <select name="destacado" id="destacado" v-model="isFeatured">
                     <option :value="true">SI</option>
                     <option :value="false">NO</option>
@@ -31,6 +35,7 @@ const description = ref('')
 const price = ref('')
 const isFeatured =  ref(true)
 const img = ref('')
+const type = ref('')
 
 onClickOutside(addFormContainer,()=>{
     const item = document.querySelector('.addProduct_c')
@@ -47,7 +52,7 @@ const addProduct = () => {
         'price':price.value,
         'featured':isFeatured.value,
         'stock': 1,
-        'ProductType': 'CUSTOM_PRODUCT'
+        'productType':type.value
     }
 
     console.log( JSON.stringify(data));
@@ -64,6 +69,7 @@ const addProduct = () => {
     fetch(url, options)
         .then(res => {
             console.log(res);
+            location.reload()
         })
         .catch(err => console.error(err));
 };

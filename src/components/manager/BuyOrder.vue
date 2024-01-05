@@ -1,5 +1,6 @@
 <template>
     <div :class="['buy-order-c', { 'finished': props.state === 'FINALIZADO' }]"  @click="showModal">
+            <h2>N orden: {{props.orderNumber}}</h2>
             <h2>Fecha:{{props.date.slice(2,10)}}</h2>
             <h2>Hora:{{props.date.slice(11,16)}}</h2>
     </div>
@@ -39,7 +40,8 @@ const props = defineProps(
         img:String,
         price:String,
         id:String,
-        date:String
+        date:String,
+        orderNumber:Number
         
     })
 

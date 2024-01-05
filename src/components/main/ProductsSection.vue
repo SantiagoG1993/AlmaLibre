@@ -4,7 +4,7 @@
   <li id="digitales" @click="handleClick('digitales','personalizados','digitales')">DISEÑOS DIGITALES</li>
 </ul>
   <div  v-if="productType == 'personalizados'" class="products_c">
-  <ProductCard  v-for="dato in datos" 
+  <ProductCard  v-for="dato in customProducts" 
   :key="dato.id" 
   :name="dato.name" 
   :price="dato.price" 
@@ -14,7 +14,14 @@
   @add-to-cart="addToCart(dato.id)"/>
   </div >
   <div v-if="productType == 'digitales'" class="products_c" >
-
+<ProductCard  v-for="dato in digitalDesign" 
+  :key="dato.id" 
+  :name="dato.name" 
+  :price="dato.price" 
+  :description="dato.description" 
+  :product-id="dato.id"
+  :img = "dato.img"
+  @add-to-cart="addToCart(dato.id)"/>
   </div>
 </template>
 
@@ -27,6 +34,8 @@ const store =useStore()
 
 const productType = ref('personalizados')
 const datos = ref(null)
+const customProducts = ref(null)
+const digitalDesign = ref(null)
 
 
 const handleClick= (id1,id2,type)=>{
@@ -50,7 +59,11 @@ onMounted(()=>{
   }
   fetch(url,options)
   .then(res=>res.json())
-  .then(data=>{datos.value=data.filter(p=>p.deleted==false);console.log(data)})
+  .then(data=>{
+    datos.value=data.filter(p=>p.deleted==false);console.log(data);
+    customProducts.value=datos.value.filter(p=>p.productType == 'CUSTOM_PRODUCT');
+    digitalDesign.value=datos.value.filter(p=>p.productType == 'DIGITAL_DESIGN');
+    })
   .catch(err=>console.log(err))
 })
 
