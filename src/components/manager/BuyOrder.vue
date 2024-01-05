@@ -1,6 +1,7 @@
 <template>
-    <div class="buy-order-c"  @click="showModal">
-            <h2>ID:{{props.id}}</h2>
+    <div :class="['buy-order-c', { 'finished': props.state === 'FINALIZADO' }]"  @click="showModal">
+            <h2>Fecha:{{props.date.slice(2,10)}}</h2>
+            <h2>Hora:{{props.date.slice(11,16)}}</h2>
     </div>
     <div v-if="modalIsOpen == true"  class="modal_buy_bckg">
         <div class="modal_c" ref="modal_c_ref">
@@ -20,12 +21,9 @@
                     <th>{{prod.id}}</th>
                 </tr>
             </table>
-            <div class="checkbox_c">
-                <input type="checkbox">
-                <p>Marcar como finalizado</p>
-            </div>
+                <p id="estado">Estado: {{props.state}}<i class="fa-solid fa-rotate" @click="changeState(props.id)"></i></p>
         
-            <button id="btn_apply">Aplicar</button>
+<!--             <button id="btn_apply">Aplicar</button> -->
         </div>
     </div>
 </template>
@@ -41,6 +39,7 @@ const props = defineProps(
         img:String,
         price:String,
         id:String,
+        date:String
         
     })
 
@@ -56,23 +55,51 @@ onClickOutside(modal_c_ref,()=>{
     modalIsOpen.value = false
 })
 
+const changeState = (id) => {
+    const url = `http://localhost:8080/api/orders/state?id=${id}`;
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    fetch(url, options)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+            }
+            return res;
+        })
+        .then(data => {
+            console.log('Respuesta exitosa:', data);
+            location.reload()
+        })
+        .catch(err => {
+            console.error('Error al realizar la solicitud:', err);
+        });
+};
+
+
 </script>
 
 <style scoped>
     .buy-order-c{
-        width: 50px;
-        height: 50px;
-        background-color: rgb(125, 0, 0);
+        width: 150px;
+        min-height: 50px;
+        background-color: rgb(184, 0, 0);
         border-radius: 4px;
         margin: 5px!important;
         color: white;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
     h2{
-        font-size:18px;
-        letter-spacing: 2px;
+        font-size:12px;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 0px;
     }
     #img_prod{
         width: 40px;
@@ -95,7 +122,7 @@ onClickOutside(modal_c_ref,()=>{
         width: 100%;
     }
     .buy-order-c:hover{
-        box-shadow: 0px 0px 1px 1px rgb(104, 104, 104);
+        background-color: rgb(190, 58, 58);
         cursor: pointer;
     }
     #btn_apply{
@@ -130,17 +157,35 @@ onClickOutside(modal_c_ref,()=>{
         background-color: white;
         border-radius: 4px;
         position: relative;
+        border-radius: 4px;
+        box-shadow: 1px 1px 1px 1px grey;
     }
-    .checkbox_c{
-        width: 200px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        position: absolute;
-        bottom: 20px;
-        font-family: Arial, Helvetica, sans-serif;
-        letter-spacing: 0px;
-        left: 20px;
-
-    }
+#estado{
+    position: absolute;
+    bottom: 20px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    left: 20px;
+/*     border: 1px solid black; */
+    padding: 5px!important;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fa-rotate{
+font-size: 18px;
+margin-left: 8px!important;
+}
+.fa-rotate:hover{
+    cursor: pointer;
+    color: rgb(137, 7, 111);
+}
+.finished{
+    background-color: rgb(0, 173, 0)!important;
+    color: white;
+}
+.finished:hover{
+background-color: rgb(60, 197, 60)!important;
+}
 </style>

@@ -48,7 +48,8 @@
         :name="order.name" 
         :list="order.productList"
         :id="order.id"
-        :state="order.state"/>
+        :state="order.state"
+        :date="order.date"/>
 
     </div>
         <!-- carrousel images -->
