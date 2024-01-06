@@ -1,6 +1,9 @@
 <template>
   <div class="main_c">
-    <CarrouselComponent />
+    <CarrouselComponent 
+    :image1="images.image1"
+    :image2="images.image2"
+    :image3="images.image3" />
     <WhatsappComponent />
     <ProductsSection />
   <FeaturedProduct 
@@ -23,29 +26,53 @@ import CarrouselComponent from './main/CarrouselComponent.vue'
 import WhatsappComponent from './main/WhatsappComponent.vue'
 
 const productoDestacado = ref([])
+const images = ref([])
 const store =useStore()
 
+const loadData= ()=>{
+
 /* GET PRODUCTO DESTACADO */
-onMounted(()=>{
-    const url = 'http://localhost:8080/api/featured'
-const options = {
+
+const urlFeatured = 'http://localhost:8080/api/featured'
+const optionsFeaetured = {
   method:'GET',
   headers:{
     'Content-Type':'application/json'
   }
 }
-  fetch(url,options)
+  fetch(urlFeatured,optionsFeaetured)
   .then(res=>res.json())
   .then(data=>{productoDestacado.value=data;
+  console.log(data)
   })
   .catch(err=>console.log(err))
+
+/* GET IMAGENES */
+
+const urlImages = 'http://localhost:8080/api/images'
+const optionsImages = {
+  method:'GET',
+  headers:{
+    'Content-Type':'application/json'
+  }
+}
+  fetch(urlImages,optionsImages)
+  .then(res=>res.json())
+  .then(data=>{images.value=data;
+  console.log(data)
+  })
+  .catch(err=>console.log(err))
+}
+
+
+onMounted(()=>{
+loadData()
 })
 
 const addToCart= ()=>{
   const producto = productoDestacado.value
   store.commit('addProductToCart',producto)
   console.log(productoDestacado.value)
-
 }
 </script>
 

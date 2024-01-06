@@ -2,19 +2,28 @@
    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="banner1.jpg" class="d-block w-100" alt="banner.jpg">
+      <img :src="props.image1" class="d-block w-100" alt="banner.jpg">
     </div>
     <div class="carousel-item">
-      <img src="banner2.jpg" class="d-block w-100" alt="banner.jpg">
+      <img :src="props.image2" class="d-block w-100" alt="banner.jpg">
     </div>
     <div class="carousel-item">
-      <img src="banner3.jpg" class="d-block w-100" alt="banner.jpg">
+      <img :src="props.image3" class="d-block w-100" alt="banner.jpg">
     </div>
   </div>
 </div>
 </template>
 
 <script setup>
+import {defineProps} from 'vue'
+
+const props = defineProps(
+  {
+    image1:String,
+    image2:String,
+    image3:String
+  }
+)
 
 </script>
 

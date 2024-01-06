@@ -24,38 +24,22 @@
                 <option value="DIGITAL_DESIGN">Diseño digital</option>
             </select>
         </div>
-        
-        <table>
-            <tbody>
-                <tr id="tr1">
-                    <th></th>
-                    <th>IMAGEN</th>
-                    <th>NOMBRE</th
-                    ><th>PRECIO</th>
-                    <th class="items_tabla">DESCRIPCION</th><th>STOCK</th>
-                    <th>COD.</th>
-                    <th></th>
-                </tr>
-                <tr v-for="product of textAndTypeFilteredProducts " id="tr2" :key="product.id">
-                            <td id="pencil"><i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
-                            </td>
-                            <td>
-                                <img :src="product.img" alt="" id="img_table">
-                            </td>
-                            <td><i v-if="product.featured == true" class="fa-solid fa-star"></i>{{product.name}}</td>
-                            <td id="precio_stock_destacado">${{product.price}}</td>
-                            <td class="items_tabla">{{product.description}}</td>
-                            <td id="precio_stock_destacado">{{product.stock}} u</td>
-                            <td>{{product.id}}</td>
-                            <td><i class="fa-solid fa-trash" @click="deleteProduct(product.id)"></i></td>
-                </tr>
-            </tbody>
-        </table>
+        <ProductManager v-for="product of textAndTypeFilteredProducts" 
+        :key="product.id"
+        :img="product.img"
+        :name="product.name"
+        :price="product.price"
+        :description="product.description"
+        :stock="product.stock"
+        :id="product.id"
+        :featured="product.featured"
+        @load-data="loadData"
+        />
     </div>
     <!-- buy orders -->
     <div v-if="buyOrderIsOpen == true" class="buyOrders_c">
         <div class="filters-c">
-            <p>Filtrar por:</p>
+            <p>Filtrar por N de orden:</p>
             <input type="text" name="" id="filter_input" v-model="filterTextOrder">
             <p>Filtrar por estado:</p>
             <select name="" id="" v-model="filterOrderState">
@@ -64,9 +48,9 @@
                 <option value="FINALIZADO">Finalizado</option>
             </select>
             <p>Desde:</p>
-            <input type="date">
+            <input type="date" v-model="filterDateFrom">
             <p>Hasta:</p>
-            <input type="date">
+            <input type="date" v-model="filterDateTo">
         </div>
         <div class="orders_c">
             <BuyOrder v-for="order of filteredOrders" 
@@ -82,56 +66,58 @@
     </div>
         <!-- carrousel images -->
     <div v-if="imagesIsOpen == true" class="images_c">
-        <div class="img_card">Imagen 1</div>
-        <div class="img_card">Imagen 2</div>
-        <div class="img_card">Imagen 3</div>
-
+        <div class="img_c">
+            <div class="img_card">Imagen 1
+                <input type="text" placeholder="Url imagen 1" v-model="img1">
+            </div>
+                <img :src="images.image1" alt="" id="imgPreview">
         </div>
+        
+        <div class="img_c">
+            <div class="img_card">Imagen 2
+                <input type="text" placeholder="Url imagen 2" v-model="img2">
+            </div>
+                <img :src="images.image2" alt="" id="imgPreview">
+        </div>
+        <div class="img_c">
+            <div class="img_card">Imagen 3
+                <input type="text" placeholder="Url imagen 3" v-model="img3">
+            </div>
+                <img :src="images.image3" alt="" id="imgPreview">
+        </div>
+    <button id="aplicar_btn" @click="uploadImages">Aplicar</button>
+    </div>
     <!-- mensajes -->
     <div v-if="mesgIsOpen == true" class="messages_c">
-        <table>
-            <tr class="tr1_msg">
-                <td></td>
-                <td>De:</td>
-                <td>Email</td>
-                <td>Fecha</td>
-                <td>Hora</td>
-                <td>Mensaje</td>
-                <td></td>
-            </tr>
-            <tr class="tr2_msg" v-for="message of messages" :key="message.id">
-                <td v-if="message.read == false" @click="readMessage(message.id)"><i class="fa-solid fa-circle-exclamation"></i></td>
-                <td v-else><i class="fa-solid fa-circle-check"></i></td>
-                <td>{{message.name}}</td>
-                <td>{{message.email}}</td>
-                <td>{{message.date.slice(0,-16)}}</td>
-                <td>{{message.date.slice(11,-10)}}</td>
-                <td>{{message.message}}</td>
-                <td><i class="fa-solid fa-trash" @click="deleteMessage(message.id)"></i></td>
-                    <div class="modal_message" ref="modal_msg_c">
-                        <p>De: {{message.name}}</p>
-                        <p>Email: {{message.email}}</p>
-                        <p>Fecha: {{message.date.slice(0,-16)}}</p>
-                        <p>Hora: {{message.date.slice(11,-10)}}</p>
-                        <p id="mensaje_modal">{{message.message}}</p>
-                        <button id="close_btn">Cerrar</button>
-                    </div>
-            </tr>
-        </table>
+        <MessageManager v-for="message of messages" :key="message.id" 
+        :id="message.id"
+        :name="message.name"
+        :email="message.email"
+        :date="message.date"
+        :read="message.read"
+        :message="message.message"
+        @load-data="loadData"
+        />
     </div>
 
 </div>
 </template>
 
 <script setup>
+import ProductManager from './ProductManager.vue'
+import MessageManager from './MessageManager.vue'
 import {ref,onMounted,computed} from 'vue'
 import BuyOrder from './BuyOrder.vue'
 
+const img1=ref(null)
+const img2=ref(null)
+const img3=ref(null)
 
 const messages = ref([])
+const images = ref([])
 const products = ref([])
 const orders = ref([])
-const modal_msg_c = ref(null)
+
 
   /* Filtrar productos por tipo y nombre */
 const filterTextProducts =ref('') 
@@ -149,11 +135,15 @@ const textAndTypeFilteredProducts = computed(() => {
         return nameMatch && typeMatch;
     });
 });
+
   /* Filtrar ordenes por n orden , fecha y estado */
 
-  const filterOrderState = ref('')
-  const filterTextOrder =  ref('')
-  const filteredOrders = computed(()=>{
+const filterOrderState = ref('')
+const filterTextOrder =  ref('')
+const filterDateFrom = ref('')
+const filterDateTo = ref('')
+
+const filteredOrders = computed(()=>{
     let state;
     let text = orders.value.filter(o=>o.orderNumber.toString().includes(filterTextOrder.value))
 
@@ -162,10 +152,32 @@ const textAndTypeFilteredProducts = computed(() => {
     }else{
         state = orders.value.filter(o=>o.state.includes(filterOrderState.value))
     }
-      return text.filter(order => state.includes(order));
-  })
+    let filteredByDates = state.filter(o => {
+    const orderDate= new Date(o.date);
+    const fromDate = filterDateFrom.value ? new Date(filterDateFrom.value) : null;
+    const toDate = filterDateTo.value ? new Date(filterDateTo.value) : null;
+    return (
+            (!fromDate || orderDate >= fromDate) &&
+            (!toDate || orderDate <= toDate)
+        );
+    })
+    return text.filter(order => filteredByDates.includes(order));
+})
 
 const loadData = ()=>{
+    const urlImages = 'http://localhost:8080/api/images'
+const optionsImages = {
+  method:'GET',
+  headers:{
+    'Content-Type':'application/json'
+  }
+}
+  fetch(urlImages,optionsImages)
+  .then(res=>res.json())
+  .then(data=>{images.value=data;
+  console.log(data)
+  })
+  .catch(err=>console.log(err))
    /* PETICION GET PRODUCTOS */
 
     const urlProducts = 'http://localhost:8080/api/products'
@@ -210,93 +222,75 @@ onMounted(()=>{
 loadData()
 },
 )
-/* PETICION DELETE PRODUCTOS */
-
-const deleteProduct = (id)=>{
-    const url= `http://localhost:8080/api/products/delete?id=${id}`
+const uploadImages = ()=>{
+    console.log(img1.value)
+    const url = "http://localhost:8080/api/images/upload"
+    const dataImg ={
+        image1:img1.value,
+        image2:img2.value,
+        image3:img3.value,
+    }
     const options = {
-        method:'POST',
+        method:'PATCH',
         headers:{
             'Content-Type':'application/json'
-        }
+        },
+        body:JSON.stringify(dataImg)
     }
     fetch(url,options)
-    .then(res=>{
-        console.log(res);
-        loadData()
-    })
+    .then(res=>console.log(res))
+    .then(data=>{console.log(data);
+    loadData()})
     .catch(err=>console.log(err))
 }
-/* PETICION DELETE MENSAJES */
-const deleteMessage = (id)=>{
-    const url= `http://localhost:8080/api/messages/delete?id=${id}`
-    const options = {
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        }
-    }
-    fetch(url,options)
-    .then(res=>{
-        console.log(res);
-        loadData()
-    })
-    .catch(err=>console.log(err))
-}
-/* PETICION MARCAR LEIDO */
-const readMessage = (id)=>{
-    const url= `http://localhost:8080/api/messages/read?id=${id}`
-    const options = {
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        }
-    }
-    fetch(url,options)
-    .then(res=>{
-        console.log(res);
-        loadData()
-        
-    })
-    .catch(err=>console.log(err))
-}
-
-
 
 const mesgIsOpen = ref(false)
-const productsIsOpen = ref(true)
-const imagesIsOpen = ref(false)
+const productsIsOpen = ref(false)
+const imagesIsOpen = ref(true)
 const buyOrderIsOpen = ref(false)
 const showProducts = ()=>{
-    productsIsOpen.value =!productsIsOpen.value
+    productsIsOpen.value =true
     mesgIsOpen.value = false
     imagesIsOpen.value = false
     buyOrderIsOpen.value = false
 }
 const showBuyOrder = ()=>{
-    buyOrderIsOpen.value =!buyOrderIsOpen.value
+    buyOrderIsOpen.value =true
     mesgIsOpen.value = false
     imagesIsOpen.value = false 
     productsIsOpen.value = false 
 }
 const showMessages = ()=>{
-   mesgIsOpen.value =!mesgIsOpen.value
+   mesgIsOpen.value =true
     productsIsOpen.value = false 
     imagesIsOpen.value = false
      buyOrderIsOpen.value = false
 }
 const showImages = ()=>{
-   imagesIsOpen.value =!imagesIsOpen.value
+   imagesIsOpen.value =true
     productsIsOpen.value = false 
     mesgIsOpen.value = false
     buyOrderIsOpen.value = false
 }
+
+/* PATCH IMAGENES */
+
 </script>
 
 
 
 
 <style scoped>
+.img_c{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+#imgPreview{
+    width: 250px;
+    height: 105px;
+
+}
 /*Filtros  */
 .filters-c{
     display: flex;
@@ -499,15 +493,35 @@ transition: .2s all ease-in;
 
 /* IMAGES CONTAINER */
 .img_card{
-    width: 300px;
+    width: 250px;
     height: 150px;
     background-color: #361837;
     border-radius: 10px;
       color: white;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-}.images_c{
+}
+.img_card input{
+    width: 90%;
+}
+#aplicar_btn{
+    width: 145px;
+    position: absolute;
+    right:20px;
+    bottom: 50px;
+    border: none;
+    background-color: rgb(72, 9, 65);
+    color: white;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 2px;
+}
+#aplicar_btn:hover{
+    background-color: rgb(106, 28, 97);
+}
+.images_c{
     display: flex;
     justify-content: center;
     align-items: center;

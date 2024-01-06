@@ -21,7 +21,7 @@ const emit = defineEmits(['add-to-cart'])
 const props = defineProps({
     name:String,
     description:String,
-    price:String,
+    price:Number,
     img:String
 
 })
