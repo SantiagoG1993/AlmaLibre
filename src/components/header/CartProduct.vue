@@ -1,10 +1,10 @@
 <template>
     <div class="product_c">
         <img :src="props.img" alt="">
-        <input type="number" id="cantidad">
+        <input type="number" id="cantidad" v-model="quantity">
         <div class="name_price_c">
             <h3>{{props.name}}</h3>
-            <p>x  $ {{props.price}}</p>
+            <p>${{totalPrice.toLocaleString()}}</p>
         </div>
             <i class="fa-solid fa-trash" @click="deleteProduct"></i>
     </div>
@@ -12,16 +12,23 @@
 </template>
 
 <script setup>
-import {defineProps,defineEmits} from 'vue'
+import {computed,ref,defineProps,defineEmits} from 'vue'
 const emit = defineEmits(['delete-from-cart'])
+const quantity = ref(1)
 
 const props = defineProps(
   {
    name:String,
-   price:String,
+   price:Number,
    img:String
   }
 )
+const totalPrice = computed(() => {
+  const price = Number(props.price) * quantity.value
+  return price
+});
+
+
 
 const deleteProduct = ()=>{
   emit('delete-from-cart')

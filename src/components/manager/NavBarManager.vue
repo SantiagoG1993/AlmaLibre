@@ -8,9 +8,10 @@
         <div class="rlink" >
             <router-link id="link" :to="'/'">IR AL INICIO</router-link>
         </div>
-        <button id="btn_agregar2">Agregar producto</button>
+        <button  id="btn_agregar2">Agregar producto</button>
     </ul>
 </div>
+<!-- RIGHT CONTAINER -->
 <div class="right_c">
     <!-- products table -->
     <div v-if="productsIsOpen == true" class="products_c">

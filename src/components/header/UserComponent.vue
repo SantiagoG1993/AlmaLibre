@@ -34,7 +34,7 @@
       <CartProduct v-for="product of cartProductsAdded" 
       :key="product.id" 
       :name="product.name" 
-      :price="product.price.toLocaleString()"
+      :price="product.price"
       :img = "product.img"
       @delete-from-cart="deleteProduct(product.id)"/>
 
