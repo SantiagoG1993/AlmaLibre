@@ -56,8 +56,9 @@
         <div class="orders_c">
             <BuyOrder v-for="order of filteredOrders" 
             :key="order.id" 
-            :name="order.name" 
-            :list="order.productList"
+            :amount="order.amount"
+            :quantity="order.quantity" 
+            :list="order.productOrders"
             :id="order.id"
             :state="order.state"
             :date="order.date"

@@ -15,16 +15,17 @@
                     <td>Cod</td>
                 </tr>
                 <tr v-for="prod of props.list" :key="prod.id">
-                    <th><img :src="prod.img" alt="" id="img_prod"></th>
-                    <th>{{prod.name}}</th>
-                    <th>${{prod.price.toLocaleString()}}</th>
-                    <th>cantidad</th>
-                    <th>{{prod.id}}</th>
+                    <th><img :src="prod.product.img" alt="" id="img_prod"></th> 
+                    <th>{{prod.product.name}}</th>
+                    <th>${{prod.amount.toLocaleString()}}</th>
+                    <th>{{prod.quantity}}</th>
+                    <th>{{prod.product.id}}</th> 
                 </tr>
             </table>
+            <p id="totalAmount">Total: ${{props.amount.toLocaleString()}}</p>
                 <p id="estado">Estado: {{props.state}}<i class="fa-solid fa-rotate" @click="changeState(props.id)"></i></p>
         
-<!--             <button id="btn_apply">Aplicar</button> -->
+            <button id="btn_apply">Aplicar</button> 
         </div>
     </div>
 </template>
@@ -38,9 +39,10 @@ const props = defineProps(
         list:[],
         state:String,
         img:String,
-        price:String,
-        id:String,
+        amount:String,
+        id:Number,
         date:String,
+        quantity:Number,
         orderNumber:Number
         
     })
@@ -161,6 +163,16 @@ const changeState = (id) => {
         position: relative;
         border-radius: 4px;
         box-shadow: 1px 1px 1px 1px grey;
+    }
+    #totalAmount{
+        letter-spacing: 2px;
+        font-size: 30px;
+        position: absolute;
+        right: 0px;
+        background-color: rgb(224, 224, 224);
+        padding: 5px!important;
+        border-radius: 4px;
+        margin-top: 10px!important;
     }
 #estado{
     position: absolute;
