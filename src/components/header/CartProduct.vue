@@ -1,10 +1,16 @@
 <template>
     <div class="product_c">
         <img :src="props.img" alt="">
-        <input type="number" id="cantidad" v-model="quantity">
+<!--         <input type="number" id="cantidad" v-model="count" @change="changeQuantity"> -->
+        <div id="contador_cantidad">
+          <p>Cant.{{count}}</p>
+          <button @click="count++;emit('increase')" >+</button>
+          <button @click="count--;emit('decrease')">-</button>
+        </div>
+
         <div class="name_price_c">
             <h3>{{props.name}}</h3>
-            <p>${{totalPrice.toLocaleString()}}</p>
+            <p>${{totalPrice*count.toLocaleString()}}</p>
         </div>
             <i class="fa-solid fa-trash" @click="deleteProduct"></i>
     </div>
@@ -13,11 +19,12 @@
 
 <script setup>
 import {computed,ref,defineProps,defineEmits} from 'vue'
-const emit = defineEmits(['delete-from-cart'])
+const emit = defineEmits(['delete-from-cart','increase','decrease'])
+const count = ref(1)
 const quantity = ref(1)
-
 const props = defineProps(
   {
+    id:Number,
    name:String,
    price:Number,
    img:String
@@ -29,7 +36,9 @@ const totalPrice = computed(() => {
 });
 
 
-
+/* const changeQuantity = ()=>{
+  emit('change-quantity')
+} */
 const deleteProduct = ()=>{
   emit('delete-from-cart')
 }
@@ -44,6 +53,10 @@ const deleteProduct = ()=>{
   align-items: center;
   justify-content: center;
   padding: 5px !important;
+}
+.product_c img{
+  width: 60px!important;
+  height: 60px!important;
 }
 #hr_carrito{
 width: 90%;
@@ -78,6 +91,7 @@ p{
   padding: 0 !important;
   box-sizing: border-box !important;
 }
+
 .fa-trash{
     color: rgb(57, 57, 57);
 }
@@ -85,5 +99,19 @@ p{
     color: #aa0eb9;
   cursor: pointer;
 }
-
+#contador_cantidad{
+  width: 100px;
+  margin-left: 4px!important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+}
+#contador_cantidad button{
+  width: 25px;
+  height: 25px;
+  border: none;
+  margin: 1px!important;
+  border-radius: 4px;
+}
 </style>

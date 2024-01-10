@@ -24,8 +24,6 @@
             </table>
             <p id="totalAmount">Total: ${{props.amount.toLocaleString()}}</p>
                 <p id="estado">Estado: {{props.state}}<i class="fa-solid fa-rotate" @click="changeState(props.id)"></i></p>
-        
-            <button id="btn_apply">Aplicar</button> 
         </div>
     </div>
 </template>
@@ -168,7 +166,7 @@ const changeState = (id) => {
         letter-spacing: 2px;
         font-size: 30px;
         position: absolute;
-        right: 0px;
+        right:10px;
         background-color: rgb(224, 224, 224);
         padding: 5px!important;
         border-radius: 4px;

@@ -31,12 +31,14 @@
   <!-- CARRITO MODAL -->
     <div class="cart_c" ref="closeModalCart">
 
-      <CartProduct v-for="product of cartProductsAdded" 
+      <CartProduct v-for="product of cartProductsAddedFiltered" 
       :key="product.id" 
       :name="product.name" 
       :price="product.price"
       :img = "product.img"
-      @delete-from-cart="deleteProduct(product.id)"/>
+      @delete-from-cart="deleteProduct(product.id)"
+      @increase="increase(product.id)"
+      @decrease="decrease(product.id)"/>
 
       <div class="article_price_c">
         <p>{{cartProductsAdded.length}} Articulo/s</p>
@@ -61,12 +63,12 @@
     <div v-if="finishBuy == true" class="buyResume_c">
       <h2>Tu pedido:</h2>
       <form action="" class="form_comprar">
-        <tr v-for="product of cartProductsAdded" :key="product.id">
+        <tr v-for="product of cartProductsAddedFiltered" :key="product.id">
           <td><img :src="product.img" alt="product_img" id="img_compra"></td>
           <td>{{product.name}}</td>
           <td>{{product.description}}</td>
           <td>Cant x 1</td>
-          <td>${{product.price}}</td>
+          <td>${{product.price.toLocaleString()}}</td>
           <td>Cod. {{product.id}}</td>
         </tr>
       </form>
@@ -134,9 +136,15 @@ const openSearchBar= ()=>{
 
 const formSelection = ref(true)
 
+const cartProductsAddedFiltered  = computed(()=>{
+  const productFromStore = store.state.cartProducts
+ return [...new Set(productFromStore)];
+})
 const cartProductsAdded  = computed(()=>{
   return store.state.cartProducts
+
 })
+
 
 const handleFinishBuy = ()=>{
   const listIdProducts = [];
@@ -172,6 +180,18 @@ const handleFinishBuy = ()=>{
 const sumaTotal = computed(()=>{
 return store.getters.sumaDePrecios;
 })
+
+const increase = (id)=>{
+  const producto = cartProductsAdded.value.filter(p => p.id == id)
+    store.commit('increaseQuantity', producto[0]);
+  console.log(producto[0])
+  }
+  const decrease =(id)=>{
+      const producto = cartProductsAdded.value.filter(p => p.id == id)
+    store.commit('decreaseQuantity', producto[0]);
+  console.log(producto[0])
+  }
+
 const deleteProduct = (id)=>{
   const producto = cartProductsAdded.value.filter(p => p.id == id)
   console.log('click')

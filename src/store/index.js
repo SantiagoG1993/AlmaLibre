@@ -27,9 +27,14 @@ export default createStore({
         },
         emptyCart(state){
             state.cartProducts = []
+        },
+        increaseQuantity (state,product){
+                    state.cartProducts.push(product)              
+        },
+        decreaseQuantity(state,product){
+            state.cartProducts.pop(product) 
         }
-
-    },
+        },
     actions:{
 
     },
