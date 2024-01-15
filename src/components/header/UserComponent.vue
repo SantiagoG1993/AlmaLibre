@@ -92,10 +92,10 @@
       <div v-if="formSelection == true" class="login_c">
         <i class="fa-solid fa-x" @click="closeLoginForm"></i>
         <h2 class="title">Login</h2>
-        <form action="">
-          <input type="text" placeholder="Email">
-          <input type="password" name="" id="password" placeholder="Password">
-          <button id="login_btn">Ingresar</button>
+        <form action="" @submit.prevent="login">
+          <input type="text" placeholder="Email" v-model="emailLogin" class="inputLogin">
+          <input type="password" name="" id="password" placeholder="Password" v-model="passwordLogin" class="inputLogin">
+          <button id="login_btn" >Ingresar</button>
           <p class="text_purple" @click="formSelection = false">Crear nueva cuenta</p>
           <p class="text_purple">¿Olvidaste tu contraseña?</p>
         </form>
@@ -112,10 +112,12 @@
           <button id="login_btn">Crear cuenta</button>
           <p class="text_purple" @click="formSelection = true">Login</p>
       </div>
+         
 
     </div>
 
   </div>
+  <button @click="loadCurrentClient">current</button>
 </template>
 
 <script setup>
@@ -124,6 +126,7 @@ import {ref,defineEmits,computed} from 'vue'
 import {useStore} from 'vuex'
 import { onClickOutside } from '@vueuse/core'
 import CartProduct from '../header/CartProduct.vue'
+
 
 const store = useStore()
 const emit = defineEmits(['openSearchBar'])
@@ -148,10 +151,10 @@ const cartProductsAdded  = computed(()=>{
 
 const handleFinishBuy = ()=>{
   const listIdProducts = [];
- for(let product of cartProductsAdded.value){
+for(let product of cartProductsAdded.value){
   listIdProducts.push(product.id)
- }
- console.log(JSON.stringify(listIdProducts))
+}
+console.log(JSON.stringify(listIdProducts))
 
   const url = "http://localhost:8080/api/order";
   const options = {
@@ -184,12 +187,12 @@ return store.getters.sumaDePrecios;
 const increase = (id)=>{
   const producto = cartProductsAdded.value.filter(p => p.id == id)
     store.commit('increaseQuantity', producto[0]);
-  console.log(producto[0])
+
   }
   const decrease =(id)=>{
       const producto = cartProductsAdded.value.filter(p => p.id == id)
     store.commit('decreaseQuantity', producto[0]);
-  console.log(producto[0])
+
   }
 
 const deleteProduct = (id)=>{
@@ -255,7 +258,39 @@ const showModalComprar = ()=>{
     item.classList.add("show--modal--comprar")
   }
 }
+/* LOGIN */
+const emailLogin = ref('')
+const passwordLogin = ref('')
 
+const loadCurrentClient = ()=>{
+  /* GET CLIENTE AUTENTICADO */
+
+  fetch('http://localhost:8080/api/current',{
+    method:"GET",
+    credentials: 'include'
+  })
+  .then(res=>console.log(res))
+  .then(datos=>{"datos " + datos})
+  .catch(err=>console.log(err))
+}
+
+const login = ()=>{
+  console.log(emailLogin.value,passwordLogin.value)
+  const url = `http://localhost:8080/api/login?email=${emailLogin.value}&password=${passwordLogin.value}`
+  const options = {
+    method:"POST",
+    headers:{
+      "Content-Type":'application/x-www-form-urlencoded',
+    },
+}
+  fetch(url,options)
+  .then(res=>console.log(res))
+  .catch(err=>console.log(err))
+  }
+
+
+
+/* ********* */
 
 
 
@@ -564,6 +599,10 @@ border: 2px solid purple;
 color: purple;
 cursor: pointer;
 transition: .2s all ease;
+}
+.inputLogin{
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0px;
 }
 .modal form{
   width: 90%;

@@ -247,8 +247,8 @@ const uploadImages = ()=>{
 }
 
 const mesgIsOpen = ref(false)
-const productsIsOpen = ref(false)
-const imagesIsOpen = ref(true)
+const productsIsOpen = ref(true)
+const imagesIsOpen = ref(false)
 const buyOrderIsOpen = ref(false)
 const showProducts = ()=>{
     productsIsOpen.value =true

@@ -2,10 +2,12 @@ import {createStore} from 'vuex'
 
 export default createStore({
     state:{
-        cartProducts:[]
+        cartProducts:[],
+        currentClient:[]
 
     } ,
     getters:{
+        /* PRODUCTS CART */
         sumaDePrecios(state){
             const productos = state.cartProducts;
             let suma = 0;
@@ -13,9 +15,12 @@ export default createStore({
                 suma+=producto.price
             }
                 return suma
-        }
+        },
+        /* CURRENT CLIENT*/
+
     } ,
     mutations:{
+            /* PRODUCTS CART */
         addProductToCart(state,product){
             state.cartProducts.push(product)
         },
@@ -33,7 +38,9 @@ export default createStore({
         },
         decreaseQuantity(state,product){
             state.cartProducts.pop(product) 
-        }
+        },
+        /* CURRENT CLIENT*/
+        
         },
     actions:{
 

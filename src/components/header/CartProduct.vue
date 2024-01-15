@@ -4,8 +4,8 @@
 <!--         <input type="number" id="cantidad" v-model="count" @change="changeQuantity"> -->
         <div id="contador_cantidad">
           <p>Cant.{{count}}</p>
-          <button @click="count++;emit('increase')" >+</button>
-          <button @click="count--;emit('decrease')">-</button>
+          <button @click="increment" >+</button>
+          <button @click="decrement">-</button>
         </div>
 
         <div class="name_price_c">
@@ -36,9 +36,15 @@ const totalPrice = computed(() => {
 });
 
 
-/* const changeQuantity = ()=>{
-  emit('change-quantity')
-} */
+const increment = () => {
+  count.value++;
+  emit('increase', count.value);
+};
+
+const decrement = () => {
+  count.value--;
+  emit('decrease', count.value);
+};
 const deleteProduct = ()=>{
   emit('delete-from-cart')
 }
