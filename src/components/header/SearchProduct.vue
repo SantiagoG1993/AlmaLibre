@@ -1,6 +1,6 @@
 <template>
-    <div class="search_product_c" >
-        <img :src="props.img" alt="" @click="openMoreInfo">
+    <div class="search_product_c" @click="openMoreInfo" >
+        <img :src="props.img" alt="" >
         <div class="name_price_c">
             <p id="nombre">{{props.name}}</p>
             <p>${{props.price}}</p>
@@ -17,7 +17,7 @@
 
 <script setup>
 import {defineProps,ref,defineEmits} from 'vue'
-
+import MoreInfoProduct from '../main/MoreInfoProduct.vue'
 const moreInfoIsOpen = ref(false)
 
 const emit = defineEmits(['add-to-cart'])

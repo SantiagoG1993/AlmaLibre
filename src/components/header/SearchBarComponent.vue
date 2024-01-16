@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div v-if="textoBusqueda.length >0" class="products_search_c" ref="closeSearch">
+  <div v-if="textoBusqueda.length >0" class="products_search_c" ref="closeSearch" >
     <SearchProduct v-for="producto of productosFiltrados" :key="producto && producto.id" 
     :name="producto && producto.name" 
     :price="producto && producto.price"
@@ -14,7 +14,6 @@
     :description="producto && producto.description"
     />
   </div>
-
 </template>
 
 <script setup>

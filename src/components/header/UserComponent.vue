@@ -216,7 +216,7 @@ onClickOutside(closeModalCart,  ()=>{
 })
 onClickOutside(closeLoginModal,  ()=>{
   const item = document.querySelector(".modal_c")
-   item.classList.remove("show--modal")
+  item.classList.remove("show--modal")
 })
 onClickOutside(closeModalComprar,  ()=>{
   const item = document.querySelector(".modal_compra")
