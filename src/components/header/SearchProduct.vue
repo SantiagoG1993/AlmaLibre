@@ -11,6 +11,7 @@
     :name="props.name" :price="props.price" 
     :description="props.description" 
     :img="props.img"
+    :imgAdicionales="props.imgAdicionales"
     @cerrar-more-info="cerrarMoreInfo" 
     @add-to-cart="add"/>
 </template>
@@ -26,7 +27,8 @@ const props =defineProps({
     name:String,
     price:String,
     img:String,
-    description:String
+    description:String,
+    imgAdicionales:[]
 }) 
 
 const openMoreInfo = ()=>{

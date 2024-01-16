@@ -10,7 +10,8 @@
   :price="dato.price" 
   :description="dato.description" 
   :product-id="dato.id"
-  :img = "dato.img"
+  :img = "dato.imgPrincipal"
+   :imgAdicionales="dato.otherImages"
   @add-to-cart="addToCart(dato.id)"/>
   </div >
   <div v-if="productType == 'digitales'" class="products_c" >
@@ -21,6 +22,7 @@
   :description="dato.description" 
   :product-id="dato.id"
   :img = "dato.img"
+  :imgAdicionales="dato.otherImages"
   @add-to-cart="addToCart(dato.id)"/>
   </div>
 </template>

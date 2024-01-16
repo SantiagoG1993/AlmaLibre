@@ -2,14 +2,21 @@
     <div class="more_info_modal">
         <div class="more_info_c" ref="closeMoreInfo">
             <div class="img_adicionales_c">
-
+              <img :src="img" 
+              alt="" 
+              class="imagen_adicional" 
+              v-for="img of imgAdicionales" 
+              :key="img"
+              @mouseover="changeMainImg(img)"
+              @mouseleave="restartImg"
+              >
             </div>
-            <img class="imgPrincipal" :src="props.img" alt="">
+            <img class="imgPrincipal" :src="localImg" alt="">
             <i class="fa-solid fa-xmark" aria-hidden="true" @click="closeMoreInfoWithX"></i>
             <div class="producto-modal__container___info">
                 <h3>{{props.name}}</h3>
                 <p class="producto-modal__container___info____descripcion">{{props.description}}</p>
-                <p class="producto-modal__container___info____precio">${{props.price}}</p>
+                <p class="producto-modal__container___info____precio">${{props.price.toLocaleString()}}</p>
                 <input id="cantidad" type="number">
                 <button @click="addToCart">Agregar al carrito</button>
                 </div>
@@ -28,7 +35,8 @@ const props = defineProps({
     name:String,
     description:String,
     price:String,
-    img:String
+    img:String,
+    imgAdicionales:[]
 })
 const emit = defineEmits(['cerrar-more-info','add-to-cart']) /* Cerrar con la "X" */
 
@@ -42,7 +50,14 @@ const closeMoreInfoWithX = ()=>{
 onClickOutside(closeMoreInfo,()=>{
   emit('cerrar-more-info')  
 })
+const localImg = ref(props.img)
 
+const changeMainImg = (newImage)=>{
+  localImg.value = newImage
+}
+const restartImg =()=>{
+  localImg.value = props.img
+}
 </script>
 
 <style scoped>
@@ -76,22 +91,29 @@ background-color: white;
 }
 .img_adicionales_c{
     height: 90%;
-  width: 120px;
+  width: 70px;
   margin-left: 20px !important;
   margin-right: 30px !important;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   border-radius: 6px;
   gap: 30px;
-  background-color: grey;
+}
+.imagen_adicional{
+  width: 100%;
+  height: 70px;
+background-color: blue;
+border-radius: 8px;
+object-fit: cover;
 }
 .imgPrincipal{
     height: 60%;
     width: 330px;
   border-radius: 6px;
    background-color: grey;
+   
 }
 .producto-modal__container___info{
     width: 600px;

@@ -10,7 +10,7 @@
     :name="productoDestacado && productoDestacado.name" 
     :price="productoDestacado && productoDestacado.price" 
     :description="productoDestacado && productoDestacado.description"
-    :img = "productoDestacado.img"
+    :img = "productoDestacado.imgPrincipal"
     @add-to-cart="addToCart"/>   
     <ComoComprar />
   </div>

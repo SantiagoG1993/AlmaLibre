@@ -13,6 +13,7 @@
     :name="props.name" :price="props.price" 
     :description="props.description" 
     :img="props.img"
+    :imgAdicionales="props.imgAdicionales"
     @cerrar-more-info="cerrarMoreInfo" 
     @add-to-cart="add"/>
 
@@ -44,7 +45,8 @@ const props = defineProps({
   name:String,
   price:String,
   description:String,
-  img:String
+  img:String,
+  imgAdicionales:[]
 })
 const cerrarMoreInfo=()=>{
   moreInfoIsOpen.value = false

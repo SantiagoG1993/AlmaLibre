@@ -27,7 +27,7 @@
         </div>
         <ProductManager v-for="product of textAndTypeFilteredProducts" 
         :key="product.id"
-        :img="product.img"
+        :img="product.imgPrincipal"
         :name="product.name"
         :price="product.price"
         :description="product.description"

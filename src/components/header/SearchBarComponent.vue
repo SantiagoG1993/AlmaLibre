@@ -10,8 +10,9 @@
     <SearchProduct v-for="producto of productosFiltrados" :key="producto && producto.id" 
     :name="producto && producto.name" 
     :price="producto && producto.price"
-    :img="producto && producto.img"
+    :img="producto && producto.imgPrincipal"
     :description="producto && producto.description"
+    :imgAdicionales=" producto && producto.otherImages"
     />
   </div>
 </template>

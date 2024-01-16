@@ -35,7 +35,7 @@
       :key="product.id" 
       :name="product.name" 
       :price="product.price"
-      :img = "product.img"
+      :img = "product.imgPrincipal"
       @delete-from-cart="deleteProduct(product.id)"
       @increase="increase(product.id)"
       @decrease="decrease(product.id)"/>
