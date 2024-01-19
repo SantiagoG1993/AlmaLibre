@@ -7,7 +7,7 @@
         </div>
         <p id="product_name">{{props.name}}</p>
         <p id="price">${{props.price.toLocaleString()}} </p>
-        <button id="add_cart_btn" @click="add"><i class="fa-solid fa-cart-shopping"></i> AGREGAR AL CARRITO </button>
+        <button id="add_cart_btn" @click="add"><i class="fa-solid fa-cart-shopping"></i> Agregar al carrito </button>
     </div>
     <MoreInfoProduct v-if="moreInfoIsOpen==true" 
     :name="props.name" :price="props.price" 
@@ -129,15 +129,18 @@ img{
 }
 #add_cart_btn{
     position: absolute;
-    width: 158px;
+    width: 160px;
     height: 39px;
     border: 1px solid black;
     background-color: transparent;
-    font-family: "Bebas Neue", sans-serif;
+  /*   font-family: "Bebas Neue", sans-serif; */
+  font-family: Arial, Helvetica, sans-serif;
     bottom: 30px;
+    font-size: 14px;
     left: 40px;
     border-radius: 4px;
     display: flex;
+    letter-spacing: normal;
     justify-content: center;
     align-items: center;
     gap: 10px;

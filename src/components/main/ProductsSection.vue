@@ -21,7 +21,7 @@
   :price="dato.price" 
   :description="dato.description" 
   :product-id="dato.id"
-  :img = "dato.img"
+  :img = "dato.imgPrincipal"
   :imgAdicionales="dato.otherImages"
   @add-to-cart="addToCart(dato.id)"/>
   </div>

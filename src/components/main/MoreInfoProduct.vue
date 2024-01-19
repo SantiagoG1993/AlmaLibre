@@ -2,13 +2,13 @@
     <div class="more_info_modal">
         <div class="more_info_c" ref="closeMoreInfo">
             <div class="img_adicionales_c">
+              <img :src="props.img" alt="" class="imagen_adicional"  @mouseover="changeMainImg(img)">
               <img :src="img" 
               alt="" 
               class="imagen_adicional" 
               v-for="img of imgAdicionales" 
               :key="img"
               @mouseover="changeMainImg(img)"
-              @mouseleave="restartImg"
               >
             </div>
             <img class="imgPrincipal" :src="localImg" alt="">
@@ -54,9 +54,6 @@ const localImg = ref(props.img)
 
 const changeMainImg = (newImage)=>{
   localImg.value = newImage
-}
-const restartImg =()=>{
-  localImg.value = props.img
 }
 </script>
 
@@ -107,12 +104,17 @@ background-color: white;
 background-color: blue;
 border-radius: 8px;
 object-fit: cover;
+cursor: pointer;
+}
+.imagen_adicional:hover{
+  border: .2px solid rgb(207, 207, 207);
 }
 .imgPrincipal{
     height: 60%;
-    width: 330px;
+    width: 350px;
   border-radius: 6px;
    background-color: grey;
+   object-fit: cover;
    
 }
 .producto-modal__container___info{

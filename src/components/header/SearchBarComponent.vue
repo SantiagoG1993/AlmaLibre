@@ -13,6 +13,7 @@
     :img="producto && producto.imgPrincipal"
     :description="producto && producto.description"
     :imgAdicionales=" producto && producto.otherImages"
+     @add-to-cart="addToCart(producto.id)"
     />
   </div>
 </template>
@@ -20,10 +21,11 @@
 <script setup>
 import {onClickOutside} from '@vueuse/core'
 import {ref,onMounted,computed,defineProps} from 'vue'
+import {useStore} from 'vuex'
 import SearchProduct from './SearchProduct.vue'
 
 const props = defineProps(['isSearchBarVisible'])
-
+const store = useStore()
 const closeSearch = ref(null)
 onClickOutside(closeSearch, ()=>{
   textoBusqueda.value=''
@@ -50,7 +52,10 @@ onMounted(()=>{
   })
   .catch(err=>console.log(err))
 })
-
+const addToCart = (id)=>{
+  const product = productos.value.filter(p => p.id == id)
+  store.commit('addProductToCart', product[0])
+}
 </script>
 
 <style scoped>
