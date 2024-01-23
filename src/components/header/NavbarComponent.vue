@@ -265,15 +265,17 @@ form{
   opacity: 0;
   pointer-events: none;
   position: absolute;
-  top: 340px;
+  top: 365px;
   z-index: 400;
   width: 100%;
   height: 90px;
-  background-color: rgba(255, 255, 255, 0.862);
+  background-color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 0px 0px 20px 20px;
+  -moz-box-shadow: 0px 5px 10px -4px rgba(164, 164, 164, 0.75);
+box-shadow: 0px 5px 10px -4px rgba(136, 136, 136, 0.75);
 }
 .show--modalNav {
   opacity: 1;

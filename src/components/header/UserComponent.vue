@@ -112,12 +112,9 @@
           <button id="login_btn">Crear cuenta</button>
           <p class="text_purple" @click="formSelection = true">Login</p>
       </div>
-         
-
     </div>
 
   </div>
-  <button @click="loadCurrentClient">current</button>
 </template>
 
 <script setup>
@@ -262,17 +259,6 @@ const showModalComprar = ()=>{
 const emailLogin = ref('')
 const passwordLogin = ref('')
 
-const loadCurrentClient = ()=>{
-  /* GET CLIENTE AUTENTICADO */
-
-  fetch('http://localhost:8080/api/current',{
-    method:"GET",
-    credentials: 'include'
-  })
-  .then(res=>console.log(res))
-  .then(datos=>{"datos " + datos})
-  .catch(err=>console.log(err))
-}
 
 const login = ()=>{
   console.log(emailLogin.value,passwordLogin.value)

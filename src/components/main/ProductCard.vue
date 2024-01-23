@@ -7,7 +7,8 @@
         </div>
         <p id="product_name">{{props.name}}</p>
         <p id="price">${{props.price.toLocaleString()}} </p>
-        <button id="add_cart_btn" @click="add"><i class="fa-solid fa-cart-shopping"></i> Agregar al carrito </button>
+        <button v-if="added==false" id="add_cart_btn" @click="add"><i class="fa-solid fa-cart-shopping"></i> Agregar al carrito </button>
+        <button v-else id="add_cart_btn" class="added" @click="remove">Agregado <i class="fa-solid fa-check"></i></button>
     </div>
     <MoreInfoProduct v-if="moreInfoIsOpen==true" 
     :name="props.name" :price="props.price" 
@@ -23,11 +24,17 @@
 import {defineProps,ref,defineEmits} from 'vue'
 import MoreInfoProduct from './MoreInfoProduct.vue'
 const favContainer = ref('favContainer')
+const added = ref(false)
 
-const emit = defineEmits(['add-to-cart'])
+const emit = defineEmits(['add-to-cart','remove-from-cart'])
 
 const add = ()=>{
+  added.value=true
   emit('add-to-cart')
+} 
+const remove = ()=>{
+  added.value=false
+  emit('remove-from-cart')
 } 
 const moreInfoIsOpen = ref(false)
 const openMoreInfo = ()=>{
@@ -56,6 +63,10 @@ const cerrarMoreInfo=()=>{
 </script>
 
 <style scoped>
+.added{
+  background-color: #653367!important;
+  color: white;
+}
 .fav_c{
   opacity: 0;
   pointer-events: none;

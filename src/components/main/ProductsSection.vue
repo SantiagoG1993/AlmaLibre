@@ -12,7 +12,9 @@
   :product-id="dato.id"
   :img = "dato.imgPrincipal"
    :imgAdicionales="dato.otherImages"
-  @add-to-cart="addToCart(dato.id)"/>
+  @add-to-cart="addToCart(dato.id)"
+  @remove-from-cart="deleteProduct(dato.id)"
+  />
   </div >
   <div v-if="productType == 'digitales'" class="products_c" >
 <ProductCard  v-for="dato in digitalDesign" 
@@ -23,7 +25,9 @@
   :product-id="dato.id"
   :img = "dato.imgPrincipal"
   :imgAdicionales="dato.otherImages"
-  @add-to-cart="addToCart(dato.id)"/>
+  @add-to-cart="addToCart(dato.id)"
+  @remove-from-cart="deleteProduct(dato.id)"
+  />
   </div>
 </template>
 
@@ -74,7 +78,12 @@ const addToCart = (id)=>{
   const product = datos.value.filter(p => p.id == id)
   store.commit('addProductToCart', product[0])
 }
-
+const deleteProduct = (id)=>{
+  const producto = datos.value.filter(p => p.id == id)
+  console.log('click removes')
+  return store.commit('removeProductFromCart',producto[0])
+  
+}
 
 </script>
 
