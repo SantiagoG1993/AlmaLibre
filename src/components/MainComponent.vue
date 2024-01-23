@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isOpen == 'main'" class="main_c">
+  <div v-if="isOpen =='main'" class="main_c">
     <CarrouselComponent 
     :image1="images.image1"
     :image2="images.image2"
@@ -14,31 +14,37 @@
     @add-to-cart="addToCart"/>   
     <ComoComprar />
   </div>
-  <div v-if="isOpen == 'products'" class="products_selected_c c" >
+  <div v-if="isOpen !== 'main'" class="products_selected_c c" >
     <aside>
-    <p id="navigation">VOLVER / REMERAS</p>
+    <p id="navigation"><span @click="isOpen = 'main'" id="volver_btn">Volver</span> / {{isOpenState}}</p>
       <h2>Categorias </h2>
+      <hr>
       <ul>
-        <li><i class="fa-solid fa-chevron-right"></i> Tazas</li>
-        <li><i class="fa-solid fa-chevron-right"></i> Remeras</li>
-        <li><i class="fa-solid fa-chevron-right"></i> Bodys</li>
-        <li><i class="fa-solid fa-chevron-right"></i> Gorras</li>
-        <li><i class="fa-solid fa-chevron-right"></i> Matelisto</li>
-        <li><i class="fa-solid fa-chevron-right"></i> Chopps</li>
-        <li><i class="fa-solid fa-chevron-right"></i> Set de jardin</li>
+        <li v-for="categorie of categories" :key="categorie"  @click="changeCategory(categorie)">
+          <i class="fa-solid fa-chevron-right"></i> {{categorie}}
+        </li>
+
       </ul>
     </aside>
     <div class="right_c">
-        <h2>Remeras</h2>
+        <h2>{{isOpenState}}</h2>
         <section class="product_list">
-
+            <ProductCard  v-for="prod in productsFiltered" 
+              :key="prod.id"
+              :name="prod.name" 
+              :price="prod.price" 
+              :description="prod.description" 
+              :product-id="prod.id"
+              :img = "prod.imgPrincipal"
+            />
         </section>
     </div>
   </div>
 </template>
 
 <script setup>
-import {ref,onMounted} from 'vue'
+import {ref,onMounted,computed,watch} from 'vue'
+import ProductCard from './main/ProductCard.vue'
 import {useStore} from 'vuex'
 import ProductsSection from './main/ProductsSection.vue'
 import FeaturedProduct from './main/FeaturedProduct.vue'
@@ -47,26 +53,53 @@ import CarrouselComponent from './main/CarrouselComponent.vue'
 import WhatsappComponent from './main/WhatsappComponent.vue'
 
 const productoDestacado = ref([])
-const isOpen = ref("products")
 const images = ref([])
 const store =useStore()
+const allProducts = ref([])
+const categories = ref([])
 
+
+const isOpenState = computed(()=>{
+  return store.getters.isOpen
+})
+const isOpen = ref(isOpenState.value)
+
+const productsFiltered = computed(()=>{
+return allProducts.value.filter(p=>p.category == isOpen.value)
+})
 const loadData= ()=>{
-
+watch(isOpenState, (newValue) => {
+  isOpen.value = newValue;
+});
 /* GET PRODUCTO DESTACADO */
-
 const urlFeatured = 'http://localhost:8080/api/featured'
-const optionsFeaetured = {
+fetch(urlFeatured, {
+  method:'GET',
+  headers:{
+    'Content-Type':'application/json'
+  }
+})
+.then(res => res.json())
+.then(data =>productoDestacado.value = data)
+.catch(err=> console.log(err))
+
+/* GET ALL PRODUCTS */
+const url = 'http://localhost:8080/api/products'
+const options = {
   method:'GET',
   headers:{
     'Content-Type':'application/json'
   }
 }
-  fetch(urlFeatured,optionsFeaetured)
+  fetch(url,options)
   .then(res=>res.json())
-  .then(data=>{productoDestacado.value=data;
-  console.log(data)
-  })
+  .then(data=>{
+    allProducts.value=data;
+    console.log(data);
+    const uniqueCategories = new Set(data.map(p => p.category));
+    categories.value = Array.from(uniqueCategories)
+  }
+  )
   .catch(err=>console.log(err))
 
 /* GET IMAGENES */
@@ -85,7 +118,9 @@ const optionsImages = {
   })
   .catch(err=>console.log(err))
 }
-
+const changeCategory= (category)=>{
+  store.commit('stateCategory',category)
+}
 
 onMounted(()=>{
 loadData()
@@ -110,8 +145,15 @@ const addToCart= ()=>{
 aside{
   width: 300px;
   height: 600px;
-  border: 1px solid red;
+/*   border: 1px solid red; */
   align-self: flex-start;
+  position: relative;
+}
+aside hr{
+  width: 160px;
+  position: absolute;
+  top: 92px;
+  left: 125px;
 }
 aside h2{
   font-size: 18px;
@@ -124,13 +166,18 @@ aside h2{
   color: grey;
   margin-right: 6px!important;
 }
+ul{
+  margin-top: 50px!important;
+}
 li{
   margin-top: 20px!important;
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-left: 30px!important;
+  margin-left:50px!important;
   user-select: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
 }
 li:hover{
   color: purple;
@@ -138,15 +185,16 @@ li:hover{
 #navigation{
   color: grey;
   align-self: flex-start;
-  margin: 20px 0px 10px 20px!important;
-  font-size: 14px;
+  margin: 20px 0px 10px 50px!important;
+  font-size: 13px;
   font-family: Arial, Helvetica, sans-serif;
+  user-select: none;
 
 }
 .right_c{
   width: 80%;
   min-height: 50vh;
-  border: 1px solid red;
+/*   border: 1px solid red; */
 }
 .products_selected_c{
   display: flex!important;
@@ -154,12 +202,25 @@ li:hover{
 .right_c h2{
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 6px;
-  color: grey;
-  margin-top: 72px!important;
+  color: rgb(75, 75, 75);
+  margin-top: 75px!important;
   user-select: none;
+  margin-left: 30px!important;
   }
   .product_list{
-    border: 1px solid blue;
+/*     border: 1px solid blue; */
   min-height: 50vh;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px!important;
+  margin-left: 40px!important;
+  gap: 20px;
   }
+  #volver_btn{
+    cursor: pointer;
+    user-select: none;
+  }
+    #volver_btn:hover{
+      color: purple;
+    }
 </style>

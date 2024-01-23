@@ -19,6 +19,7 @@
 
 <script setup>
 import {computed,ref,defineProps,defineEmits} from 'vue'
+
 const emit = defineEmits(['delete-from-cart','increase','decrease'])
 const count = ref(1)
 const quantity = ref(1)

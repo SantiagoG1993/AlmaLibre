@@ -3,8 +3,7 @@ import {createStore} from 'vuex'
 export default createStore({
     state:{
         cartProducts:[],
-        currentClient:[]
-
+        isOpen : 'main',
     } ,
     getters:{
         /* PRODUCTS CART */
@@ -16,8 +15,10 @@ export default createStore({
             }
                 return suma
         },
-        /* CURRENT CLIENT*/
-
+        /* IS OPEN */
+        isOpen(state) {
+            return state.isOpen;
+        },
     } ,
     mutations:{
             /* PRODUCTS CART */
@@ -39,7 +40,11 @@ export default createStore({
         decreaseQuantity(state,product){
             state.cartProducts.pop(product) 
         },
-        /* CURRENT CLIENT*/
+        /* IS OPEN*/
+        stateCategory(state,category){
+            state.isOpen = category;
+            console.log(state.isOpen)
+        }
         
         },
     actions:{

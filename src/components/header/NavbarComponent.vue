@@ -1,7 +1,7 @@
 <template>
   <div  class="navbar_c">
     <ul class="list">
-      <li>INICIO</li>
+      <li @click="changeCategory('main')">INICIO</li>
       <li @mouseover="openModal">PRODUCTOS</li>
       <li @click="openContact">CONTACTO</li>
     </ul>
@@ -21,13 +21,13 @@
 
     <div class="modal_nav"  @mouseleave="closeModal">
       <ul class="list_modal">
-        <li>TAZAS</li>
-        <li>REMERAS</li>
-        <li>GORRAS</li>
-        <li>BODYS</li>
-        <li>CHOPPS</li>
-        <li>MATELISTO</li>
-        <li>SET DE JARDIN</li>
+        <li @click="changeCategory('Tazas')">TAZAS</li>
+        <li @click="changeCategory('Remeras')">REMERAS</li>
+        <li @click="changeCategory('Gorras')">GORRAS</li>
+        <li @click="changeCategory('Bodys')">BODYS</li>
+        <li @click="changeCategory('Chopps')">CHOPPS</li>
+        <li @click="changeCategory('Matelisto')">MATELISTO</li>
+        <li @click="changeCategory('Set de jardin')">SET DE JARDIN</li>
         <li id="como_comprar">COMO COMPRAR?</li>
       </ul>
     </div>
@@ -38,10 +38,18 @@
 
 <script setup>
 import { onClickOutside } from '@vueuse/core'
+import {useStore} from 'vuex'
 import {ref,onMounted} from 'vue'
+
+
+const store = useStore();
 
 const closeContactModal = ref(null)
 
+
+const changeCategory= (category)=>{
+  store.commit('stateCategory',category)
+}
 
 const handleScroll = ()=>{
   const navbar = document.querySelector(".navbar_c")

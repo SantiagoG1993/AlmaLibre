@@ -23,6 +23,7 @@
 <script setup>
 import {defineProps,ref,defineEmits} from 'vue'
 import MoreInfoProduct from './MoreInfoProduct.vue'
+
 const favContainer = ref('favContainer')
 const added = ref(false)
 
@@ -50,7 +51,7 @@ const closeFav = ()=>{
 
 const props = defineProps({
   name:String,
-  price:String,
+  price:Number,
   description:String,
   img:String,
   imgAdicionales:[]
