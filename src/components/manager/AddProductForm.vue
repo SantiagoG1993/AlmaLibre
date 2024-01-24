@@ -1,23 +1,33 @@
 <template>
     <div class="addProduct_c" :class="{'show--addForm' : props.isAddFormVisible}" ref="addFormContainer">
-        <i id="close-x" class="fa-solid fa-xmark" aria-hidden="true"></i>
-        <form action="" @submit.prevent="addProduct" enctype="multipart/form-data">
-            <h2>Agregar producto</h2>
+        <form action="" @submit.prevent="addProduct">
+            <div class="upper_form">
             <input type="text" placeholder="Nombre" id="nombre" v-model="name">
-            <div id="inputImage">
-                <i class="fa-regular fa-image" aria-hidden="true"></i>
-                <input  type="text" name="img" id="imgInput" v-model="img">
-            </div>
                 <input type="text" placeholder="Precio" id="precio" v-model="price">
-                <select name="" id="" v-model="type">
-                    <option value="CUSTOM_PRODUCT">Personalizado</option>
-                    <option value="DIGITAL_DESIGN">Diseño digial</option>
+                <label for="categories">Categoria</label>
+                <select name="categories" id="categories" v-model="category">
+                    <option :value="'Nueva'">Nueva categoria</option>
+                    <option v-for="categorie of categories" :key="categorie" :value="categorie">{{categorie}}</option>
+                    
                 </select>
-                <select name="destacado" id="destacado" v-model="isFeatured">
-                    <option :value="true">SI</option>
-                    <option :value="false">NO</option>
-                </select>
+                <input  type="text" name="img" id="imgInput" v-model="img" placeholder="URL de la imagen principal">
+            </div>
+            <div class="lower_form">
                 <input type="text" placeholder="Descripcion" id="descripcion" v-model="description">
+                <div class="selects_c">
+                    <p>Tipo de producto</p>
+                    <select name="" id="type" v-model="type">
+                        <option value="CUSTOM_PRODUCT">Personalizado</option>
+                        <option value="DIGITAL_DESIGN">Diseño digial</option>
+                    </select>
+                    <p>Producto destacado</p>
+                    <select name="destacado" id="destacado" v-model="isFeatured">
+                        <option :value="true">SI</option>
+                        <option   option tion :value="false">NO</option>
+                </select>
+                </div>
+                <input :disabled="category !== 'Nueva'"  type="text" placeholder="Nueva categoria" id="new_category" v-model="newCategory">
+            </div>
                 <button >Agregar</button>
             </form>
     </div>
@@ -29,7 +39,10 @@ import {onClickOutside} from '@vueuse/core'
 const props = defineProps(['isAddFormVisible'])
 
 const addFormContainer = ref(null)
+const categories = ref([])
 
+const category = ref('')
+const newCategory = ref('')
 const name = ref('')
 const description = ref('')
 const price = ref('')
@@ -37,13 +50,36 @@ const isFeatured =  ref(true)
 const img = ref('')
 const type = ref('')
 
+
 onClickOutside(addFormContainer,()=>{
     const item = document.querySelector('.addProduct_c')
     item.classList.remove('show--addForm')
 })
 
 
+const url = 'http://localhost:8080/api/products'
+const options = {
+  method:'GET',
+  headers:{
+    'Content-Type':'application/json'
+  }
+}
+  fetch(url,options)
+  .then(res=>res.json())
+  .then(data=>{
+    const nonDeletedProducts = data.filter(p=>p.deleted == false)
+    const uniqueCategories = new Set(nonDeletedProducts.map(p => p.category));
+    categories.value = Array.from(uniqueCategories)
+  }
+  )
+  .catch(err=>console.log(err))
+
 const addProduct = () => {
+
+let categoryValue = category.value;
+if (categoryValue === 'Nueva') {
+    categoryValue = newCategory.value;
+}
 
     const data = {
         'name': name.value,
@@ -52,7 +88,8 @@ const addProduct = () => {
         'price':price.value,
         'featured':isFeatured.value,
         'stock': 1,
-        'productType':type.value
+        'productType':type.value,
+        'category':categoryValue
     }
 
     console.log( JSON.stringify(data));
@@ -84,12 +121,16 @@ const addProduct = () => {
     position: absolute;
     top: 270px;
     right: 60px;
-    background-color: #3d273ef3;
-    border: 2px solid white;
+    background-color: #e3e3e3;
     border-radius: 4px;
-    width: 400px;
-    height: 470px;
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    height: 250px;
     z-index: 2;
+    -webkit-box-shadow: 0px 5px 7px -2px rgba(87,87,87,1);
+-moz-box-shadow: 0px 5px 7px -2px rgba(87,87,87,1);
+box-shadow: 0px 5px 7px -2px rgba(87,87,87,1);
 
 }
 .show--addForm{
@@ -98,10 +139,12 @@ const addProduct = () => {
 }
 form{
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
+    gap: 10px;
+    border: 1px solid green;
 }
 form button{
     cursor: pointer;
@@ -110,42 +153,17 @@ form button{
     border-radius: 4px;
     background-color: #715572;
     color: white;
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 4px;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
     height: 40px;
-    margin-top: 20px !important;
+/*     margin-top: 20px !important; */
 }
 form button:hover{
-    background-color: #ae81af;  
-}
-.fa-xmark{
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    font-size: 28px;
-}
-.fa-xmark:hover{
-    color: rgb(109, 81, 109) !important;
+    background-color: #7d587d;  
 }
 #descripcion{
-    width: 80%;
-    margin-top: 20px !important;
-    height: 100px;
-}
-#precio,#destacado{
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 4px;
-    margin-top: 10px !important;
-    font-size: 18px !important;
-    width: 140px;
-    height: 45px;
-    position: absolute;
-    top: 130px;
-    right: 40px;
-}
-#destacado{
-    top: 210px;
+    width: 200px;
+        height: 100%;
 }
 #inputImage{
     width: 130px;
@@ -160,29 +178,65 @@ form button:hover{
     margin-left: 40px !important;
     margin-top: 20px !important;
 }
-#inputImage i{
-    font-size: 30px;
-    color: rgb(168, 168, 168);
-}
+
 #imgInput{
-    width: 100%;
-    
+    width: 300px; 
+    height:100%;
 }
-h2{
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 4px;
-    color: white;
-    margin: 20px 0px 20px 0px !important;
-    font-size: 20px;
+#precio{
+    height: 100%;
 }
 form input{
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        border-radius: 3px;
+        border: none;
+        padding-left: 20px!important;
 }
 #nombre{
-    width: 75%;
-    height: 45px;
-    padding-left: 20px !important;
+    width: 200px;
+    height: 100%;
+}
+select{
+    font-family: Arial, Helvetica, sans-serif;
+    color: grey;
+    font-size: 12px;
+    width: 150px;
+    height: 100%;
+    padding-left: 20px!important;
+}
+.upper_form{
+/*     border: 1px solid red; */
+    width:90%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.lower_form{
+/*         border: 1px solid blue; */
+            width: 90%;
+        height: 120px;
+        display: flex;
 
+}
+.selects_c{
+    width: 200px;
+    height: 100%;
+/*     border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+}
+.selects_c select{
+    height: 40px;
+    margin-left: 10px!important;
+}
+.selects_c  p{
+    margin-left: 10px!important;
+}
+#new_category{
+    width: 250px;
+    height: 40px;
+    margin-left: 42px!important;
 }
 </style>

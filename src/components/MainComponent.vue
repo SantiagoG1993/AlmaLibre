@@ -16,7 +16,7 @@
   </div>
   <div v-if="isOpen !== 'main'" class="products_selected_c c" >
     <aside>
-    <p id="navigation"><span @click="isOpen = 'main'" id="volver_btn">Volver</span> / {{isOpenState}}</p>
+    <p id="navigation"><span @click="isOpen = 'main'" id="volver_btn">Inicio</span> / {{isOpenState}}</p>
       <h2>Categorias </h2>
       <hr>
       <ul>
@@ -65,7 +65,7 @@ const isOpenState = computed(()=>{
 const isOpen = ref(isOpenState.value)
 
 const productsFiltered = computed(()=>{
-return allProducts.value.filter(p=>p.category == isOpen.value)
+return allProducts.value.filter(p=>p.category == isOpen.value && p.deleted == false)
 })
 const loadData= ()=>{
 watch(isOpenState, (newValue) => {
@@ -96,7 +96,8 @@ const options = {
   .then(data=>{
     allProducts.value=data;
     console.log(data);
-    const uniqueCategories = new Set(data.map(p => p.category));
+    const nonDeletedProducts = data.filter(p=>p.deleted == false)
+    const uniqueCategories = new Set(nonDeletedProducts.map(p => p.category));
     categories.value = Array.from(uniqueCategories)
   }
   )

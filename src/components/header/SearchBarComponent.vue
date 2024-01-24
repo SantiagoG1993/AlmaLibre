@@ -1,6 +1,6 @@
 <template>
   <div class="searchbar_c" :class="{ 'show--searchbar': props.isSearchBarVisible }">
-    <input v-model="textoBusqueda" type="text" id="input"  placeholder="Remera" />
+    <input v-model="textoBusqueda" type="text" id="input"  placeholder="Buscar producto" />
     <div class="lupa">
       <i class="fa-solid fa-magnifying-glass"></i>
     </div>
@@ -77,9 +77,9 @@ const addToCart = (id)=>{
   position: absolute;
   user-select: none;
   width: 300px;
-  height: 55px;
+  height: 45px;
   background-color: white;
-  border-radius: 10px 6px 6px 10px;
+  border-radius: 5px 6px 6px 5px;
   display: flex;
   align-items: center;
   left: 80px;
@@ -92,8 +92,7 @@ const addToCart = (id)=>{
 #input {
   width: 70%;
   height: 80%;
-  font-family: "Bebas Neue", sans-serif;
-  letter-spacing: 3px;
+  font-family: Arial, Helvetica, sans-serif;
   padding-left: 20px !important;
   border: none;
   font-size: 13px;
