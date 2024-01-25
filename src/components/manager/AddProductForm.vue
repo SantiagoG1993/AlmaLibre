@@ -121,8 +121,8 @@ if (categoryValue === 'Nueva') {
     position: absolute;
     top: 270px;
     right: 60px;
-    background-color: #e3e3e3;
-    border-radius: 4px;
+    background-color: #ffffff;
+    border-radius: 10px;
     width: 1000px;
     display: flex;
     justify-content: center;
@@ -144,19 +144,20 @@ form{
     align-items: center;
     justify-content: center;
     gap: 10px;
-    border: 1px solid green;
 }
 form button{
     cursor: pointer;
     width: 150px;
     border: none;
     border-radius: 4px;
-    background-color: #715572;
+    background-color: #68316a;
     color: white;
     font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
     height: 40px;
-/*     margin-top: 20px !important; */
+position: absolute;
+right: 20px;
+bottom: 20px;
 }
 form button:hover{
     background-color: #7d587d;  
@@ -190,7 +191,6 @@ form input{
     font-family: Arial, Helvetica, sans-serif;
         font-size: 12px;
         border-radius: 3px;
-        border: none;
         padding-left: 20px!important;
 }
 #nombre{

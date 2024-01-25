@@ -36,6 +36,9 @@
               :description="prod.description" 
               :product-id="prod.id"
               :img = "prod.imgPrincipal"
+              :imgAdicionales="prod.otherImages"
+              @add-to-cart="addToCartProduct(prod.id)"
+              @remove-from-cart="deleteProduct(prod.id)"
             />
         </section>
     </div>
@@ -131,6 +134,16 @@ const addToCart= ()=>{
   const producto = productoDestacado.value
   store.commit('addProductToCart',producto)
   console.log(productoDestacado.value)
+}
+
+const addToCartProduct = (id)=>{
+  const product = allProducts.value.filter(p => p.id == id)
+  store.commit('addProductToCart', product[0])
+}
+const deleteProduct = (id)=>{
+  const producto = allProducts.value.filter(p => p.id == id)
+  return store.commit('removeProductFromCart',producto[0])
+  
 }
 </script>
 

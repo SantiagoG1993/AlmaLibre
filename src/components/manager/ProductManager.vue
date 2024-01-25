@@ -10,6 +10,7 @@
         <i class="fa-solid fa-trash" @click="deleteProduct(props.id)" ></i>
         <i v-if="props.featured == true" class="fa-solid fa-star"></i>
     </div>
+    <!-- modal edit -->
     <div class="modal_c_bckg" v-if="modalOpen ==true">
         <div class="modal_c" ref="modal_c_ref">
             <form action="" @submit.prevent="editProduct(props.id)">
@@ -17,7 +18,7 @@
                 <input type="text" :placeholder="props.name" v-model="name">
                 <input type="text" placeholder="Url de la imagen" v-model="img">
                 <input type="text" :placeholder="props.description" id="description" v-model="description">
-                <input type="number" id="precio" v-model="price">
+                <input type="text" id="precioEdit" v-model="price" placeholder="Precio">
                 <div class="stock_type_c">
                     <p>Stock:</p>
                     <input type="number" name="" id="editStock" v-model="stock">
@@ -135,7 +136,7 @@ cursor: pointer;
     height: 55px;
    margin-right:3%!important;
   border-radius: 2px;
-  border: 1px solid black;
+/*   border: 1px solid black; */
 }
 .fa-pen{
     margin: 0px 4%!important;
@@ -225,7 +226,7 @@ input{
     height: 35px;
     padding-left: 10px!important;
     font-size: 12px;
-    letter-spacing: 3px;
+font-family: Arial, Helvetica, sans-serif;
 }
 #description{
     height: 80px;
@@ -239,6 +240,10 @@ input{
     align-items: center;
     gap: 10px;
     justify-content: center;
+}
+#precioEdit{
+    width: 150px;
+
 }
 /* MEDIA QUERIES */
 @media (max-width:1000px){

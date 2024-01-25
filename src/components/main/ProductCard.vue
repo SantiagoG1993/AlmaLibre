@@ -127,17 +127,16 @@ img{
     object-fit: cover;
 }
 #product_name{
-        font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 2px;
+        font-family: Arial, Helvetica, sans-serif;
   color: #6a6969;
   font-size: 16px;
   margin-top: 15px !important;
 }
 #price{
   font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   margin-top: 10px !important;
-  font-size: 18px !important;
+  font-size: 30px !important;
 }
 #add_cart_btn{
     position: absolute;
@@ -148,9 +147,9 @@ img{
   /*   font-family: "Bebas Neue", sans-serif; */
   font-family: Arial, Helvetica, sans-serif;
     bottom: 30px;
-    font-size: 14px;
+    font-size: 12px;
     left: 40px;
-    border-radius: 4px;
+    border-radius: 2px;
     display: flex;
     letter-spacing: normal;
     justify-content: center;

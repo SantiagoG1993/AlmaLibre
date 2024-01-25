@@ -1,14 +1,13 @@
 <template>
 <div class="menu">
     <ul>
-        <li @click="showProducts">PRODUCTOS</li>
-        <li @click="showBuyOrder">PEDIDOS</li>
-        <li @click="showImages">IMAGENES</li>
-        <li @click="showMessages">MENSAJES</li>
+        <li @click="showProducts">Productos</li>
+        <li @click="showBuyOrder">Pedidos</li>
+        <li @click="showImages">Imagenes</li>
+        <li @click="showMessages">Mensajes</li>
         <div class="rlink" >
-            <router-link id="link" :to="'/'">IR AL INICIO</router-link>
+            <router-link id="link" :to="'/'">Ir al inicio</router-link>
         </div>
-        <button  id="btn_agregar2">Agregar producto</button>
     </ul>
 </div>
 <!-- RIGHT CONTAINER -->
@@ -25,17 +24,20 @@
                 <option value="DIGITAL_DESIGN">Diseño digital</option>
             </select>
         </div>
+        <div class="products_card_c">
         <ProductManager v-for="product of textAndTypeFilteredProducts" 
-        :key="product.id"
-        :img="product.imgPrincipal"
-        :name="product.name"
-        :price="product.price"
-        :description="product.description"
-        :stock="product.stock"
-        :id="product.id"
-        :featured="product.featured"
-        @load-data="loadData"
+            :key="product.id"
+            :img="product.imgPrincipal"
+            :name="product.name"
+            :price="product.price"
+            :description="product.description"
+            :stock="product.stock"
+            :id="product.id"
+            :featured="product.featured"
+            @load-data="loadData"
         />
+        </div>
+        
     </div>
     <!-- buy orders -->
     <div v-if="buyOrderIsOpen == true" class="buyOrders_c">
@@ -312,6 +314,8 @@ const showImages = ()=>{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    min-height: 330px;
+    max-height: 370px;
 }
 .orders_c{
     display: flex;
@@ -372,12 +376,11 @@ const showImages = ()=>{
   position: absolute;
   left: 40px;
   margin-top: 20px !important;
-  letter-spacing: 4px;
 }
 .menu ul{
     list-style-type: none;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
+font-family: Arial, Helvetica, sans-serif;
+  font-size:19px;
   color: rgb(97, 96, 96);
 }
 li{
@@ -401,7 +404,7 @@ li{
 .right_c{
     box-shadow: -2px 2px 5px 0px rgba(163,163,163,1);
   width: 80%;
-  min-height: 450px;
+  max-height: 400px;
   background-color: #D6CDD6;
   position: absolute !important;
   right: 0px;
@@ -457,7 +460,6 @@ font-size: 20px;
     width: 100%;
     min-height: 450px;  
 }
-
 /* messages */
 .fa-circle-exclamation{
     color: rgb(224, 3, 3);
@@ -529,6 +531,11 @@ transition: .2s all ease-in;
     align-items: center;
     gap: 10px;
   
+}
+.products_card_c{
+    width: 100%;
+    height: 355px;
+    overflow: auto;
 }
 @media (max-width:1000px){
  .menu{

@@ -101,7 +101,6 @@ background-color: white;
 .imagen_adicional{
   width: 100%;
   height: 70px;
-background-color: blue;
 border-radius: 8px;
 object-fit: cover;
 cursor: pointer;
@@ -113,7 +112,7 @@ cursor: pointer;
     height: 60%;
     width: 350px;
   border-radius: 6px;
-   background-color: grey;
+
    object-fit: cover;
    
 }
@@ -131,9 +130,8 @@ h3{
     font-size: 40px;
 }
 .producto-modal__container___info____descripcion{
-    font-size: 20px;
+    font-size: 18px;
   color: #505050;
-  letter-spacing: 2px;
   font-family: Arial, Helvetica, sans-serif;
 }
 .producto-modal__container___info____precio{

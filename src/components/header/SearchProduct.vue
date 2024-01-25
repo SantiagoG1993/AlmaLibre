@@ -63,7 +63,6 @@ emit('add-to-cart')
 img{
     width: 70px;
     height: 100%;
-    border: 1px solid black;
     object-fit: cover;
 }
 #nombre{

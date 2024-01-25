@@ -36,24 +36,21 @@ const openFormAddProduct = ()=>{
     top: 150px;
 }
 button{
-    background-color: transparent;
-  letter-spacing: 4px;
+    background-color: rgb(215, 215, 215);
   border-radius: 3px;
   width: 160px;
-  height: 60px;
-  color: white;
-  font-size: 16px;
-  border: 3px solid white;
+  height: 40px;
+  color: black;
+  font-size: 12px;
+  border: none;
   position: absolute;
   right: 3%;
-  top: 200px;
-  font-family: 'Bebas Neue', sans-serif;
+  top: 300px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 button:hover{
-    background-color: white;
-    color: #3D273E;
+    background-color: rgb(176, 174, 174);
     cursor: pointer;
-
 }
 .title_logo_c{
     width: 500px;
