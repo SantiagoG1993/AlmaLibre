@@ -15,7 +15,7 @@
                     <td>Cod</td>
                 </tr>
                 <tr v-for="prod of props.list" :key="prod.id">
-                    <th><img :src="prod.product.img" alt="" id="img_prod"></th> 
+                    <th><img :src="prod.product.imgPrincipal" alt="" id="img_prod"></th> 
                     <th>{{prod.product.name}}</th>
                     <th>${{prod.amount.toLocaleString()}}</th>
                     <th>{{prod.quantity}}</th>
@@ -165,9 +165,10 @@ const changeState = (id) => {
     #totalAmount{
         letter-spacing: 2px;
         font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
         position: absolute;
         right:10px;
-        background-color: rgb(224, 224, 224);
+/*         background-color: rgb(224, 224, 224); */
         padding: 5px!important;
         border-radius: 4px;
         margin-top: 10px!important;

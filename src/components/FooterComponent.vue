@@ -4,13 +4,13 @@
     <div class="contact_us_c">
       <img src="LOGO FOOTER.png" alt="">
       <p id="contactanos">Contactanos:</p>
-      <p id="telefono"><i class="fa-solid fa-phone"></i> 3329-1155533</p>
+      <p id="telefono"><i class="fa-solid fa-phone"></i> 3329-631587</p>
       <p id="mail"><i class="fa-regular fa-envelope"></i> almalibre@gmail.com</p>
       <p id="map"><i class="fa-solid fa-location-dot"></i> Retira tu compra en: 
       Esquiu 350. 
       San Pedro 
       Pv. Buenos Aires.</p>
-    </div>
+    </div> 
     <div class="social_c">
       <p id="seguinos">Seguinos en nuestras redes</p>
       <div class="social_icons">

@@ -1,7 +1,7 @@
 <template>
-    <div class="wapp_c">
+   <a href="https://wa.me/5493329631587" target="blank"><div class="wapp_c">
 <i class="fa-brands fa-whatsapp"></i>
-    </div>
+    </div></a>
 </template>
 
 <script setup>

@@ -64,7 +64,7 @@
       <h2>Tu pedido:</h2>
       <form action="" class="form_comprar">
         <tr v-for="product of cartProductsAddedFiltered" :key="product.id">
-          <td><img :src="product.img" alt="product_img" id="img_compra"></td>
+          <td><img :src="product.imgPrincipal" alt="product_img" id="img_compra"></td>
           <td>{{product.name}}</td>
           <td>{{product.description}}</td>
           <td>Cant x 1</td>

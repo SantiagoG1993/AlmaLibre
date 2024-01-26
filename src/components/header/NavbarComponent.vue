@@ -149,7 +149,7 @@ top: 45px!important;
   left: 0;
   right: 0;
   background-color: #1b1b1b46;
-  z-index: 200;
+  z-index: 1000;
   display: flex;
   justify-content: center;
 }

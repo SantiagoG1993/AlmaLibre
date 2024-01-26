@@ -192,6 +192,15 @@ form input{
         font-size: 12px;
         border-radius: 3px;
         padding-left: 20px!important;
+        border: 1px solid black;      
+        cursor: pointer;
+}
+form input:focus{
+    outline: none;
+}
+form input:disabled{
+    background-color: rgb(223, 223, 223);
+    border: none;
 }
 #nombre{
     width: 200px;
