@@ -1,6 +1,7 @@
 <template>
   <div class="user_c">
     <div class="user_cart_icos_c">
+      <i v-if="authClient.length != 0" class="fa-solid fa-arrow-right-from-bracket" @click="logout"></i>
       <i class="fa-solid fa-user" @click="openLoginForm"></i>
         <i id="fav_user_icon" class="fa-solid fa-heart"></i>
       <div class="cart_icon_c">
@@ -11,7 +12,7 @@
       <i class="fa-solid fa-bars" @click="showMobileNav"></i>
 
     </div>
-    <p id="user_name_logged">Bienvenido/a Santiago</p>
+    <p id="user_name_logged">Bienvenido/a {{authClient.firstName}}</p>
   </div>
       <!-- MENU MODAL IZQUIERDO MOVIL -->
     <div class="modal_navbar" ref="closeMobileNavbar" >
@@ -88,6 +89,7 @@
   <!-- LOGIN Y REGISTER MODAL -->
   <div class="modal_c" >
     <div class="modal" ref="closeLoginModal">
+
       <!-- LOGIN FORM -->
       <div v-if="formSelection == true" class="login_c">
         <i class="fa-solid fa-x" @click="closeLoginForm"></i>
@@ -119,15 +121,15 @@
 
 <script setup>
 
-import {ref,defineEmits,computed} from 'vue'
-import {useStore} from 'vuex'
+import { ref,defineEmits,computed,onMounted } from 'vue'
+import { useStore } from 'vuex'
 import { onClickOutside } from '@vueuse/core'
 import CartProduct from '../header/CartProduct.vue'
 
 
 const store = useStore()
 const emit = defineEmits(['openSearchBar'])
-
+const authClient = ref([])
 const finishBuy = ref(true)
 
 const openSearchBar= ()=>{
@@ -260,19 +262,67 @@ const emailLogin = ref('')
 const passwordLogin = ref('')
 
 
-const login = ()=>{
-  console.log(emailLogin.value,passwordLogin.value)
-  const url = `http://localhost:8080/api/login?email=${emailLogin.value}&password=${passwordLogin.value}`
-  const options = {
-    method:"POST",
-    headers:{
-      "Content-Type":'application/x-www-form-urlencoded',
-    },
-}
+const fetchAuth = () => {
+  const url = "http://localhost:8080/api/client/auth";
+  const options = { method: "GET", credentials: "include" };
+  
+  fetch(url, options)
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error('Authentication request failed');
+      }
+    })
+    .then(data => {
+      authClient.value=data
+    })
+    .catch(err => {
+      console.error('Error fetching authentication data:', err);
+    });
+};
+
+const login = () => {
+  const url = `http://localhost:8080/api/login?email=${emailLogin.value}&password=${passwordLogin.value}`;
+  const options = { method: "POST", credentials: "include" };
+
+  fetch(url, options)
+    .then(res => {
+      // Verifica si la respuesta es exitosa (código de estado 200)
+      if (res.ok) {
+        window.location.reload()
+        return res;
+      } else {
+        throw new Error('Login request failed');
+      }
+    })
+    .then(data => {
+      console.log(data);
+      fetchAuth();
+    })
+    .catch(err => {
+      console.error('Error logging in:', err);
+    });
+};
+const logout = ()=>{
+  const url = "http://localhost:8080/api/logout"
+  const options ={method:"POST",credentials:"include"}
   fetch(url,options)
-  .then(res=>console.log(res))
-  .catch(err=>console.log(err))
-  }
+  .then(res=>{
+    if(!res.ok){
+      throw new Error("Logout error")
+    }else{
+      console.log("Succesfully logout")
+      window.location.reload()
+      return res
+    }
+  })
+  .then(data=>console.log(data))
+  .then(err=>console.log(err))
+}
+onMounted(()=>{
+  fetchAuth()
+})
 
 
 
