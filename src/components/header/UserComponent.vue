@@ -2,7 +2,7 @@
   <div class="user_c">
     <div class="user_cart_icos_c">
       <i v-if="authClient.length != 0" class="fa-solid fa-arrow-right-from-bracket" @click="logout"></i>
-      <i class="fa-solid fa-user" @click="openLoginForm"></i>
+      <i v-if="authClient.length == 0" class="fa-solid fa-user" @click="openLoginForm"></i>
         <i id="fav_user_icon" class="fa-solid fa-heart"></i>
       <div class="cart_icon_c">
         <p v-if="cartProductsAdded.length>0" id="number_products">{{cartProductsAdded.length}}</p>
@@ -716,10 +716,10 @@ transition: .2s all ease;
   font-size: 12px;
 }
 #user_name_logged {
-  font-family: "Bebas Neue", sans-serif;
-  letter-spacing: 5px;
-  font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
   color: rgb(82, 82, 82);
+  user-select: none;
 }
 @media (max-width:1000px){
   .fa-magnifying-glass, .fa-bars{
