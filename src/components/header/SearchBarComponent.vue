@@ -37,20 +37,23 @@ const productosFiltrados = computed(()=>{
   return productos.value.filter(prod=>prod.name.toUpperCase().includes(textoBusqueda.value.toUpperCase()))
 })
 
-const url = 'http://localhost:8080/api/products'
+const fetchProducts = ()=>{
+  const url = 'http://localhost:8080/api/products'
 const options = {
   method:'GET',
   headers:{
     'Content-Type':'application/json'
   }
 }
-
-onMounted(()=>{
   fetch(url,options)
   .then(res=>res.json())
   .then(data=>{productos.value=data;
   })
   .catch(err=>console.log(err))
+}
+
+onMounted(()=>{
+  fetchProducts()
 })
 const addToCart = (id)=>{
   const product = productos.value.filter(p => p.id == id)
@@ -74,7 +77,6 @@ const addToCart = (id)=>{
 }
 .searchbar_c {
   cursor: pointer;
-  position: absolute;
   user-select: none;
   width: 300px;
   height: 45px;
@@ -82,8 +84,7 @@ const addToCart = (id)=>{
   border-radius: 5px 6px 6px 5px;
   display: flex;
   align-items: center;
-  left: 80px;
-  top: 140px;
+
 }
 .show--searchbar{
   opacity: 1;

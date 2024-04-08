@@ -46,7 +46,6 @@ const store = useStore();
 
 const closeContactModal = ref(null)
 
-
 const changeCategory= (category)=>{
   store.commit('stateCategory',category)
 }
@@ -282,8 +281,7 @@ form{
   justify-content: center;
   align-items: center;
   border-radius: 0px 0px 20px 20px;
-  -moz-box-shadow: 0px 5px 10px -4px rgba(164, 164, 164, 0.75);
-box-shadow: 0px 5px 10px -4px rgba(136, 136, 136, 0.75);
+  box-shadow: 0px 5px 10px -4px rgba(136, 136, 136, 0.75);
 }
 .show--modalNav {
   opacity: 1;
@@ -305,13 +303,16 @@ box-shadow: 0px 5px 10px -4px rgba(136, 136, 136, 0.75);
   text-decoration-color: #a476a7;
   cursor: pointer;
 }
+.navbar_c {
+    display: none;
+  }
 #como_comprar {
   color: #aa62af;
 }
 
-@media (max-width: 1000px) {
+@media (min-width: 1000px) {
   .navbar_c {
-    display: none;
+    display: unset;
   }
 }
 </style>

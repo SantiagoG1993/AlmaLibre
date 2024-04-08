@@ -27,18 +27,25 @@ const openSearchBarMedia = ()=>{
   flex-direction: column;
   align-items: center;
   width: 100%;
-  min-height: 365px;
+  justify-content: space-around;
+  height: 350px;
   background-color: #dbc9dd;
 }
-#logo {
-  width: 200px;
-  margin-bottom: 40px !important;
+#flores{
+  display: none;
 }
-@media (max-width:1000px){
+#logo {
+  width: 50%;
+}
+@media (min-width:1000px){
   #logo{
     position: absolute;
     left: 30px;
     top: 100px;
   }
+  #flores{
+  display: unset;
+}
+  
 }
 </style>

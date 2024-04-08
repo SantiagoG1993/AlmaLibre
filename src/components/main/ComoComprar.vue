@@ -17,7 +17,6 @@
     height: 405px;
     background-color: #CFC7CF;
     margin-bottom: 40px!important;
-    border-radius: 20px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -45,9 +44,10 @@ text-align: center;
     text-align: center;
     width: 80%;
 }
-@media (max-width:1000px){
-    .howto_c{
+.howto_c{
         width: 100%;
     }
+@media (min-width:1000px){
+
 }
 </style>

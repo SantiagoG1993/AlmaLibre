@@ -28,18 +28,13 @@ const props = defineProps(
 </script>
 
 <style scoped>
-/* .carrousel{
-    width: 100%;
-    height: 400px;
-    background-color: rgb(237, 237, 237);
-} */
+
 #carouselExampleSlidesOnly{
-  width: 100%!important;
-width: 1440px;
+width: 100%!important;
 object-fit: cover;
+border: 1px solid red;
 }
 .carousel-inner{
-    
-    height: 550px;
+  height: 150px;
 }
 </style>

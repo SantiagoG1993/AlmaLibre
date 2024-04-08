@@ -32,8 +32,8 @@ const props =defineProps({
 }) 
 
 const openMoreInfo = ()=>{
-  moreInfoIsOpen.value = true
-  document.body.style.overflow = 'hidden';
+    moreInfoIsOpen.value = true
+    document.body.style.overflow = 'hidden';
 }
 
 const cerrarMoreInfo=()=>{

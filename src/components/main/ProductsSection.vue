@@ -126,18 +126,18 @@ const deleteProduct = (id)=>{
   
 }
 .submenu{
-font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 4px;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
-  gap: 30px;
+  flex-direction: column;
+  gap: 10px;
   list-style-type: none;
-  font-size: 18px;
+  text-align: center;
+  font-size: 16px;
   cursor: pointer;
   user-select: none;
-  margin-top: 100px !important;
-  margin-bottom: 40px !important;
+  margin-top: 30px!important;
   justify-content: center;
-  color: rgb(201, 199, 199);
+  color: rgb(95, 95, 95);
 }
 .submenu li:hover{
   color: rgb(41, 41, 41);
@@ -155,6 +155,8 @@ padding: 40px 0px!important;
   gap: 40px;
 }
 .--selected{
-  color: rgb(41, 41, 41);
+  color: rgb(96, 31, 111);
+  background-color: rgb(189, 189, 189);
+  border-radius: 3px;
 }
 </style>
