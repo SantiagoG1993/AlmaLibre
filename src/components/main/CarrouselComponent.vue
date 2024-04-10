@@ -32,7 +32,6 @@ const props = defineProps(
 #carouselExampleSlidesOnly{
 width: 100%!important;
 object-fit: cover;
-border: 1px solid red;
 }
 .carousel-inner{
   height: 150px;

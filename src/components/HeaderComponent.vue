@@ -26,9 +26,10 @@ const openSearchBarMedia = ()=>{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  justify-content: space-around;
   height: 350px;
+  gap: 30px;
   background-color: #dbc9dd;
 }
 #flores{

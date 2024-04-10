@@ -31,16 +31,15 @@ img{
 }
 #como_comprar_p{
     font-family: "Bebas Neue", sans-serif;
-    letter-spacing: 8px;
-    font-size: 50px;
-color: white;
-text-align: center;
+    letter-spacing: 4px;
+    font-size: 40px;
+    color: white;
+    text-align: center;
 }
 #text{
     color: white;
-      font-family: "Bebas Neue", sans-serif;
-    letter-spacing: 4px;
-    font-size: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
     text-align: center;
     width: 80%;
 }

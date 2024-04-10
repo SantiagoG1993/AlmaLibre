@@ -103,11 +103,11 @@ const cerrarMoreInfo=()=>{
 }
 .card_c{
   position: relative;
-display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  width: 250px;
-  height: 400px;
+  width: 45%!important;
+  height: 330px!important;
   border-radius: 5px;
   border: 1px solid rgb(228, 227, 228);
   background-color: white;
@@ -121,31 +121,30 @@ display: flex;
 }
 img{
     width: 90%;
-    height: 190px;
+    height: 145px!important;
     margin-top: 16px!important;
     border-radius: 8px;
     object-fit: cover;
 }
 #product_name{
-        font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   color: #6a6969;
-  font-size: 16px;
+  font-size: 14px;
   margin-top: 15px !important;
 }
 #price{
   font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin-top: 10px !important;
-  font-size: 30px !important;
+  font-size: 22px !important;
 }
 #add_cart_btn{
     position: absolute;
-    width: 160px;
-    height: 39px;
+    width: 80%!important;
+    height: 35px!important;
     border: 1px solid black;
     background-color: transparent;
-  /*   font-family: "Bebas Neue", sans-serif; */
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     bottom: 30px;
     font-size: 12px;
     left: 40px;
@@ -154,7 +153,7 @@ img{
     letter-spacing: normal;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 }
 #add_cart_btn:hover{
     background-color: black;

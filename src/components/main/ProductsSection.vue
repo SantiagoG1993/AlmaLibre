@@ -22,7 +22,7 @@
     
   </div >
   <div v-if="productType == 'digitales'" class="products_c" >
-<ProductCard  v-for="dato in slicedProd" 
+<ProductCard  v-for="dato in digitalDesign" 
   :key="dato.id" 
   :name="dato.name" 
   :price="dato.price" 
@@ -37,6 +37,7 @@
 </template>
 
 <script setup>
+
 import {ref,onMounted,watch} from 'vue'
 import {useStore} from 'vuex'
 import ProductCard from './ProductCard.vue'
@@ -151,8 +152,8 @@ const deleteProduct = (id)=>{
   width: 95%;
   min-height: 400px;
   background-color: #f1f1f1;
-padding: 40px 0px!important;
-  gap: 40px;
+  padding: 40px 0px!important;
+  gap: 10px;
 }
 .--selected{
   color: rgb(96, 31, 111);

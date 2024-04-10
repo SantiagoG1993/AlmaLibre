@@ -42,7 +42,7 @@
 
 
 .contact_us_c{
-  width: 400px;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -50,10 +50,10 @@
   align-items: center;
 }
 #contactanos{
-       font-family: "Bebas Neue", sans-serif;
-         letter-spacing: 6px;
-         color: white;
-         font-size: 20px;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 6px;
+  color: white;
+  font-size: 20px;
 }
 #telefono,#mail,#map{
   color: white;
@@ -68,10 +68,8 @@
 
 
 .social_c{
-  width: 500px;
+  width: 100%;
   height: 200px;
-  border-left: 2px solid white;
-  border-right: 2px solid white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -80,14 +78,14 @@
 #seguinos{
   color: white;
   font-family: "Bebas Neue", sans-serif;
-  letter-spacing: 6px;
-  font-size: 25px;
+  letter-spacing: 4px;
+  font-size: 22px;
   text-align: center;
 }
 .social_icons{
   display: flex;
-  gap: 30px;
-  font-size: 50px;
+  gap:20px;
+  font-size: 30px;
   color: white;
 }
 .social_icons i{
@@ -101,18 +99,19 @@
 
 
 .pay_mediums_c{
-  width: 400px;
-height: 100%;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 }
 #flores{
   width: 100%;
   object-fit: contain;
   position: absolute;
+  display: none;
 }
 @media(max-width:1100px){
   .footer_c{

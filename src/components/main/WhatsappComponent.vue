@@ -17,13 +17,13 @@ border-radius: 50%;
 padding: 39px !important;
 background-color: rgb(5, 189, 5);
 z-index: 1;
-width: 50px!important;
-height: 50px!important;
+width: 30px!important;
+height: 30px!important;
 display: flex;
 align-items: center;
 justify-content: center;
 cursor: pointer;
-box-shadow: 2px 10px 30px 0px rgba(0,0,0,0.75);
+box-shadow: var(--shadowbtn);
 }
 .wapp_c:hover{
 background-color: rgb(101, 169, 101);   

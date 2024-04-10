@@ -9,7 +9,7 @@
         <i class="fa-solid fa-cart-shopping"  @click="handleCartClick"></i>
       </div>
       <i class="fa-solid fa-magnifying-glass" @click="openSearchBar"></i>
-      <i class="fa-solid fa-bars" @click="navModalIsOpen  = true"></i>
+      <i class="fa-solid fa-bars" @click="handleBarsClick"></i>
 
     </div>
     <p id="user_name_logged">Bienvenido/a {{authClient.firstName}}</p>
@@ -89,7 +89,7 @@
 
       <!-- LOGIN FORM -->
       <div v-if="formSelection == true" class="login_c">
-        <i class="fa-solid fa-x" @click="loginIsOpen = false"></i>
+        <i class="fa-solid fa-x" @click="handleCloseLogin"></i>
         <h2 class="title">Login</h2>
         <form action="" @submit.prevent="login">
           <input type="text" placeholder="Email" v-model="emailLogin" class="inputLogin">
@@ -101,7 +101,7 @@
       </div>
       <!-- REGISTER FORM -->
       <div v-if="formSelection == false" class="register_c">
-        <i class="fa-solid fa-x" @click="loginIsOpen = false"></i>
+        <i class="fa-solid fa-x" @click="handleCloseLogin"></i>
         <h2 class="title">Crear nueva cuenta</h2>
         <input type="text" placeholder="Nombre">
         <input type="text" placeholder="Apellido">
@@ -148,7 +148,10 @@ const cartProductsAdded  = computed(()=>{
 
 })
 
-
+const handleBarsClick = ()=>{
+  document.documentElement.style.overflow = 'hidden';
+  navModalIsOpen.value = true
+}
 const handleFinishBuy = ()=>{
   const listIdProducts = [];
   for(let product of cartProductsAdded.value){
@@ -207,14 +210,20 @@ const closeLoginModal = ref(null)
 const closeModalComprar = ref(null)
 
 onClickOutside(closeMobileNavbar,  ()=>{
+  document.documentElement.style.overflow='auto'
   navModalIsOpen.value = !navModalIsOpen.value
 })
 onClickOutside(closeModalCart,  ()=>{
 cartIsOpen.value = false
 })
 onClickOutside(closeLoginModal,  ()=>{
+  document.documentElement.style = 'auto'
 loginIsOpen.value = false
 })
+const handleCloseLogin=()=>{
+  document.documentElement.style = 'auto'
+loginIsOpen.value = false 
+}
 onClickOutside(closeModalComprar,  ()=>{
   const item = document.querySelector(".modal_compra")
   item.classList.remove("show--modal--comprar")
@@ -230,6 +239,7 @@ const showModalComprar = ()=>{
 
 const handleUserClick = ()=>{
   document.documentElement.scrollTo('top','smooth')
+  document.documentElement.style.overflow="hidden"
   loginIsOpen.value = true
 }
 const handleCartClick = ()=>{
@@ -340,11 +350,11 @@ onMounted(()=>{
 #btn_finalizar{
   width: 220px;
   height: 45px;
-   font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   color: white;
   background-color: #3D273E;
-border: none;
-margin-bottom: 30px!important;
+  border: none;
+  margin-bottom: 30px!important;
 }
 #btn_finalizar:hover{
   background-color: #584359;
@@ -395,7 +405,7 @@ margin-bottom: 30px!important;
   left: 0;
   height: 100vh;
   width: 250px;
-  background-color: rgb(61, 39, 62);
+  background-color: rgb(133, 74, 138);
   color: white;
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 5px;
@@ -647,6 +657,7 @@ transition: .2s all ease;
     font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   color: rgb(82, 82, 82);
+  text-align: center;
   user-select: none;
 }
 @media (min-width:1000px){

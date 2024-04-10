@@ -112,9 +112,7 @@ cursor: pointer;
     height: 60%;
     width: 350px;
   border-radius: 6px;
-
-   object-fit: cover;
-   
+  object-fit: cover;
 }
 .producto-modal__container___info{
     width: 600px;
@@ -130,9 +128,11 @@ h3{
     font-size: 40px;
 }
 .producto-modal__container___info____descripcion{
-    font-size: 18px;
-  color: #505050;
+    font-size: 16px;
+  color: #888888;
   font-family: Arial, Helvetica, sans-serif;
+  width: 80%;
+  text-align: center;
 }
 .producto-modal__container___info____precio{
     font-size: 40px;
@@ -143,8 +143,8 @@ h3{
   cursor: pointer;
 }
 .producto-modal__container___info button{
-     font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
     width: 200px;
   height: 50px;
   border: none;
@@ -187,7 +187,6 @@ h3{
   align-items: center;
 }
 .imgPrincipal{
-  border: 1px solid red;
   width: 300px;
   height: 300px;
   margin-top: 40px!important;

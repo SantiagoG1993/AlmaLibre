@@ -34,30 +34,31 @@ emit('add-to-cart')
 <style scoped>
 .featured_c{
     margin-top: 40px!important;
-        margin-bottom: 40px!important;
+    margin-bottom: 40px!important;
     width: 1200px;
     height: 316px;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(241, 241, 241);
-      box-shadow: 2px 10px 30px 0px rgba(116, 116, 116, 0.2);
+    background-color: rgb(121, 76, 131);
+    color: white;
 }
 #title{
-       font-family: "Bebas Neue", sans-serif;
-       color: grey; 
-       letter-spacing: 8px;
-       font-size: 30px;
-       margin-top: 20px!important;
+    font-family: "Bebas Neue", sans-serif;
+    color: grey; 
+    letter-spacing: 4px;
+    font-size: 26px;
+    margin-top: 20px!important;
 }
 .fa-heart{
     color: rgb(63, 37, 63);
     font-size: 40px;
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 70px;
+    top: 10px;
     cursor: pointer;
+    color: white;
 }
 .fa-heart:hover{
    color: rgb(157, 71, 157); 
@@ -71,44 +72,49 @@ img{
 width:750px ;
 height: 100%;
 margin-right: 30px!important;
- font-family: "Bebas Neue", sans-serif;
- letter-spacing: 6px;
- display: flex;
- justify-content: center;
- flex-direction: column;
- position: relative;
- gap: 20px;
+font-family: "Bebas Neue", sans-serif;
+letter-spacing: 6px;
+display: flex;
+justify-content: center;
+flex-direction: column;
+position: relative;
+gap: 20px;
 }
 #name_product{
-    font-size: 46px;
+    font-size: 40px;
+    letter-spacing: 2px
 }
 #description_product{
     color: rgb(94, 94, 94);
-    font-size: 20px;
+    font-size: 16px!important;
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 1px;
+    color: white;
 }
 #price{
-    font-size: 35px;
+    font-size: 32px;
 }
 #add_btn{
     width: 300px;
     height: 70px;
-     font-family: "Bebas Neue", sans-serif;
- letter-spacing: 4px;
- background-color: transparent;
- color: white;
- border: none;
- background-color: black;
- font-size: 16px;
- display: flex;
- justify-content: center;
- align-items: center;
- gap: 10px;
- border-radius: 2px;
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 4px;
+    background-color: transparent;
+    color: black;
+    border: none;
+    background-color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 2px;
+    margin-bottom: 40px!important;
 }
 #add_btn:hover{
-    background-color: #2f2f2f;
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
     cursor: pointer;
     transition: .2s all ease;
 }

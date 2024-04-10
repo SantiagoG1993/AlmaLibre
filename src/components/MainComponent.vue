@@ -43,6 +43,7 @@
         </section>
     </div>
   </div>
+  <UpButton />
 </template>
 
 <script setup>
@@ -54,6 +55,7 @@ import FeaturedProduct from './main/FeaturedProduct.vue'
 import ComoComprar from './main/ComoComprar.vue'
 import CarrouselComponent from './main/CarrouselComponent.vue'
 import WhatsappComponent from './main/WhatsappComponent.vue'
+import UpButton from '../components/main/UpButton.vue'
 
 const productoDestacado = ref([])
 const images = ref([])
