@@ -1,5 +1,5 @@
 <template>
-    <div class="card_c" @mouseover="showFav" @mouseleave="closeFav">
+    <div class="card_c wow animate__animated animate__slideInUp" @mouseover="showFav" @mouseleave="closeFav">
         <img :src="props.img" alt="remera" border="0">
         <div class="fav_c" ref="favContainer">
             <div class="ico" id="heart"><i class="fa-regular fa-heart"></i></div>
@@ -21,8 +21,9 @@
 </template>
 
 <script setup>
-import {defineProps,ref,defineEmits} from 'vue'
+import {defineProps,ref,defineEmits,onMounted} from 'vue'
 import MoreInfoProduct from './MoreInfoProduct.vue'
+import WOW from 'wow.js'
 
 const favContainer = ref('favContainer')
 const added = ref(false)
@@ -59,7 +60,10 @@ const props = defineProps({
 const cerrarMoreInfo=()=>{
   moreInfoIsOpen.value = false
 }
-
+onMounted(()=>{
+  const wow = new WOW();
+  wow.init()
+})
 
 </script>
 
@@ -88,8 +92,8 @@ const cerrarMoreInfo=()=>{
   box-shadow: 3px 4px 18px 0px rgba(0, 0, 0, 0.75);
 }
 .ico:hover{
- background-color: #a372a4; 
- transition: .2s all ease-in;
+  background-color: #a372a4; 
+  transition: .2s all ease-in;
 }
 #heart{
   position: absolute;
@@ -106,8 +110,8 @@ const cerrarMoreInfo=()=>{
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 45%!important;
-  height: 330px!important;
+  width: 45%;
+  height: 290px;
   border-radius: 5px;
   border: 1px solid rgb(228, 227, 228);
   background-color: white;
@@ -120,9 +124,9 @@ const cerrarMoreInfo=()=>{
       box-shadow: 3px 4px 18px 0px rgba(214, 214, 214, 0.75);
 }
 img{
-    width: 90%;
-    height: 145px!important;
-    margin-top: 16px!important;
+    width: 80%;
+    height: 145px;
+    margin-top: 16px;
     border-radius: 8px;
     object-fit: cover;
 }
@@ -139,7 +143,6 @@ img{
   font-size: 22px !important;
 }
 #add_cart_btn{
-    position: absolute;
     width: 80%!important;
     height: 35px!important;
     border: 1px solid black;
@@ -147,7 +150,6 @@ img{
     font-family: Arial, Helvetica, sans-serif;
     bottom: 30px;
     font-size: 12px;
-    left: 40px;
     border-radius: 2px;
     display: flex;
     letter-spacing: normal;
@@ -161,19 +163,11 @@ img{
     transition: .3s all ease;
     cursor: pointer;
 }
-@media (max-width:1000px){
+@media (min-width:1000px){
   .card_c{
-    width: 400px;
-    height: 456px;
-  }  
-  img{
-    width: 80%;
-    height: 250px;
-  }
-  #add_cart_btn{
-    position: unset;
-    width: 70%;
-    height: 50px;
-  }
+  width: 220px;
+  height: 330px;
+justify-content: center;
+}
 }
 </style>

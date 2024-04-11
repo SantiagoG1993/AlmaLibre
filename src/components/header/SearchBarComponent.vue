@@ -84,12 +84,26 @@ const addToCart = (id)=>{
   border-radius: 5px 6px 6px 5px;
   display: flex;
   align-items: center;
-
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  position: absolute;
+  left: 10%;
+  top: 300px;
+  width: 80%;
 }
 .show--searchbar{
   opacity: 1;
-  pointer-events: none;
+  pointer-events: unset;
 }
+
+.products_search_c{
+width: 80%;
+left: 10%;
+top: 355px;
+z-index: 300;
+}
+
 #input {
   width: 70%;
   height: 80%;
@@ -102,7 +116,7 @@ const addToCart = (id)=>{
   outline: none;
 }
 .lupa {
-  background-color: #3d273e;
+  background-color: #ffffff;
   width: 30%;
   height: 100%;
   border-radius: 50px 6px 6px 50px;
@@ -111,29 +125,23 @@ const addToCart = (id)=>{
   justify-content: center;
 }
 .lupa i {
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 18px;
 }
-@media (max-width: 1000px) {
+@media (min-width: 1000px) {
   .searchbar_c {
-    opacity: 0;
-    pointer-events: none;
-    z-index: 1;
-    position: absolute;
-    left: 10%;
-    top: 300px;
-    width: 80%;
-
-  }
-  .show--searchbar{
-  opacity: 1;
+  width: 300px;
+  left: 6%;
+  top: 220px;
+  opacity: 100;
   pointer-events: unset;
 }
 .products_search_c{
-width: 80%;
-left: 10%;
-top: 355px;
+width: 300px;
+left: 6%;
+top: 265px;
 z-index: 300;
+
 }
 }
 </style>

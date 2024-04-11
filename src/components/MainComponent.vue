@@ -214,6 +214,7 @@ li:hover{
 }
 .products_selected_c{
   display: flex!important;
+  margin-top: 80px!important
 }
 .right_c h2{
   font-family: 'Bebas Neue', sans-serif;

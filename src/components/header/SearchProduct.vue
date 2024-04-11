@@ -3,7 +3,7 @@
         <img :src="props.img" alt="" >
         <div class="name_price_c">
             <p id="nombre">{{props.name}}</p>
-            <p>${{props.price}}</p>
+            <p>${{props.price.toLocaleString()}}</p>
         </div>
     </div>
     <hr id="hr_carrito">
@@ -54,8 +54,8 @@ emit('add-to-cart')
     display: flex;
     align-items: center;
     gap: 10px;
-      font-family: "Bebas Neue", sans-serif;
-  letter-spacing: 2px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .search_product_c:hover{
     background-color: rgb(227, 227, 227);

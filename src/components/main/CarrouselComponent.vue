@@ -33,7 +33,11 @@ const props = defineProps(
 width: 100%!important;
 object-fit: cover;
 }
-.carousel-inner{
-  height: 150px;
+@media(min-width:1000px){
+  
+  .carousel-inner{
+    height: 580px;
+    margin-top: 70px!important;
+  }
 }
 </style>

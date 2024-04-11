@@ -401,7 +401,7 @@ onMounted(()=>{
   position: fixed;
   animation: fadeInLeft .3s;
   top: 0px;
-  z-index: 2;
+  z-index: 100;
   left: 0;
   height: 100vh;
   width: 250px;
@@ -639,7 +639,7 @@ transition: .2s all ease;
   position: relative;
 }
 #number_products{
-  background-color: #3D273E;
+  background-color: #ff4949;
   color: white;
   width: 18px;
   height: 18px;
@@ -656,7 +656,7 @@ transition: .2s all ease;
 #user_name_logged {
     font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
-  color: rgb(82, 82, 82);
+  color: rgb(255, 255, 255);
   text-align: center;
   user-select: none;
 }
@@ -670,14 +670,29 @@ transition: .2s all ease;
 }
 .user_c {
   position: absolute;
-  border: 1px solid red;
   width: auto;
   height: auto;
   right: 90px;
-  top: 150px;
+  top: 210px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+.cart_c{
+  top: 270px;
+  right: 5%;
+  width: 400px;
+  min-height: 200px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 2px 2px 11px 0px rgba(140, 140, 140, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.user_c i:hover{
+  color: rgb(223, 223, 223);
 }
 }
 </style>

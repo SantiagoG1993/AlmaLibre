@@ -1,6 +1,6 @@
 <template>
 <ul class="submenu">
-  <li id="personalizados" @click="handleClick('personalizados','digitales','personalizados')">PRODUCTOS PERSONALIZADOS</li>
+  <li id="personalizados" @click="handleClick('personalizados','digitales','personalizados')" >PRODUCTOS PERSONALIZADOS</li>
   <li id="digitales" @click="handleClick('digitales','personalizados','digitales')">DISEÑOS DIGITALES</li>
 </ul>
     <div  v-if="productType == 'personalizados'" class="products_c">
@@ -42,6 +42,7 @@ import {ref,onMounted,watch} from 'vue'
 import {useStore} from 'vuex'
 import ProductCard from './ProductCard.vue'
 
+
 const store =useStore()
 
 const productType = ref('personalizados')
@@ -78,7 +79,6 @@ const handleClick= (id1,id2,type)=>{
 /* GET PRODUCTOS */
 onMounted(()=>{
 
-  
   const url = 'http://localhost:8080/api/products'
   const options = {
     method:'GET',

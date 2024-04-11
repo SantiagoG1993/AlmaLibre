@@ -1,7 +1,7 @@
 <template>
-    <div class="howto_c">
-        <p id="como_comprar_p">Como comprar</p>
-        <p id="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, eaque quas quod id odit ducimus nemo, excepturi fugit, blanditiis dolorem sapiente rem repudiandae odio eos perferendis quae. Dolor, cum repellendus!</p>
+    <div class="howto_c wow animate__animated animate__fadeInUp" >
+        <p id="como_comprar_p" class="wow animate__animated animate__fadeInRight">Como comprar</p>
+        <p id="text" class="wow animate__animated animate__fadeInLeft">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, eaque quas quod id odit ducimus nemo, excepturi fugit, blanditiis dolorem sapiente rem repudiandae odio eos perferendis quae. Dolor, cum repellendus!</p>
         <img src="flores_como_comprar.png" alt=""> 
 
     </div>
@@ -28,6 +28,8 @@ img{
     top: 0px;
     width: 100%;
     border-radius: 20px;
+    object-fit: cover;
+    height: 100%;
 }
 #como_comprar_p{
     font-family: "Bebas Neue", sans-serif;
@@ -47,6 +49,5 @@ img{
         width: 100%;
     }
 @media (min-width:1000px){
-
 }
 </style>

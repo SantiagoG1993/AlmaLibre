@@ -1,5 +1,5 @@
 <template>
-  <div class="footer_c">
+  <div class="footer_c wow animate__animated animate__slideInUp">
     <img id="flores" src="flores_footer.png" alt="">
     <div class="contact_us_c">
       <img src="LOGO FOOTER.png" alt="">
@@ -25,13 +25,15 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+
+</script>
 
 <style scoped>
 .footer_c {
   width: 100%;
   height: 350px;
-  background-color: #7D5C7F;
+  background-color: #39173e;
   display: flex;
   justify-content: space-around;
   align-items: center;

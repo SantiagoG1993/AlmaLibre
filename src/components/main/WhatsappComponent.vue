@@ -1,17 +1,18 @@
 <template>
-   <a href="https://wa.me/5493329631587" target="blank"><div class="wapp_c">
-<i class="fa-brands fa-whatsapp"></i>
-    </div></a>
+    <a href="https://wa.me/5493329631587" target="blank"><div class="wapp_c">
+    <i class="fa-brands fa-whatsapp"></i>
+</div></a>
 </template>
 
 <script setup>
+
 
 </script>
 
 <style scoped>
 .wapp_c{
 position: fixed;
-bottom: 30px;
+bottom: 60px;
 right: 30px;
 border-radius: 50%;
 padding: 39px !important;

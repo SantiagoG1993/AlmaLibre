@@ -1,20 +1,21 @@
 <template>
 <p id="title">Producto Destacado</p>
-    <div class="featured_c">
-        <img :src="props.img" alt="">
+    <div class="featured_c wow animate__animated animate__fadeIn">
+        <img :src="props.img" alt="" class="wow animate__animated animate__fadeInRight ">
         <div class="info_c">
-            <p id="name_product">{{props.name}}</p>
+            <p id="name_product" class="wow animate__animated animate__fadeInLeft ">{{props.name}}</p>
             <p id="description_product">{{props.description}}</p>
             <p id="price">${{props.price}}</p>
             <i class="fa-regular fa-heart"></i>
-            <button id="add_btn" @click="addToCart"> Agregar al carrito <i class="fa-solid fa-cart-shopping"></i></button>
+            <button id="add_btn" @click="addToCart" class="wow animate__animated animate__fadeInUp "> Agregar al carrito <i class="fa-solid fa-cart-shopping"></i></button>
         </div>
     </div>
 </template>
 
 <script setup>
 
-import {defineProps,defineEmits} from 'vue'
+import {defineProps,defineEmits,onMounted} from 'vue'
+import WOW from 'wow.js'
 
 const emit = defineEmits(['add-to-cart'])
 
@@ -29,20 +30,32 @@ const addToCart = ()=>{
 emit('add-to-cart')
 }
 
+onMounted(()=>{
+    const wow = new WOW(
+        {
+        offset:       0,          // default
+        mobile:       true,       // default
+        live:         true,        // default
+        duration:'.1s'
+    }
+    )
+    wow.init();
+})
 </script>
 
 <style scoped>
 .featured_c{
     margin-top: 40px!important;
     margin-bottom: 40px!important;
-    width: 1200px;
-    height: 316px;
+    width: 90%;
     border-radius: 8px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(121, 76, 131);
+    background-color: rgb(129, 64, 144);
     color: white;
+    height: auto;
 }
 #title{
     font-family: "Bebas Neue", sans-serif;
@@ -55,28 +68,28 @@ emit('add-to-cart')
     color: rgb(63, 37, 63);
     font-size: 40px;
     position: absolute;
-    right: 70px;
-    top: 10px;
+    right: 20px;
+    top: 7px;
     cursor: pointer;
     color: white;
 }
 .fa-heart:hover{
-   color: rgb(157, 71, 157); 
+color: rgb(157, 71, 157); 
 }
 img{
-    width: 380px;
+    width: 90%;
     height: 100%;
     object-fit: cover;
 }
 .info_c{
-width:750px ;
+width:100% ;
 height: 100%;
-margin-right: 30px!important;
 font-family: "Bebas Neue", sans-serif;
 letter-spacing: 6px;
 display: flex;
 justify-content: center;
 flex-direction: column;
+align-items: center;
 position: relative;
 gap: 20px;
 }
@@ -123,9 +136,6 @@ gap: 20px;
     height: 70px;
     background-color: transparent;
     border: 1px solid grey;
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
     font-size: 16px;
     font-family: "Bebas Neue", sans-serif;
     letter-spacing: 4px;
@@ -139,40 +149,21 @@ gap: 15px;
     cursor: pointer;
     transition: .3s all ease;
 }
-@media (max-width:1230px){
+@media (min-width:1000px){
     .featured_c{
-        width: 90%;
-    }
-    #info_btn{
-        position: unset;
-    }
-    .info_c{
-width:450px ;
-margin-right: 10px!important;
-gap: 20px;
-align-items: center;
+    flex-direction: row;
+    background-color: rgb(129, 64, 144);
+    height: 400px;
+    width: 80%;
 }
-@media (max-width:815px){
-  #add_btn{
-    width: 250px;
-  }  
-    #add_btn i{
-        display: none;
-    }
-    #description_product{
-        font-size: 18px;
-    }
-}
-@media (max-width:650px){
-    .featured_c{
-        flex-direction: column;
-        height: auto;
-    }
-    img{
-    width: 90%;
-    height: 380px;
-    margin-left: 0px!important;
+img{
+    width: 80%;
+    height: 90%;
+    object-fit: cover;
+    margin-left: 5%!important;
 }
 }
-}
+
+
+
 </style>

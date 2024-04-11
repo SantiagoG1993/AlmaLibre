@@ -243,15 +243,6 @@ form{
 /* NAVBAR-------------------------------------------------- */
 
 
-.navbar_c {
-  width: 100%;
-  height: 80px;
-  background-color: #3d273e;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-}
 .list {
   color: white;
   display: flex;
@@ -272,7 +263,7 @@ form{
   opacity: 0;
   pointer-events: none;
   position: absolute;
-  top: 365px;
+  top: 80px;
   z-index: 400;
   width: 100%;
   height: 90px;
@@ -311,8 +302,18 @@ form{
 }
 
 @media (min-width: 1000px) {
-  .navbar_c {
-    display: unset;
-  }
+.navbar_c {
+  display: unset;
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  background-color: #3d273e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  top: 345px;
+  z-index: 2;
+}
 }
 </style>
