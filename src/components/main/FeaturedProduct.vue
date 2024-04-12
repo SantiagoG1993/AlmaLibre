@@ -62,7 +62,7 @@ onMounted(()=>{
     color: grey; 
     letter-spacing: 4px;
     font-size: 26px;
-    margin-top: 20px!important;
+    margin-top: 40px!important;
 }
 .fa-heart{
     color: rgb(63, 37, 63);
@@ -161,6 +161,11 @@ img{
     height: 90%;
     object-fit: cover;
     margin-left: 5%!important;
+}
+.fa-heart{
+    right: 20%;
+    top: 55px;
+
 }
 }
 

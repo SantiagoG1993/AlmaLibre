@@ -1,5 +1,5 @@
 <template>
-    <div class="card_c wow animate__animated animate__slideInUp" @mouseover="showFav" @mouseleave="closeFav">
+    <div class="card_c wow animate__animated animate__fadeInRight" @mouseover="showFav" @mouseleave="closeFav">
         <img :src="props.img" alt="remera" border="0">
         <div class="fav_c" ref="favContainer">
             <div class="ico" id="heart"><i class="fa-regular fa-heart"></i></div>

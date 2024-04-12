@@ -12,18 +12,12 @@
       <i class="fa-solid fa-bars" @click="handleBarsClick"></i>
 
     </div>
-    <p id="user_name_logged">Bienvenido/a {{authClient.firstName}}</p>
+    <p v-if="authClient.length != 0" id="user_name_logged">Bienvenido/a {{authClient.firstName}}</p>
   </div>
       <!-- MENU MODAL IZQUIERDO MOVIL -->
     <div v-if="navModalIsOpen" class="modal_navbar" ref="closeMobileNavbar" >
       <ul>
-        <li>TAZAS</li>
-        <li>REMERAS</li>
-        <li>GORRAS</li>
-        <li>BODYS</li>
-        <li>CHOPPS</li>
-        <li>MATELISTO</li>
-        <li>COMO COMPRAR?</li>
+        <li v-for="categorie of categories" :key="categorie" @click="changeCategory(categorie)">{{categorie}}</li>
       </ul>
     </div>
 
@@ -51,7 +45,7 @@
         <p>TOTAL</p>
         <p>${{sumaTotal.toLocaleString()}}</p>
       </div>
-      <button class="carrito_btn" @click="showModalComprar">COMPRAR <i class="fa-solid fa-cart-shopping"></i></button>
+      <button class="carrito_btn" @click="showModalComprar">Comprar <i class="fa-solid fa-cart-shopping"></i></button>
     </div>
 
 <!-- MODAL COMPRA PARA INGRESAR DATOS DE CONTACTO -->
@@ -129,6 +123,7 @@ import 'animate.css'
 const store = useStore()
 const emit = defineEmits(['openSearchBar'])
 const authClient = ref([])
+const categories = ref([])
 const finishBuy = ref(true)
 const cartIsOpen = ref(false)
 const navModalIsOpen = ref(false)
@@ -137,6 +132,9 @@ const openSearchBar= ()=>{
   emit('openSearchBar')
 }
 
+const changeCategory= (category)=>{
+  store.commit('stateCategory',category)
+}
 const formSelection = ref(true)
 
 const cartProductsAddedFiltered  = computed(()=>{
@@ -280,6 +278,24 @@ AuthService.logout()
 }
 onMounted(()=>{
   fetchAuth()
+const url = 'http://localhost:8080/api/products'
+const options = {
+  method:'GET',
+  headers:{
+    'Content-Type':'application/json'
+  }
+}
+  fetch(url,options)
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data);
+    const nonDeletedProducts = data.filter(p=>p.deleted == false)
+    const uniqueCategories = new Set(nonDeletedProducts.map(p => p.category));
+    categories.value = Array.from(uniqueCategories)
+  }
+  )
+  .catch(err=>console.log(err))
+
 })
 
 
@@ -399,13 +415,14 @@ onMounted(()=>{
 
 .modal_navbar{
   position: fixed;
+  user-select: none;
   animation: fadeInLeft .3s;
   top: 0px;
   z-index: 100;
   left: 0;
   height: 100vh;
   width: 250px;
-  background-color: rgb(133, 74, 138);
+  background-color: rgb(139, 56, 147);
   color: white;
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 5px;
@@ -425,6 +442,11 @@ onMounted(()=>{
   padding-left: 20px !important;
   padding-top: 30px !important;
 }
+.modal_navbar ul li{
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0px;
+  font-size: 16px;
+}
 .modal_navbar ul li:hover{
   cursor: pointer;
   text-decoration: underline;
@@ -441,7 +463,7 @@ onMounted(()=>{
   width: 100%;
   min-height: 200px;
   background-color: white;
-  border-radius: 6px;
+  border-radius:3px;
   box-shadow: 2px 2px 11px 0px rgba(140, 140, 140, 0.75);
   display: flex;
   flex-direction: column;
@@ -463,8 +485,8 @@ width: 90%;
   display: flex;
   justify-content: space-between;
   padding: 0px 20px !important;
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 3px;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0px;
   color: grey;
   font-size: 14px !important;
 }
@@ -566,10 +588,10 @@ input:focus{
   height: 45px;
   border: none;
   background-color: purple;
-     font-family: "Bebas Neue", sans-serif;
- letter-spacing: 6px;
- color: white;
- border-radius: 4px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: white;
+  border-radius: 4px;
 }
 #login_btn:hover{
 background-color: transparent;
@@ -608,6 +630,8 @@ transition: .2s all ease;
 }
 .register_c input{
   width: 80%;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0px;
 }
 
 /* USER CONTAINER */

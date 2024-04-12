@@ -1,5 +1,5 @@
 <template>
-  <div class="footer_c wow animate__animated animate__slideInUp">
+  <div class="footer_c wow animate__animated animate__fadeIn">
     <img id="flores" src="flores_footer.png" alt="">
     <div class="contact_us_c">
       <img src="LOGO FOOTER.png" alt="">

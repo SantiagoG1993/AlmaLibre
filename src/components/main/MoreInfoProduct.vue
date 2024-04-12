@@ -133,6 +133,7 @@ h3{
   font-family: Arial, Helvetica, sans-serif;
   width: 80%;
   text-align: center;
+  letter-spacing: 0px;
 }
 .producto-modal__container___info____precio{
     font-size: 40px;
@@ -201,6 +202,12 @@ display: none;
   height: 100%;
   flex-direction: column;
   align-items: center;
+  border-radius: 0px;
 }
+h3{
+    font-size: 2em;
+    width: 90%;
+    text-align: center;
+  }
 }
 </style>

@@ -118,9 +118,11 @@ const deleteProduct = (id)=>{
 .dots_c{
   display: flex;
   gap: 10px;
+  position: absolute;
+  bottom: 10px;
 }
 .dots_c i {
-  font-size: 10px;
+  font-size: 15px;
 }
 .dots_c i:hover{
   cursor: pointer;
@@ -144,20 +146,31 @@ const deleteProduct = (id)=>{
   color: rgb(41, 41, 41);
 }
 .products_c{
-  margin-top: 50px!important;
+  margin-top: 40px!important;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   width: 95%;
-  min-height: 400px;
+  min-height: 450px;
   background-color: #f1f1f1;
   padding: 40px 0px!important;
+  position: relative;
   gap: 10px;
 }
 .--selected{
   color: rgb(96, 31, 111);
   background-color: rgb(189, 189, 189);
   border-radius: 3px;
+}
+@media(min-width:1000px){
+  .submenu{
+    flex-direction: row;
+    gap: 30px;
+  }
+  .dots_c{
+    position: absolute;
+    bottom: 20px;
+}
 }
 </style>

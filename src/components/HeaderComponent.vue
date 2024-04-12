@@ -1,8 +1,8 @@
 <template>
-  <div class="header_c wow animate__animated animate__fadeIn">
+  <div class="header_c ">
     <img id="flores" src="floresheader.png" alt="" />
     <SearchBarComponent :isSearchBarVisible="isSearchBarVisible" />
-    <img id="logo " class="animate__animated animate__fadeInDown" src="santi.jpg" alt="" />
+    <img id="logo " src="santi.jpg" alt="" @click="changeCategory('main')"/>
     <UserComponent @openSearchBar = "openSearchBarMedia" />
     <NavbarComponent  />
   </div>
@@ -13,11 +13,17 @@ import NavbarComponent from "./header/NavbarComponent.vue";
 import SearchBarComponent from "./header/SearchBarComponent.vue";
 import UserComponent from "./header/UserComponent.vue";
 import {ref} from 'vue'
+import {useStore} from 'vuex'
 
+
+const store = useStore()
 const isSearchBarVisible = ref(null)
 
 const openSearchBarMedia = ()=>{
   isSearchBarVisible.value=!isSearchBarVisible.value
+}
+const changeCategory= (category)=>{
+  store.commit('stateCategory',category)
 }
 </script>
 
@@ -42,12 +48,6 @@ const openSearchBarMedia = ()=>{
   .header_c{
     flex-direction: row;
     border: 3 px solid green;
-  }
-  #logo{
-    position: absolute;
-    left: 30px;
-    top: 100px;
-    border: 1px solid red;
   }
   #flores{
   display: unset;

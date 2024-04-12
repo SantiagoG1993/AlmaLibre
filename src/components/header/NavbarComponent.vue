@@ -39,7 +39,7 @@
 <script setup>
 import { onClickOutside } from '@vueuse/core'
 import {useStore} from 'vuex'
-import {ref,onMounted} from 'vue'
+import {ref} from 'vue'
 
 
 const store = useStore();
@@ -50,22 +50,7 @@ const changeCategory= (category)=>{
   store.commit('stateCategory',category)
 }
 
-const handleScroll = ()=>{
-  const navbar = document.querySelector(".navbar_c")
-  const modalNav= document.querySelector(".modal_nav")
-  if(window.scrollY >= 295){
-    navbar.classList.add('--sticky')
-    modalNav.classList.add('--stickymodal_nav')
-  }else{
-    navbar.classList.remove('--sticky')
-    modalNav.classList.remove('--stickymodal_nav') 
-  }
-}
 
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-},
-);
 
 onClickOutside(closeContactModal,()=>{ 
   document.body.style.overflow = 'auto';
@@ -139,19 +124,7 @@ const closeModal = () => {
 .--stickymodal_nav{
 top: 45px!important;
 }
-.modal_contact{
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #1b1b1b46;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-}
+
 
 .contacto__form__input{
   font-family: 'Bebas Neue', sans-serif;
@@ -197,35 +170,6 @@ button:hover{
 input:focus{
   outline: none;
 }
-.contacto__form__text{
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 6px;
-  width: 550px;
-  cursor: pointer;
-  height: 130px;
-  letter-spacing: 3px;
-  margin-top: 20px !important;
-  width: 500px;
-  padding-left: 20px !important;
-  border: 1px solid rgb(192, 192, 192);
-  color: rgb(107, 107, 107);
-}
-.contact_c{
-  width: 650px;
-  height: 430px;
-  background-color: white;
-  border-radius: 10px;
-  position: absolute;
-  top: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 4px;
-  user-select: none;
-}
-  
 form{
   width: 100%;
   height: 80%;
@@ -315,5 +259,48 @@ form{
   top: 345px;
   z-index: 2;
 }
+.modal_contact{
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  z-index: 2000;
+}
+.contacto__form__text{
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 6px;
+  width: 550px;
+  cursor: pointer;
+  height: 130px;
+  letter-spacing: 3px;
+  margin-top: 20px !important;
+  width: 500px;
+  z-index: 30000;
+  padding-left: 20px !important;
+  border: 1px solid rgb(192, 192, 192);
+  color: rgb(107, 107, 107);
+}
+.contact_c{
+  width: 650px;
+  height: 430px;
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 4px;
+  user-select: none;
+}
+.show--contact{
+    opacity: 1!important;
+    pointer-events: unset;
+  }
 }
 </style>

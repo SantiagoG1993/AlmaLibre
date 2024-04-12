@@ -159,9 +159,9 @@ const deleteProduct = (id)=>{
   align-items: center;
 }
 aside{
+  display: none;
   width: 300px;
   height: 600px;
-/*   border: 1px solid red; */
   align-self: flex-start;
   position: relative;
 }
@@ -208,9 +208,8 @@ li:hover{
 
 }
 .right_c{
-  width: 80%;
+  width: 100%;
   min-height: 50vh;
-/*   border: 1px solid red; */
 }
 .products_selected_c{
   display: flex!important;
@@ -218,20 +217,18 @@ li:hover{
 }
 .right_c h2{
   font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 6px;
+  letter-spacing: 4px;
   color: rgb(75, 75, 75);
-  margin-top: 75px!important;
   user-select: none;
-  margin-left: 30px!important;
+text-align: center;
   }
   .product_list{
-/*     border: 1px solid blue; */
+  width: 100%;
   min-height: 50vh;
   display: flex;
   flex-wrap: wrap;
-  margin-top: 30px!important;
-  margin-left: 40px!important;
   gap: 20px;
+  padding: 3px!important;
   }
   #volver_btn{
     cursor: pointer;
@@ -239,5 +236,22 @@ li:hover{
   }
     #volver_btn:hover{
       color: purple;
+    }
+@media(min-width:1000px){
+      aside{
+display: unset;
+}
+.product_list{
+  min-height: 50vh;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px!important;
+  margin-left: 40px!important;
+  gap: 20px;
+  }
+  .right_c{
+  width: 80%;
+  min-height: 50vh;
+}
     }
 </style>
